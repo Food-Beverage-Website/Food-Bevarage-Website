@@ -1,1 +1,24 @@
-<p>home works!</p>
+<div>
+    <img class="banner-img" src="assets/Images/banner-contact.png">
+    <div class="type-list">
+        <div *ngFor="let type of types" class="type" >
+            <img  [src]="'assets/Images/' + type.Poster">
+            <p >{{ type.TenTieuMuc }}</p>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div>
+        <p>Unlock Your Online Storefront <br> 
+        <span>
+            Mở cửa hàng trực tuyến của bạn, chúng tôi lo phần còn lại!
+        </span></p>
+    </div>
+
+    <div>
+        <input type="text">
+        <button></button>
+    </div>
+</div>

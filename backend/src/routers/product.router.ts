@@ -21,8 +21,14 @@ router.get("/getProduct",asynceHandler(
 ))
 
 
-router.get("/", (req, res) => {
-    res.send("Hello world nè");
-});
+router.get("/",asynceHandler( 
+    async (req,res)=>{ 
+       const products = await ProductModel.find();
+       res.send(products);
+     }
+))
+
+
+
 
 export default router;

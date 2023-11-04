@@ -1,0 +1,19 @@
+.banner-img{
+    @apply w-full h-[800px]
+}
+
+.type-list{
+    @apply px-[100px] py-2 bg-orange-50 flex justify-center h-[400px]  items-center  ;
+}
+
+.type{
+    @apply ml-[50px]
+}
+
+.type img{
+    @apply h-[250px] w-[250px] rounded-full
+}
+
+.type p{
+    @apply text-center text-[50px] font-mono
+}

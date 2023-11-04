@@ -6,6 +6,7 @@ import express from "express";
 import cors from "cors";
 import productRouter from './routers/product.router';
 import { dbConnect } from './configs/database.config';
+import typeRouter from './routers/type.router';
 dbConnect();
 const app = express();
 app.use(cors({
@@ -14,7 +15,7 @@ app.use(cors({
 }));
 
 app.use("/api/products", productRouter);
-
+app.use("/api/types", typeRouter);
 
 
 const port = 5000;
