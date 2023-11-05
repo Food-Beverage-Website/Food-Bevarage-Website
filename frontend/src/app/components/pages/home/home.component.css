@@ -3,7 +3,7 @@
 }
 
 .type-list{
-    @apply px-[100px] py-2 bg-orange-50 flex justify-center h-[400px]  items-center  ;
+    @apply px-[100px] py-2  flex justify-center h-[400px]  items-center  ;
 }
 
 .type{
@@ -15,5 +15,56 @@
 }
 
 .type p{
-    @apply text-center text-[50px] font-mono
+    @apply text-center text-[30px] font-mono
+}
+
+.invite-logan h1{
+    @apply text-[50px] font-[20px]
+    }
+
+.invite-logan p{
+@apply text-[20px] font-[10px]
+}
+
+.form-res {
+    @apply px-[300px] items-center 
+}
+
+.invite-btn input{
+    @apply w-[500px] h-[60px] border outline-none rounded-[20px] focus:text-red-500
+}
+
+.invite-btn button{
+    @apply p-2 h-[55px] rounded-[40px] w-[200px] bg-sky-500 ml-[20px] text-[30px]
+}
+
+.invite-btn{
+    @apply ml-[300px]
+}
+
+.list-product{
+    @apply grid grid-cols-4 px-[150px] gap-[40px]
+}
+
+.item-product{
+    @apply h-[500px] w-full bg-amber-50
+}
+
+.infor-product{
+    @apply px-5
+}
+.item-product img{
+    @apply h-[350px] w-full
+}
+
+.product-address{
+    @apply text-[25px] font-light text-orange-600
+}
+
+.product-name{
+    @apply text-[30px] font-medium
+}
+
+.product-price{
+    @apply text-[30px]  ml-auto 
 }

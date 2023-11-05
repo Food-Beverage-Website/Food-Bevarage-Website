@@ -1,48 +1,58 @@
-import { Schema,model } from "mongoose";
+import { ObjectId, Schema,model } from "mongoose";
 
 export interface Product {
-  MaSP:String,
-  TenSP: String,
-  MieuTa: String,
-  DonGia: [{ Size: String, Gia: Number }],
-  Hinh: [String],
-  MaThucDon: String,
-  MaTopping: String,
+  id:ObjectId,
+  MaSP: string;
+  TenSP: string;
+  MieuTa: string;
+  DonGia: { Size: string; Gia: number }[];
+  Hinh: string[];
+  MaCH: ObjectId;
+  MaThucDon: string;
+  MaTieuMuc: string;
+  MaTopping: string[];
   DanhGia: [{
-    MaDonHang: String,
-    Rate: Number,
-    ChiTiet: String,
-    Hinh: [String]
-  }]| null;
+    MaDonHang: string;
+    Rate: number;
+    ChiTiet: string;
+    Hinh: string[];
+  }];
   }
 
-  export const ProductSchema = new Schema<Product>(
+  const ProductSchema = new Schema<Product>(
     {
+      id:{type:Schema.Types.ObjectId},
       MaSP: { type: String, required: true },
       TenSP: { type: String, required: true },
       MieuTa: { type: String, required: true },
       DonGia: [{ Size: String, Gia: Number }],
       Hinh: [String],
+      MaCH: { type: Schema.Types.ObjectId, ref: 'cuahang' },
       MaThucDon: { type: String, required: true },
-      MaTopping: { type: String, required: true },
+      MaTieuMuc: { type: String, required: true },
+      MaTopping: [String],
       DanhGia: [
         {
           MaDonHang: String,
           Rate: Number,
           ChiTiet: String,
-          Hinh: [String]
-        }
-      ]
-    }, {
+          Hinh: [String],
+        },
+      ],
+    },
+    {
       toJSON: {
-        virtuals: true
+        virtuals: true,
       },
       toObject: {
-        virtuals: true
+        virtuals: true,
       },
-      timestamps: true
+      timestamps: true,
     }
   );
+
+
+  
   export const ProductModel=model<Product>('sanpham',ProductSchema);
   
 

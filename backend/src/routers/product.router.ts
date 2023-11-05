@@ -4,7 +4,7 @@ import { ProductModel } from "../models/product.model";
 
 const router = Router();
 
-router.get("/getProduct",asynceHandler(
+router.get("/check",asynceHandler(
     async (req,res)=>{ 
         const productsCount = await ProductModel.countDocuments();
         if(productsCount >0)
@@ -21,14 +21,29 @@ router.get("/getProduct",asynceHandler(
 ))
 
 
-router.get("/",asynceHandler( 
-    async (req,res)=>{ 
-       const products = await ProductModel.find();
-       res.send(products);
-     }
-))
 
 
+
+
+router.get("/", asynceHandler(async (req, res) => {
+    try {
+        const products = await ProductModel.find(); // Loại bỏ trường 'id'
+        res.send(products);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}))
+
+
+router.get("/getProduct", asynceHandler(async (req, res) => {
+ 
+        const productsWithStoreInfo = await ProductModel.find().populate('MaCH');
+        productsWithStoreInfo.sort(() => Math.random() - 0.5);
+
+        res.send(productsWithStoreInfo);
+    
+}));
 
 
 export default router;

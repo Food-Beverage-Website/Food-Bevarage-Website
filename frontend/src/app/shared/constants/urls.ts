@@ -1,3 +1,5 @@
 const BASE_URL = 'http://localhost:5000';
 
 export const TYPE_GET_URL = BASE_URL + '/api/types';
+
+export const PRODUCT_ALL_GET_URL = BASE_URL + '/api/products/getProduct';

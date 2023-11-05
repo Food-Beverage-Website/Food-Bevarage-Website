@@ -7,6 +7,8 @@ import cors from "cors";
 import productRouter from './routers/product.router';
 import { dbConnect } from './configs/database.config';
 import typeRouter from './routers/type.router';
+import storeRouter from './routers/store.router';
+import menuRouter from './routers/menu.router';
 dbConnect();
 const app = express();
 app.use(cors({
@@ -16,7 +18,8 @@ app.use(cors({
 
 app.use("/api/products", productRouter);
 app.use("/api/types", typeRouter);
-
+app.use("/api/stores", storeRouter);
+app.use("/api/menus", menuRouter);
 
 const port = 5000;
 app.listen(port, () => {

@@ -1,7 +1,7 @@
-import { Schema,model } from "mongoose";
+import { ObjectId, Schema,model } from "mongoose";
 
 export interface Type {
-  MaTieuMuc:String,
+  id:ObjectId,
   TenTieuMuc: String,
   Poster: String,
   
@@ -9,7 +9,7 @@ export interface Type {
 
   export const TypeSchema = new Schema<Type>(
     {
-      MaTieuMuc: { type: String, required: true },
+      id:{type:Schema.Types.ObjectId},
       TenTieuMuc: { type: String, required: true },
       Poster: { type: String, required: true },
       
