@@ -42,12 +42,13 @@
     @apply ml-[300px]
 }
 
+/* Đây là css cho danh sách sản phẩm */
 .list-product{
     @apply grid grid-cols-4 px-[150px] gap-[40px]
 }
 
 .item-product{
-    @apply h-[500px] w-full bg-amber-50
+    @apply h-[500px] w-full bg-orange-50
 }
 
 .infor-product{
@@ -67,4 +68,20 @@
 
 .product-price{
     @apply text-[30px]  ml-auto 
+}
+
+.product-button{
+    @apply flex 
+}
+
+.product-button .icon{
+    @apply py-2 px-4 bg-sky-950 text-white items-center
+}
+
+.product-button .icon mat-icon{
+    @apply  text-white font-medium
+}
+
+.product-button p{
+    @apply py-2 px-20 bg-orange-600 text-white text-[20px] font-medium
 }

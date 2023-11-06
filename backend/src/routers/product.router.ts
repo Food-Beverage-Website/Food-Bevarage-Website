@@ -46,4 +46,12 @@ router.get("/getProduct", asynceHandler(async (req, res) => {
 }));
 
 
+
+router.get("/getProductByName/:Searchname", asynceHandler(async (req, res) => {
+    const productName = req.params.Searchname;
+    const productsWithStoreInfo = await ProductModel.find({ TenSP: { $regex: productName, $options: 'i' } }).populate('MaCH');
+    res.send(productsWithStoreInfo);
+}));
+
+router.get("/GetAllProductbyName")
 export default router;

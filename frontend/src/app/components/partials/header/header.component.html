@@ -19,14 +19,16 @@
 
     <div class="header-icon">
         <div class="icon-search">
-            <div class="relative ...">
-                <div class="absolute pointer-events-auto ...">
-                 
-                </div>
-                <input type="text" placeholder="Search" class="outline-none border-none focus:text-red-500">
+            <div class="relative flex">
+                
+                <input #s (keyup.enter)="search(s.value)" type="text" placeholder="Search" class="outline-none border-none focus:text-red-500">
+                
               </div>
+              
         </div>
+        <button (click)="search(s.value)"  class="bnt-search">Search</button>
         <div class="icon-cart"><mat-icon>shopping_cart</mat-icon></div>
+        
         <div><mat-icon>menu</mat-icon></div>
     </div>
 

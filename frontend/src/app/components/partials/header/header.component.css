@@ -19,13 +19,16 @@ header{
 
 
 .icon-search{
-    @apply flex border-2 h-[60px] py-[4px] px-[10px] rounded-full;
+    @apply flex border-2 h-[60px] py-[4px] px-[10px] rounded-l-full;
 }
 
 .icon-search div{
     @apply mt-[0px] ml-[0px];
 }
 
+.bnt-search{
+    @apply h-[60px] bg-sky-400 text-[30px] px-2 py-1 text-white rounded-r-full
+}
 
 
 .header-icon{

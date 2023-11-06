@@ -1,32 +1,14 @@
-<div>
-    <img class="banner-img" src="assets/Images/banner-contact.png">
-    <div class="type-list">
-        <div *ngFor="let type of types" class="type" >
-            <img  [src]="'assets/Images/' + type.Poster">
-            <p >{{ type.TenTieuMuc }}</p>
+<div class="banner-result">
+    <div class="img-banner" style="background-image: url(assets/Images/pexels-photo-2228559.jpeg); background-size: cover;">
+        <div class="text-banner ">
+            <p>result for "{{result}}"</p>
         </div>
     </div>
 </div>
 
 <br>
 
-<div class=" form-res flex">
-    <div class="invite-logan">
-        <h1>Unlock Your Online Storefront </h1> 
-        <p>
-            Mở cửa hàng trực tuyến của bạn, chúng tôi lo phần còn lại!
-        </p>
-    </div>
-
-    <div class="invite-btn">
-        <input type="text" placeholder="Your email" size="2">
-        <button>Đăng ký ngay</button>
-    </div>
-</div>
-
-<br>
-
-<div class="list-product">
+ <div class="list-product">
     <div class="item-product" *ngFor="let item of products">
         <img  src="assets/Images/poster_banh.jpeg">
         <div class="infor-product">
@@ -42,4 +24,5 @@
         </div>
         </div>
     </div>
-</div>
+</div> 
+<br>
