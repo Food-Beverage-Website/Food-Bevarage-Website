@@ -85,3 +85,58 @@
 .product-button p{
     @apply py-2 px-20 bg-orange-600 text-white text-[20px] font-medium
 }
+
+/* Đây là css banner rank */
+
+.banner-rank{
+    @apply px-[150px]
+}
+
+.rank{
+    @apply  gap-[15px] mt-[15px]
+}
+.rank-25dish, .rank-3shop, .rank-new{
+    @apply w-full h-[150px] relative object-cover
+}
+
+.rank-25dish div, .rank-3shop p, .rank-new p{
+    @apply absolute opacity-100 text-white w-full h-full flex justify-center items-center text-[70px]
+}
+
+/* Đây là css cho list store */
+.title-store{
+    @apply text-[50px] flex justify-center font-mono font-medium  bg-stone-700 text-white shadow-2xl
+}
+
+.list-store{
+    @apply px-[150px] grid-cols-5 
+}
+
+.list-itemStore{
+    @apply h-[350px] w-[380px] bg-red-50
+}
+.infor-store{
+    @apply px-[10px]
+}
+.img-store{
+    @apply h-[250px]   w-full
+}
+
+.address-Store{
+    @apply  text-[20px]  text-red-800 font-normal
+}
+
+.name-Store{
+    @apply text-[20px]  font-semibold
+}
+.time-Store{
+    @apple 
+}
+
+.time-Store .open{ 
+    @apply px-2 py-1 bg-red-600 text-white rounded-[20px]
+}
+
+.time-Store .close{
+    @apply px-2 py-1 bg-red-600 text-white rounded-[20px]
+}

@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+import { StoreService } from 'src/app/services/store.service';
 import { TypeService } from 'src/app/services/type.service';
+import { Store } from 'src/app/shared/models/store';
 import { Type } from 'src/app/shared/models/type';
 
 @Component({
@@ -14,14 +16,17 @@ import { Type } from 'src/app/shared/models/type';
 export class HomeComponent implements OnInit {
   types :Type[]=[];
   products: any[]=[];
+  stores:Store[]=[];
 
-  constructor(private typeService:TypeService,private productService:ProductService, activatedRouter: ActivatedRoute)
+  constructor(private storeService:StoreService,private typeService:TypeService,private productService:ProductService, activatedRouter: ActivatedRoute)
   {
     let typeObservable:Observable<Type[]>
     let productObservable:Observable<any[]>
+    let storeObservable:Observable<Store[]>
     activatedRouter.params.subscribe((params)=>{
       typeObservable=typeService.getAll();
       productObservable=productService.getAllProduct();
+      storeObservable=storeService.getBestSelling();
 
       typeObservable.subscribe ((serverType)=>{
         this.types=serverType;
@@ -29,6 +34,10 @@ export class HomeComponent implements OnInit {
 
       productObservable.subscribe ((serverProduct)=>{
         this.products=serverProduct.slice(0,10);
+      })
+
+      storeObservable.subscribe ((storeService)=>{
+        this.stores=storeService.slice(0,5);
       })
 
 
