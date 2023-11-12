@@ -10,6 +10,11 @@ import { FooterComponent } from './components/partials/footer/footer.component';
 import { ProductlistComponent } from './components/pages/productlist/productlist.component';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginPageComponent } from './components/pages/login-page/login-page.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     FooterComponent,
     ProductlistComponent,
-  
+    LoginPageComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbPaginationModule,
     NgbAlertModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut:3000,
+      positionClass:'toast-bottom-right',
+      newestOnTop:false
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

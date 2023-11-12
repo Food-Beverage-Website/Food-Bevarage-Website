@@ -1,0 +1,48 @@
+.video-container {
+  @apply  relative w-[100%] h-[85vh] overflow-hidden  flex items-center justify-center;
+}
+
+video {
+    @apply absolute  w-[100%] h-[100%] object-cover z-0
+   
+  }
+
+.content{
+    @apply opacity-70 mt-[50] absolute bg-white h-[700px] w-[1700px] z-10  rounded-[30px]
+}
+
+.title-login{
+    @apply text-[60px] text-red-800 font-bold font-mono flex justify-center
+}
+
+.name-role{
+    @apply text-[20px] py-1 px-1 w-[100px] border mt-[10px]   opacity-100 text-white
+}
+
+.div-buyer{
+    @apply w-[900px] h-[500px] bg-sky-100  mx-auto
+}
+
+.div-shop{
+    @apply w-[900px] h-[500px] bg-orange-100  mx-auto
+}
+
+.form{
+    @apply ml-[30%]
+}
+
+.input-container label{
+    @apply  text-[25px] font-mono
+}
+
+.input-container input{
+    @apply  w-[300px] h-[60px] font-mono border border-current
+}
+
+.button-sm{
+    @apply w-[300px] h-[50px] bg-sky-500  
+}
+
+.button-sm button{
+    @apply w-full h-full text-[30px] text-white font-bold font-mono flex justify-center mt-[5px]
+}

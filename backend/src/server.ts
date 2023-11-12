@@ -16,6 +16,7 @@ import voucherRouter from './routers/voucher.router';
 import toppingRouter from './routers/topping.router';
 dbConnect();
 const app = express();
+app.use(express.json());
 app.use(cors({
     credentials: true,
     origin: ["http://localhost:4200"]
@@ -30,6 +31,9 @@ app.use("/api/buyer", buyerRouter);
 app.use("/api/payment",paymentRouter);
 app.use("/api/voucher", voucherRouter);
 app.use("/api/topping", toppingRouter);
+
+
+
 
 const port = 5000;
 app.listen(port, () => {

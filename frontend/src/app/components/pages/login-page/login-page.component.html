@@ -1,0 +1,79 @@
+<div >
+    <div class="video-container">
+        <video autoplay muted loop>
+          <source src="assets/Images/bg-login.mp4" type="video/mp4">
+        </video>
+
+        <div class="content">
+            <p class="title-login">Login</p>
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs flex">
+                <li [ngbNavItem]="1">
+                    <button ngbNavLink class="name-role bg-blue-600 rounded-l-[40px] ml-[750px] ">Buyer</button>
+                    <ng-template ngbNavContent >
+                           <div class="div-buyer">
+                            
+                                <form class="form" [formGroup]="loginbuyerForm" (ngSubmit)="submit()">
+                                        <div class="input-container">
+                                            <label>Account</label>
+                                            <div>
+                                                <input type="text" placeholder="Your account" formControlName="account">
+                                            </div>
+                                            <div class="error-anno" *ngIf="fc.account.errors && isSubmitted">
+                                                <div *ngIf="fc.account.errors.required">Vui lòng nhập đầy đủ thông tin</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-container">
+                                            <label>Password</label>
+                                            <div>
+                                                <input type="password" placeholder="Your password" formControlName="password">
+                                            </div>
+                                            <div class="error-anno" *ngIf="fc.account.errors && isSubmitted">
+                                                <div *ngIf="fc.account.errors.required">Vui lòng nhập đầy đủ thông tin</div>
+                                            </div>
+                                        </div>
+                                        <div class="button-sm">
+                                            <button type="submit"> LOGIN</button>
+                                        </div>
+                                </form>
+                           </div>
+                        </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                    <button ngbNavLink class="name-role bg-orange-600 rounded-r-[40px]">Shop</button>
+                    <ng-template ngbNavContent>
+                        <div class="div-shop">
+                            <form class="form" [formGroup]="loginbuyerForm" (ngSubmit)="submit()">
+                                <div class="input-container">
+                                    <label>Account</label>
+                                    <div>
+                                        <input type="text" placeholder="Your account" formControlName="account_sh">
+                                    </div>
+                                    <div class="error-anno" *ngIf="fc.account.errors && isSubmitted">
+                                        <div *ngIf="fc.account.errors.required">Vui lòng nhập đầy đủ thông tin</div>
+                                    </div>
+                                </div>
+
+                                <div class="input-container">
+                                    <label>Password</label>
+                                    <div>
+                                        <input type="password" placeholder="Your password" formControlName="password_sh">
+                                    </div>
+                                    <div class="error-anno" *ngIf="fc.account.errors && isSubmitted">
+                                        <div *ngIf="fc.account.errors.required">Vui lòng nhập đầy đủ thông tin</div>
+                                    </div>
+                                </div>
+                                <div class="button-sm">
+                                    <button type="submit"> LOGIN</button>
+                                </div>
+                        </form>
+                            
+                        </div>
+                    </ng-template>
+                </li>
+            </ul>
+
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+    
+</div>

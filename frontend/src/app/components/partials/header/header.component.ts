@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +10,21 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router){
-
+  user!:User;
+  constructor(private router:Router, private userService:UserService){
+    userService.userObservable.subscribe((newUser)=>{
+      this.user= newUser;
+    })
   }
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+  }
+
+  login():void{
+    
+      this.router.navigateByUrl('/login');
+    
   }
 
 
@@ -22,5 +33,9 @@ export class HeaderComponent implements OnInit {
     {
       this.router.navigateByUrl('/search/'+term);
     }
+  }
+
+  get isAuth(){
+    return this.user.TaiKhoan;
   }
 }
