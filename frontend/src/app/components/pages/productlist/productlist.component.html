@@ -1,28 +1,55 @@
-<div class="banner-result">
-    <div class="img-banner" style="background-image: url(assets/Images/pexels-photo-2228559.jpeg); background-size: cover;">
-        <div class="text-banner ">
-            <p>result for "{{result}}"</p>
+<div class="container">
+    <div class="banner-result">
+        <div class="img-banner" style="background-image: url(assets/Images/pexels-photo-2228559.jpeg); background-size: cover;">
+            <div class="text-banner ">
+                <p>result for "{{result}}"</p>
+            </div>
         </div>
     </div>
+    
+    <br>
+    
+    <div class="row">
+        <div class="col-3" *ngFor="let item of products" style="padding-bottom: 10px">
+            <div class="card">
+                <img src="assets/Images/poster_banh.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}
+                    </h5>
+    
+                    <p class="d-flex justify-content-start text-orange-600" title="{{ item.MaCH.DiaChi }}" >
+                        <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...
+                    </p>
+    
+                    <p class="card-text product-price">
+                        {{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}
+                    </p>
+                   
+                </div>
+    
+              
+            </div>
+        </div>
+    </div>
+    
+     <!-- <div class="list-product">
+        
+        <div class="item-product" *ngFor="let item of products">
+            <img  src="assets/Images/poster_banh.jpeg">
+            <div class="infor-product">
+            <p class="product-address"> <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
+            <div class="flex"> 
+                <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
+                <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+            </div>
+            <div class="product-button">
+                <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+                
+                <p>Go shop</p>
+            </div>
+            </div>
+        </div>
+    </div>  -->
+    <br>
 </div>
-
-<br>
-
- <div class="list-product">
-    <div class="item-product" *ngFor="let item of products">
-        <img  src="assets/Images/poster_banh.jpeg">
-        <div class="infor-product">
-        <p class="product-address"> <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
-        <div class="flex"> 
-            <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
-            <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
-        </div>
-        <div class="product-button">
-            <div class="icon"><mat-icon>monetization_on</mat-icon></div>
-            
-            <p>Go shop</p>
-        </div>
-        </div>
-    </div>
-</div> 
-<br>

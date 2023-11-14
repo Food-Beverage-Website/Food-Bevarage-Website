@@ -1,5 +1,5 @@
 header {
-    @apply flex grid grid-cols-11 justify-items-center w-full max-w-full;
+    @apply flex grid grid-cols-11 py-2  justify-items-center max-w-full;
 }
 
 .div-header {
@@ -15,12 +15,11 @@ header {
 }
 
 .hr-logo {
-    @apply m-auto col-start-6;
+    @apply m-auto col-span-1;
 }
 
-
 .header-logo {
-    @apply w-full;
+    @apply max-w-[50px] h-auto; /* Đảm bảo hình ảnh không vượt quá kích thước của col-1 */
 }
 
 .icon-search {
@@ -36,7 +35,7 @@ header {
 }
 
 .header-icon {
-    @apply flex text-[25px] m-auto col-span-5   ;
+    @apply flex text-[25px] col-span-5   ;
 }
 
 .header-icon div {
@@ -48,7 +47,7 @@ header {
 }
 
 header .div-header, .header-icon {
-    @apply mt-[50px];
+    @apply mt-[10px];
 }
 
 
