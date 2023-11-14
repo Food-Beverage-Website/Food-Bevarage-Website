@@ -1,63 +1,61 @@
-header{
-    @apply flex grid grid-cols-3 justify-items-center px-[100px] py-[00px]  ;
+header {
+    @apply flex grid grid-cols-11 justify-items-center w-full max-w-full;
 }
 
-.div-header{
-    @apply mr-auto;
-}
-.header-menu{
-    @apply flex mr-auto  ;
+.div-header {
+    @apply mr-auto col-span-4;
 }
 
-.header-menu li{
-    @apply  text-[35px] ml-[50px] hover:text-red-500;
+.header-menu {
+    @apply flex mr-auto;
 }
 
-.header-logo{
-    @apply h-[150px] w-[150px]
+.header-menu li {
+    @apply text-[25px] ml-[25px] hover:text-red-500;
+}
+
+.hr-logo {
+    @apply m-auto col-start-6;
 }
 
 
-.icon-search{
+.header-logo {
+    @apply w-full;
+}
+
+.icon-search {
     @apply flex border-2 h-[60px] py-[4px] px-[10px] rounded-l-full;
 }
 
-.icon-search div{
+.icon-search div {
     @apply mt-[0px] ml-[0px];
 }
 
-.bnt-search{
-    @apply h-[60px] bg-sky-400 text-[30px] px-2 py-1 text-white rounded-r-full
+.bnt-search {
+    @apply h-[60px] bg-sky-400 text-[25px] px-2 py-1 text-white rounded-r-full;
 }
 
-
-.header-icon{
-    @apply flex text-[35px] ml-auto;
+.header-icon {
+    @apply flex text-[25px] m-auto col-span-5   ;
 }
 
-.header-icon div{
+.header-icon div {
     @apply ml-[40px];
 }
 
-.header-icon div mat-icon{
+.header-icon div mat-icon {
     @apply text-[50px] h-[45px] w-[45px] mt-[10px];
 }
 
-header .div-header,  .header-icon{
-    @apply mt-[50px]
-}
-
-.hr-logo{
-    @apply mt-[5px]
+header .div-header, .header-icon {
+    @apply mt-[50px];
 }
 
 
-.slide-bar-header{
-    @apply h-screen w-[-4px] bg-pink-500 absolute  ;
-   
+.slide-bar-header {
+    @apply h-screen w-[-4px] bg-pink-500 absolute;
 }
 
-.icon-cart:hover .slide-bar-header{
-   @apply w-[100px]
+.icon-cart:hover .slide-bar-header {
+    @apply w-[100px];
 }
-
