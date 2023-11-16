@@ -61,6 +61,8 @@
                     <p class="card-text">
                         {{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}
                     </p>
+                    <button (click)="chietietsanpham(item._id)" class="btn btn-primary">Mua Ngay</button>
+
                    
                 </div>
 

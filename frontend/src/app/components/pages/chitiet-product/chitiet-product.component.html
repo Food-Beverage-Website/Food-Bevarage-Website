@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="row justify-content-md-center py-3">
+                <div class="col col-lg-5">
+                    <img src="http://placekitten.com/400/252" class="w-100 h-100 rounded-5" />
+                </div>
+                <div class="py-10 col-lg-6">
+                    <h3>{{products.TenSP}}</h3>
+                    <p class="">
+                        {{products.MieuTa}}
+                    </p>
+
+                    <!-- Sử dụng ngFor để lặp qua mảng DonGia -->
+                    <div *ngFor="let price of products.DonGia">
+                        <p>Size: {{ price.Size }}, Gia: {{ price.Gia }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
