@@ -46,4 +46,3 @@ video {
 .button-sm button{
     @apply w-full h-full text-[30px] text-white font-bold font-mono flex justify-center mt-[5px]
 }
-

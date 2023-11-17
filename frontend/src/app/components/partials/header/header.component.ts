@@ -27,14 +27,6 @@ export class HeaderComponent implements OnInit {
     
   }
 
-  youruser():void{
-    this.router.navigateByUrl('/user/infor');
-  }
-
-  logout():void{
-    this.userService.logout();
-  }
-
 
   search(term:string):void{
     if(term)
