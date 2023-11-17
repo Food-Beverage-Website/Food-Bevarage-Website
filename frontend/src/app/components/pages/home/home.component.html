@@ -1,119 +1,80 @@
-<div class="container">
-    <div>
-        <img class="banner-img" src="assets/Images/banner-contact.png">
-        <div class="type-list">
-            <div *ngFor="let type of types" class="type">
-                <img [src]="'assets/Images/' + type.Poster">
-                <p>{{ type.TenTieuMuc }}</p>
-            </div>
+<div>
+    <img class="banner-img" src="assets/Images/banner-contact.png">
+    <div class="type-list">
+        <div *ngFor="let type of types" class="type" >
+            <img  [src]="'assets/Images/' + type.Poster">
+            <p >{{ type.TenTieuMuc }}</p>
         </div>
     </div>
-
-    <br>
-    <div class="banner-rank">
-        <div class="rank-25dish "
-            style="background-image: url(assets/Images/b181818cf48822d67b99.jpg); background-size: cover;">
-            <div>Top 25 side dishes</div>
-        </div>
-        <div class="rank flex gird grid-col-2">
-
-            <div class="rank-3shop"
-                style="background-image: url(assets/Images/pexels-photo-1438445.jpeg) ; background-size: cover;">
-                <p>Top 3 shop</p>
-            </div>
-            <div class="rank-new"
-                style="background-image: url(assets/Images/pexels-photo-941864.jpeg) ; background-size: cover;">
-                <p>New dishes</p>
-            </div>
-        </div>
-    </div>
-    <br>
-
-    <div class=" form-res flex">
-        <div class="invite-logan">
-            <h1>Unlock Your Online Storefront </h1>
-            <p>
-                Mở cửa hàng trực tuyến của bạn, chúng tôi lo phần còn lại!
-            </p>
-        </div>
-
-        <div class="invite-btn">
-            <input type="text" placeholder="Your email" size="2">
-            <button>Đăng ký ngay</button>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="row">
-        <div class="col-3" *ngFor="let item of products" style="padding-bottom: 10px">
-            <div class="card">
-                <img src="assets/Images/poster_banh.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        {{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}
-                    </h5>
-
-                    <p class="d-flex justify-content-start text-orange-600" title="{{ item.MaCH.DiaChi }}" >
-                        <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...
-                    </p>
-
-                    <p class="card-text">
-                        {{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}
-                    </p>
-                    <button (click)="chietietsanpham(item._id)" class="btn btn-primary">Mua Ngay</button>
-
-                   
-                </div>
-
-              
-            </div>
-        </div>
-    </div>
-
-
-    <!-- <div class="list-product">
-        <div class="item-product" *ngFor="let item of products">
-            <img src="assets/Images/poster_banh.jpeg">
-            <div class="infor-product">
-                <p class="product-address"> <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi
-                    | slice:0:27 }} ...</p>
-                <div class="flex">
-                    <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP
-                        }}</p>
-                    <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
-                </div>
-                <div class="product-button">
-                    <div class="icon"><mat-icon>monetization_on</mat-icon></div>
-
-                    <p>Go shop</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <br>
-
-    <div class="bg-fixed h-[400px] w-full bg-cover bg-center  "
-        style="background-image: url(assets/Images/027d1c3c513b8765de2a.jpg)"></div>
-
-    <div class="title-store">Best-Selling Store</div>
-    <br>
-    <div class="list-store" *ngFor="let item of stores">
-        <div class="list-itemStore">
-            <img class="img-store" src="assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg">
-            <div class="infor-store">
-                <div class="address-Store">
-                    {{ (item.DiaChi) ? (item.DiaChi | slice:0:31) + '...' : item.DiaChi }}
-                </div>
-
-                <div class="name-Store">
-                    {{item.TenCuaHang}}
-                </div>
-                <div class="time-Store flex justify-end">
-                    <div class="open">O: {{item.GioMoCua}}</div>&nbsp;<div class="close"> C: {{item.GioDongCua}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
+
+<br>
+<div class="banner-rank">
+    <div class="rank-25dish "  style="background-image: url(assets/Images/b181818cf48822d67b99.jpg); background-size: cover;" >
+        <div>Top 25 side dishes</div>
+    </div>
+    <div class="rank flex gird grid-col-2">
+        
+        <div class="rank-3shop" style="background-image: url(assets/Images/pexels-photo-1438445.jpeg) ; background-size: cover;"><p>Top 3 shop</p></div>
+        <div class="rank-new" style="background-image: url(assets/Images/pexels-photo-941864.jpeg) ; background-size: cover;"><p>New dishes</p></div>
+    </div>
+</div>
+<br>
+
+<div class=" form-res flex">
+    <div class="invite-logan">
+        <h1>Unlock Your Online Storefront </h1> 
+        <p>
+            Mở cửa hàng trực tuyến của bạn, chúng tôi lo phần còn lại!
+        </p>
+    </div>
+
+    <div class="invite-btn">
+        <input type="text" placeholder="Your email" size="2">
+        <button>Đăng ký ngay</button>
+    </div>
+</div>
+
+<br>
+
+<div class="list-product">
+    <div class="item-product" *ngFor="let item of products">
+        <img  src="assets/Images/poster_banh.jpeg">
+        <div class="infor-product">
+        <p class="product-address"> <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
+        <div class="flex"> 
+            <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
+            <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+        </div>
+        <div class="product-button">
+            <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+            
+            <p>Go shop</p>
+        </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="bg-fixed h-[400px] w-full bg-cover bg-center  " style="background-image: url(assets/Images/027d1c3c513b8765de2a.jpg)"></div>
+
+<div class="title-store">Best-Selling Store</div>
+<br>
+<div class="list-store" *ngFor="let item of stores">
+    <div class="list-itemStore">
+        <img class="img-store" src="assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg" >
+        <div class="infor-store">
+            <div class="address-Store">
+                {{ (item.DiaChi) ? (item.DiaChi | slice:0:31) + '...' : item.DiaChi }}
+            </div>
+            
+            <div  class="name-Store">
+                {{item.TenCuaHang}}
+            </div>
+            <div class="time-Store flex justify-end">
+                <div class="open">O: {{item.GioMoCua}}</div>&nbsp;<div class="close"> C: {{item.GioDongCua}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+  

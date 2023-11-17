@@ -7,8 +7,6 @@ import { StoreService } from 'src/app/services/store.service';
 import { TypeService } from 'src/app/services/type.service';
 import { Store } from 'src/app/shared/models/store';
 import { Type } from 'src/app/shared/models/type';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-home',
@@ -20,8 +18,7 @@ export class HomeComponent implements OnInit {
   products: any[]=[];
   stores:Store[]=[];
 
-  constructor(private storeService:StoreService,private typeService:TypeService,private productService:ProductService, activatedRouter: ActivatedRoute,
-    private router:Router,)
+  constructor(private storeService:StoreService,private typeService:TypeService,private productService:ProductService, activatedRouter: ActivatedRoute)
   {
     let typeObservable:Observable<Type[]>
     let productObservable:Observable<any[]>
@@ -66,13 +63,5 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-
-  chietietsanpham(term:string):void{
-    if(term)
-    {
-      this.router.navigateByUrl('/chitietsanpham/'+term);
-    }
-  }
-  
   
 }
