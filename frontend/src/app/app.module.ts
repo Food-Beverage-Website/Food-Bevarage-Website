@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
+import { ChitietProductComponent } from './components/pages/chitiet-product/chitiet-product.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { LoginPageComponent } from './components/pages/login-page/login-page.com
     FooterComponent,
     ProductlistComponent,
     LoginPageComponent,
+    ChitietProductComponent,
     
   ],
   imports: [
