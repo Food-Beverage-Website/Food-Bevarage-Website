@@ -37,6 +37,13 @@ export class UserService {
     );
   }
 
+  logout()
+  {
+    this.userSubject.next(new User());
+    localStorage.removeItem(user_key);
+    window.location.reload();
+  }
+
 
   private setUserToLocalStorage (user:User)
   {

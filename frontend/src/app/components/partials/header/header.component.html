@@ -28,8 +28,10 @@
         </div>
         <button (click)="search(s.value)"  class="bnt-search">Search</button>
         <div *ngIf="!user.TaiKhoan" (click)="login()" class="icon-cart"><mat-icon>supervised_user_circle </mat-icon></div>
-       
-        <div><mat-icon>menu</mat-icon></div>
+
+        
+        <div (click)="youruser()"><mat-icon>shopping_cart</mat-icon></div>
+        <div *ngIf="user.TaiKhoan" (click)="logout()"  class="icon-cart"><mat-icon>logout </mat-icon></div>
     </div>
 
 
