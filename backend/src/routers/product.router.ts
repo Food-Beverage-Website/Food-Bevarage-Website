@@ -27,7 +27,7 @@ router.get("/check",asynceHandler(
 
 router.get("/", asynceHandler(async (req, res) => {
     try {
-        const products = await ProductModel.find().select({ _id: 1 });
+        const products = await ProductModel.find(); // Loại bỏ trường 'id'
         res.send(products);
     } catch (error) {
         console.error(error);
@@ -52,27 +52,6 @@ router.get("/getProductByName/:Searchname", asynceHandler(async (req, res) => {
     const productsWithStoreInfo = await ProductModel.find({ TenSP: { $regex: productName, $options: 'i' } }).populate('MaCH');
     res.send(productsWithStoreInfo);
 }));
-
-router.get("/getProductById/:productId", asynceHandler(async (req, res) => {
-        const productId = req.params.productId;
-
-        const productInfo = await ProductModel.findById(productId);
-
-        // Kiểm tra xem sản phẩm có tồn tại hay không
-        if (!productInfo) {
-            throw { status: 404, message: 'Không tìm thấy sản phẩm' };
-        }
-
-        // Trả về thông tin của sản phẩm
-        res.send(productInfo);
-    
-}));
-
-
-
-
-
-
 
 router.get("/GetAllProductbyName")
 export default router;
