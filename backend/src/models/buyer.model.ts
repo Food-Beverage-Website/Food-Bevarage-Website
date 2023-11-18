@@ -20,7 +20,14 @@ const BuyerSchema = new mongoose.Schema({
     },
     ThanhTien: Number,
     GhiChu: String
-  }]
+  }],
+  DiaChis:[
+    {
+      TenNguoiNhan:{ type: String, required: true },
+      DiaChi:{ type: String, required: true },
+      SDT:{ type: String, required: true }
+    }
+  ]
 });
 
 export const BuyerModel = mongoose.model('khachhang', BuyerSchema);

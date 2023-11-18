@@ -1,6 +1,6 @@
 <div class="infor">
     <p class="title-infor">Thông tin cá nhân</p>
-    <p class="ml-[10px] text-[15px]">Phạm Thanh Tuyền | 0298545465585</p>
+    <p class="ml-[10px] text-[15px]">{{user.TenKhachHang}} | {{user.SDT}}</p>
     <p class="ml-[10px]  text-[10px] text-red-500">* Đây là thông tin gốc của tài khoản khách hàng khi đăng ký tài khoản và không thể thay đổi !</p>
 </div>
 <br>
@@ -10,12 +10,12 @@
    <button class="flex"><mat-icon class=" ">add</mat-icon>Thêm địa chỉ mới</button>
 </div>
 <br>
-<div >
+<div *ngFor="let item of user.DiaChis">
 
     <div class="address">
         <div class="name-address">
-            <p><span class="font-bold"> Trần Thanh Nam</span> | 094245625445</p>
-            <p>140 Lê Trọng Tấn</p>
+            <p><span class="font-bold">{{item.TenNhanHang}}</span> | {{item.SDT}}</p>
+            <p>{{item.DiaChi}}</p>
         </div>
         <div class="change-address">
             <a>Cập nhật</a>
@@ -23,15 +23,6 @@
         </div>
     </div>
     <br>
-    <div class="address">
-        <div class="name-address">
-            <p><span class="font-bold"> Trần Thanh Nam</span> | 094245625445</p>
-            <p>140 Lê Trọng Tấn</p>
-        </div>
-        <div class="change-address">
-            <a>Cập nhật</a>
-            <a>Xóa</a>
-        </div>
-    </div>
+    
 
 </div>

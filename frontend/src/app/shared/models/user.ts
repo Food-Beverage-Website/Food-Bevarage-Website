@@ -7,8 +7,14 @@ export class User {
     TaiKhoan!: string;
     TichDiem!: string;
     GioHang: GioHangItem[] = [];
+    DiaChis: diaChis[]=[];
   }
-  
+  export class diaChis {
+    TenNhanHang!: string;
+    DiaChi!: string;
+    SDT!: string;
+  }
+
   export class GioHangItem {
     MaID!: number;
     MaSP!: string;
