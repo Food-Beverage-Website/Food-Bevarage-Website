@@ -1,5 +1,5 @@
  .banner-result .img-banner{
-    @apply relative w-full h-[200px] 
+    @apply relative w-full h-[150px] 
 }
 
  .text-banner{
@@ -10,32 +10,35 @@
     @apply text-white  text-[50px]
 } 
 
-/* Đây là css cho list sản phẩm  */
-.list-product{
-    @apply grid grid-cols-4 px-[150px] gap-[40px]
+/* Đây là css cho list sản phẩm  */.list-product{
+    @apply grid grid-cols-4 px-[100px] gap-[30px]
 }
 
 .item-product{
-    @apply h-[500px] w-full bg-orange-50
+    @apply h-[328px] w-full bg-orange-50
 }
 
 .infor-product{
-    @apply px-5
+    @apply px-3
 }
 .item-product img{
-    @apply h-[350px] w-full
+    @apply h-[248px] w-full
 }
 
 .product-address{
-    @apply text-[25px] font-light text-orange-600
+    @apply text-[11px] font-light text-orange-600 flex mt-[2px]
 }
 
-.product-name{
-    @apply text-[30px] font-medium
+
+.product-address mat-icon {
+    @apply text-[14px] font-light text-orange-600
+}
+.product-name {
+    @apply text-[15px] font-medium
 }
 
 .product-price{
-    @apply text-[30px]  ml-auto 
+    @apply text-[15px]  ml-auto 
 }
 
 .product-button{
@@ -43,13 +46,13 @@
 }
 
 .product-button .icon{
-    @apply py-2 px-4 bg-sky-950 text-white items-center
+    @apply bg-sky-950 text-white items-center h-[25px] w-[25px] 
 }
 
 .product-button .icon mat-icon{
-    @apply  text-white font-medium
+    @apply  text-white text-[20px] mt-[3px] ml-[2px] 
 }
 
 .product-button p{
-    @apply py-2 px-20 bg-orange-600 text-white text-[20px] font-medium
+    @apply  bg-orange-600 text-white text-[15px] font-medium h-[25px] w-[100px] text-center
 }

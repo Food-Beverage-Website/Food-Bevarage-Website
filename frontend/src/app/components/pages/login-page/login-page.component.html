@@ -8,7 +8,7 @@
             <p class="title-login">Login</p>
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs flex">
                 <li [ngbNavItem]="1">
-                    <button ngbNavLink class="name-role bg-blue-600 rounded-l-[40px] ml-[750px] ">Buyer</button>
+                    <button ngbNavLink class="name-role bg-blue-600 rounded-l-[40px] ml-[410px] ">Buyer</button>
                     <ng-template ngbNavContent >
                            <div class="div-buyer">
                             
@@ -43,7 +43,7 @@
                     <button ngbNavLink class="name-role bg-orange-600 rounded-r-[40px]">Shop</button>
                     <ng-template ngbNavContent>
                         <div class="div-shop">
-                            <form class="form" [formGroup]="loginbuyerForm" (ngSubmit)="submit()">
+                            <!-- <form class="form" [formGroup]="loginbuyerForm" (ngSubmit)="submit()">
                                 <div class="input-container">
                                     <label>Account</label>
                                     <div>
@@ -66,7 +66,7 @@
                                 <div class="button-sm">
                                     <button type="submit"> LOGIN</button>
                                 </div>
-                        </form>
+                        </form> -->
                             
                         </div>
                     </ng-template>

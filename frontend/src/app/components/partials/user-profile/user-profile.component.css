@@ -1,0 +1,28 @@
+.banner-address{
+    @apply flex py-[10px]  h-[70px]
+}
+
+.banner-address button{
+    @apply ml-auto bg-sky-100 mr-[10px] px-[10px] text-[15px] rounded-[20px] my-[10px]
+}
+
+.title-infor{
+    @apply text-red-800 text-[20px]  ml-[10px] my-auto
+
+}
+
+.address{
+    @apply flex 
+}
+
+.name-address{
+    @apply text-[15px] ml-[10px]
+}
+
+.change-address{
+    @apply ml-auto mr-[10px]
+}
+
+.change-address a{
+    @apply px-4 text-[12px]
+}

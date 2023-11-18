@@ -1,0 +1,21 @@
+<div class="font-sans  flex mx-[10px] mt-2">
+   
+    <aside class="w-[250px] bg-gray-800 rounded-[20px] h-screen text-white flex justify-center">
+        <div class="py-6 w-full">
+            <img class="h-[100px] w-[100px] mx-auto" src="assets/Images/logouser.png">
+            <ul class="sidebar">
+                <li><a routerLink="/user/infor"> <mat-icon>home</mat-icon> Thông Tin</a></li>
+                <li><a routerLink="/user/ordered"> <mat-icon>local_shipping</mat-icon> Đơn Đặt</a></li>
+                <li><a routerLink="/user/history"> <mat-icon>history</mat-icon> Lịch Sử</a></li>
+                <li><a routerLink="/user/statistical"> <mat-icon>monitoring</mat-icon> Thống kê</a></li>
+                <li><a routerLink="/user/setting"> <mat-icon>settings</mat-icon> Cài Đặt</a></li>
+                <li (click)="logout()" ><a > <mat-icon>logout</mat-icon> Đăng Xuất</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 bg-gray-100 rounded-[20px] ml-2">
+        <router-outlet ></router-outlet>
+    </main>
+</div>

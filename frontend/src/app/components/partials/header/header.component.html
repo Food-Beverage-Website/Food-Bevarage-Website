@@ -17,15 +17,27 @@
         <img class="header-logo" src="assets/Images/logo.jpg">
     </div>
 
-    <div class="header-icon">
-      
+    <div class="header-icon ">
+       
            
+                
         <input #s (keyup.enter)="search(s.value)"  type="text" placeholder="Search" class="hover:border-indigo-700 border-indigo-700 border px-[10px] rounded-l-[020px] text-[20px] h-[30px] w-[200px]">
+                
+        <button (click)="search(s.value)"  class="bnt-search">Search</button>
+        <div *ngIf="user.TaiKhoan" class="flex"> <!-- Tài khoản khách hàng tồn tại (buyer)-->
+            <div ><mat-icon >shopping_cart</mat-icon></div> 
+            <div (click)="youruser()"  class="icon-cart"><mat-icon >reorder</mat-icon></div>
+        </div>
+
+        <div *ngIf="!user.TaiKhoan"> <!-- Giao diện client (Khách vãn lai)-->
+            <div *ngIf="!user.TaiKhoan" (click)="login()" class="icon-cart"><mat-icon>supervised_user_circle </mat-icon></div>
+        </div>
        
-         <button (click)="search(s.value)"  class="bnt-search">Search</button> 
-        <div *ngIf="!user.TaiKhoan" (click)="login()" class="icon-cart"><mat-icon>supervised_user_circle </mat-icon></div>
        
-        <div><mat-icon>menu</mat-icon></div>
+       
+
+        
+        
     </div>
 
 
@@ -36,7 +48,3 @@
 <br>
 <hr>
 
-<div class="slide-bar-header">
-
-
-</div>

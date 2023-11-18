@@ -8,11 +8,11 @@
 
 <br>
 
- <div class="list-product">
+<div class="list-product">
     <div class="item-product" *ngFor="let item of products">
         <img  src="assets/Images/poster_banh.jpeg">
         <div class="infor-product">
-        <p class="product-address"> <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
+        <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
         <div class="flex"> 
             <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
             <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
@@ -24,5 +24,7 @@
         </div>
         </div>
     </div>
-</div> 
+</div>
+
+
 <br>

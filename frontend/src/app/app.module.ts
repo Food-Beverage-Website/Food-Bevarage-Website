@@ -14,6 +14,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
+import { UserComponent } from './components/pages/user/user.component';
+import { UserInforComponent } from './components/partials/user-infor/user-infor.component';
+import { UserOrderComponent } from './components/partials/user-order/user-order.component';
+import { UserProfileComponent } from './components/partials/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -24,6 +28,10 @@ import { LoginPageComponent } from './components/pages/login-page/login-page.com
     FooterComponent,
     ProductlistComponent,
     LoginPageComponent,
+    UserComponent,
+    UserInforComponent,
+    UserOrderComponent,
+    UserProfileComponent,
     
   ],
   imports: [

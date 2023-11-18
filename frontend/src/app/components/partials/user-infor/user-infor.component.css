@@ -1,0 +1,15 @@
+.title-infor{
+    @apply ml-[20px] 
+}
+
+.title-infor h2{
+    @apply text-[17px] font-bold
+}
+
+.title-infor p{
+    @apply text-[15px] 
+}
+
+.btn-option{
+    @apply px-[5px] py-1 bg-sky-100 text-[15px] w-[300px]
+}
