@@ -8,7 +8,6 @@
     </div>
 </div>
 
-<br>
 <div class="banner-rank">
     <div class="rank-25dish "  style="background-image: url(assets/Images/b181818cf48822d67b99.jpg); background-size: cover;" >
         <div>Top 25 side dishes</div>
@@ -41,7 +40,7 @@
     <div class="item-product" *ngFor="let item of products">
         <img  src="assets/Images/poster_banh.jpeg">
         <div class="infor-product">
-        <p class="product-address"> <mat-icon class="text-orange-600">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
+        <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
         <div class="flex"> 
             <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
             <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
@@ -56,12 +55,12 @@
 </div>
 <br>
 
-<div class="bg-fixed h-[400px] w-full bg-cover bg-center  " style="background-image: url(assets/Images/027d1c3c513b8765de2a.jpg)"></div>
+<div class="bg-fixed h-[250px] w-full bg-cover bg-center  " style="background-image: url(assets/Images/027d1c3c513b8765de2a.jpg)"></div>
 
 <div class="title-store">Best-Selling Store</div>
 <br>
-<div class="list-store" *ngFor="let item of stores">
-    <div class="list-itemStore">
+<div class="list-store" >
+    <div class="list-itemStore" *ngFor="let item of stores">
         <img class="img-store" src="assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg" >
         <div class="infor-store">
             <div class="address-Store">

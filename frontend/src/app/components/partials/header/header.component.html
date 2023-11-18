@@ -18,15 +18,11 @@
     </div>
 
     <div class="header-icon">
-        <div class="icon-search">
-            <div class="relative flex">
-                
-                <input #s (keyup.enter)="search(s.value)" type="text" placeholder="Search" class="outline-none border-none focus:text-red-500">
-                
-              </div>
-              
-        </div>
-        <button (click)="search(s.value)"  class="bnt-search">Search</button>
+      
+           
+        <input #s (keyup.enter)="search(s.value)"  type="text" placeholder="Search" class="hover:border-indigo-700 border-indigo-700 border px-[10px] rounded-l-[020px] text-[20px] h-[30px] w-[200px]">
+       
+         <button (click)="search(s.value)"  class="bnt-search">Search</button> 
         <div *ngIf="!user.TaiKhoan" (click)="login()" class="icon-cart"><mat-icon>supervised_user_circle </mat-icon></div>
        
         <div><mat-icon>menu</mat-icon></div>

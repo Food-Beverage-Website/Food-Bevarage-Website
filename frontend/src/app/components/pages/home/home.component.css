@@ -1,73 +1,82 @@
 .banner-img{
-    @apply w-full h-[800px]
+    @apply w-full h-[370px]
 }
 
 .type-list{
-    @apply px-[100px] py-2  flex justify-center h-[400px]  items-center  ;
+    @apply px-[50px] py-2  flex justify-center h-[200px]  items-center  ;
 }
 
 .type{
-    @apply ml-[50px]
+    @apply ml-[20px]
 }
 
 .type img{
-    @apply h-[250px] w-[250px] rounded-full
+    @apply h-[120px] w-[120px] rounded-full
 }
 
 .type p{
-    @apply text-center text-[30px] font-mono
+    @apply text-center text-[20px] font-mono
 }
 
-.invite-logan h1{
-    @apply text-[50px] font-[20px]
-    }
-
-.invite-logan p{
-@apply text-[20px] font-[10px]
-}
+/* Đây là css cho invite */
 
 .form-res {
-    @apply px-[300px] items-center 
+    @apply px-[130px] items-center 
 }
 
-.invite-btn input{
-    @apply w-[500px] h-[60px] border outline-none rounded-[20px] focus:text-red-500
+
+.invite-logan h2{
+    @apply text-[60px] font-[20px]
 }
 
-.invite-btn button{
-    @apply p-2 h-[55px] rounded-[40px] w-[200px] bg-sky-500 ml-[20px] text-[30px]
+.invite-logan p{
+@apply text-[10px] font-[10px]
 }
 
 .invite-btn{
-    @apply ml-[300px]
+    @apply ml-auto mr-[40px]
 }
+
+
+.invite-btn input{
+    @apply w-[200px] h-[30px] border outline-none rounded-[20px] focus:text-red-500 px-[10px]
+}
+
+.invite-btn button{
+    @apply p-2 h-[25px] rounded-[40px] w-[80px] bg-sky-500 ml-[20px] text-[10px]
+}
+
 
 /* Đây là css cho danh sách sản phẩm */
 .list-product{
-    @apply grid grid-cols-4 px-[150px] gap-[40px]
+    @apply grid grid-cols-4 px-[100px] gap-[30px]
 }
 
 .item-product{
-    @apply h-[500px] w-full bg-orange-50
+    @apply h-[328px] w-full bg-orange-50
 }
 
 .infor-product{
-    @apply px-5
+    @apply px-3
 }
 .item-product img{
-    @apply h-[350px] w-full
+    @apply h-[248px] w-full
 }
 
 .product-address{
-    @apply text-[25px] font-light text-orange-600
+    @apply text-[11px] font-light text-orange-600 flex mt-[2px]
 }
 
-.product-name{
-    @apply text-[30px] font-medium
+
+.product-address mat-icon {
+    @apply text-[14px] font-light text-orange-600
+}
+.product-name {
+    @apply text-[15px] font-medium
 }
 
 .product-price{
-    @apply text-[30px]  ml-auto 
+    @apply text-[15px]  ml-auto 
 }
 
 .product-button{
@@ -75,41 +84,41 @@
 }
 
 .product-button .icon{
-    @apply py-2 px-4 bg-sky-950 text-white items-center
+    @apply bg-sky-950 text-white items-center h-[25px] w-[25px] 
 }
 
 .product-button .icon mat-icon{
-    @apply  text-white font-medium
+    @apply  text-white text-[20px] mt-[3px] ml-[2px] 
 }
 
 .product-button p{
-    @apply py-2 px-20 bg-orange-600 text-white text-[20px] font-medium
+    @apply  bg-orange-600 text-white text-[15px] font-medium h-[25px] w-[100px] text-center
 }
 
 /* Đây là css banner rank */
 
 .banner-rank{
-    @apply px-[150px]
+    @apply px-[100px]
 }
 
 .rank{
     @apply  gap-[15px] mt-[15px]
 }
 .rank-25dish, .rank-3shop, .rank-new{
-    @apply w-full h-[150px] relative object-cover
+    @apply w-full h-[80px] relative object-cover
 }
 
 .rank-25dish div, .rank-3shop p, .rank-new p{
-    @apply absolute opacity-100 text-white w-full h-full flex justify-center items-center text-[70px]
+    @apply absolute opacity-100 text-white w-full h-full flex justify-center items-center text-[40px]
 }
 
 /* Đây là css cho list store */
 .title-store{
-    @apply text-[50px] flex justify-center font-mono font-medium  bg-stone-700 text-white shadow-2xl
+    @apply text-[30px] flex justify-center font-mono font-medium  bg-stone-700 text-white shadow-2xl
 }
 
 .list-store{
-    @apply px-[150px] grid-cols-5 
+    @apply px-[100px] grid-cols-5  flex  gap-x-[30px]
 }
 
 .list-itemStore{
@@ -122,12 +131,14 @@
     @apply h-[250px]   w-full
 }
 
+
+
 .address-Store{
-    @apply  text-[20px]  text-red-800 font-normal
+    @apply  text-[15px]  text-red-800 font-normal
 }
 
 .name-Store{
-    @apply text-[20px]  font-semibold
+    @apply text-[15px]  font-semibold
 }
 .time-Store{
     @apple 
@@ -138,5 +149,5 @@
 }
 
 .time-Store .close{
-    @apply px-2 py-1 bg-red-600 text-white rounded-[20px]
+    @apply px-2 py-1 bg-red-600 text-white rounded-[20px] 
 }

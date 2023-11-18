@@ -1,5 +1,5 @@
 header{
-    @apply flex grid grid-cols-3 justify-items-center px-[100px] py-[00px]  ;
+    @apply flex grid grid-cols-3 justify-items-center px-[50px] py-[00px] h-[80px]  ;
 }
 
 .div-header{
@@ -10,16 +10,16 @@ header{
 }
 
 .header-menu li{
-    @apply  text-[35px] ml-[50px] hover:text-red-500;
+    @apply  text-[20px] ml-[20px] hover:text-red-500;
 }
 
 .header-logo{
-    @apply h-[150px] w-[150px]
+    @apply h-[80px] 
 }
 
 
 .icon-search{
-    @apply flex border-2 h-[60px] py-[4px] px-[10px] rounded-l-full;
+    @apply flex border-2 h-[40px] w-[20px] py-[4px]  rounded-l-full;
 }
 
 .icon-search div{
@@ -27,7 +27,7 @@ header{
 }
 
 .bnt-search{
-    @apply h-[60px] bg-sky-400 text-[30px] px-2 py-1 text-white rounded-r-full
+    @apply h-[30px] bg-sky-400 text-[15px] px-2 py-1 text-white rounded-r-full
 }
 
 
@@ -40,11 +40,11 @@ header{
 }
 
 .header-icon div mat-icon{
-    @apply text-[50px] h-[45px] w-[45px] mt-[10px];
+    @apply text-[20px] h-[45px] w-[45px] mt-[10px];
 }
 
 header .div-header,  .header-icon{
-    @apply mt-[50px]
+    @apply mt-[30px]
 }
 
 .hr-logo{
