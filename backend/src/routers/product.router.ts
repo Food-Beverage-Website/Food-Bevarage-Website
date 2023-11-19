@@ -1,6 +1,10 @@
 import { Router } from "express";
 import asynceHandler from 'express-async-handler';
 import { ProductModel } from "../models/product.model";
+import { StoreModel } from "../models/store.model";
+import { ToppingModel } from "../models/topping.model";
+
+const mongoose = require('mongoose');
 
 const router = Router();
 
@@ -54,4 +58,37 @@ router.get("/getProductByName/:Searchname", asynceHandler(async (req, res) => {
 }));
 
 router.get("/GetAllProductbyName")
+
+
+
+router.get("/getProductById/:productId", asynceHandler(async (req, res) => {
+    const productId = req.params.productId;
+
+    const productInfo = await ProductModel.findById(productId);
+
+    // Kiểm tra xem sản phẩm có tồn tại hay không
+    if (!productInfo) {
+        throw { status: 404, message: 'Không tìm thấy sản phẩm' };
+    } else {
+        const storeInfo = await StoreModel.findById(productInfo.MaCH);
+
+        if (storeInfo) {
+            const toppings = await ToppingModel.find({ MaCH: storeInfo._id });
+            const productWithToppings = {
+                productInfo,
+                toppings,
+            };
+            res.send(productWithToppings);
+            return; // Exit the function after sending the response
+        }
+    }
+
+    res.send(productInfo);
+}));
+
+
+
+
+
+
 export default router;

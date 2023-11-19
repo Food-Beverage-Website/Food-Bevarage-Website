@@ -18,6 +18,7 @@ import { UserComponent } from './components/pages/user/user.component';
 import { UserInforComponent } from './components/partials/user-infor/user-infor.component';
 import { UserOrderComponent } from './components/partials/user-order/user-order.component';
 import { UserProfileComponent } from './components/partials/user-profile/user-profile.component';
+import { ChitietProductComponent } from './components/pages/chitiet-product/chitiet-product.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { UserProfileComponent } from './components/partials/user-profile/user-pr
     UserInforComponent,
     UserOrderComponent,
     UserProfileComponent,
+    ChitietProductComponent,
     
   ],
   imports: [

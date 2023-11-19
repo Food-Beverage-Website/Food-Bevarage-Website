@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="row justify-content-md-center py-3">
+                <div class="col col-lg-5">
+                    <img src="https://images.baodantoc.vn/uploads/2022/Th%C3%A1ng%207/Ng%C3%A0y_18/Anh/untitled%20folder/my-vi-am-thuc-viet-ba-mien-2.jpg"
+                        class="w-100 rounded-5" style="height: 400px;" />
+                </div>
+                <div class="py-10 col-lg-6">
+                    <h3>{{products.productInfo.TenSP}}</h3>
+                    <p>Size:</p>
+
+                    <div class="row">
+                        <div class="col-4" *ngFor="let item of products.productInfo.DonGia">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sizegia" [id]="item.Size"
+                                    [value]="item.Gia" (click)="selectSize(item.Gia)">
+                                <label class="form-check-label" [for]="item.Size">
+                                    <p>{{ item.Size }}</p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topping -->
+                    <p>Topping: </p>
+                    <div class="row" *ngFor="let item of products.toppings">
+                        <div class="col-4 py-1">
+                            <input class="form-check-input" type="radio" name="toppinggia" id="None" value="0"
+                                (click)="selectTopping(0)">
+                            <label class="form-check-label" for="None">
+                                None
+                            </label>
+                        </div>
+
+                        <div class="col-4 py-1" *ngFor="let item2 of item.Topping">
+                            <input class="form-check-input" type="radio" name="toppinggia" [id]="item2.tentopping"
+                                [value]="item2.gia" (click)="selectTopping(item2.gia)">
+                            <label class="form-check-label" [for]="item2.tentopping">
+                                {{ item2.tentopping }}
+                            </label>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col-6">
+                            <p> Giá loại: {{showgiaSize()}}đ </p>
+                        </div>
+                        <div class="col-6">
+                            <p> Giá Topping: {{showgiaTopping()}}đ</p>
+
+                        </div>
+                    </div>
+
+                    <p>Tổng giá: <span class="text-danger">{{ calculateTotalPrice() }}</span>đ</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-md-center">
+                <div class="col-6 ">
+                    <h5>Mô tả</h5>
+                    <p>{{products.productInfo.MieuTa}}</p>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    
+</div>

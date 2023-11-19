@@ -6,6 +6,7 @@ import { LoginPageComponent } from './components/pages/login-page/login-page.com
 import { UserComponent } from './components/pages/user/user.component';
 import { UserInforComponent } from './components/partials/user-infor/user-infor.component';
 import { UserOrderComponent } from './components/partials/user-order/user-order.component';
+import { ChitietProductComponent } from './components/pages/chitiet-product/chitiet-product.component';
 
 const routes: Routes = [
 {path:'',component:HomeComponent},
@@ -28,7 +29,9 @@ const routes: Routes = [
      path:'',
      component:UserOrderComponent
   }]
- }
+ },
+ {path: 'chitietsanpham/:productId', component:ChitietProductComponent},
+
 ];
 
 @NgModule({
