@@ -1,0 +1,24 @@
+
+.form-check{
+    padding-left: 0;
+}
+.hidden-input {
+    position: absolute;
+    left: -9999px;
+}
+
+p{
+    @apply mb-0
+}
+
+.selected {
+    color: blue;
+    /* hoặc màu sắc mong muốn khi được chọn */
+}
+
+.noselected {
+    color: black;
+    /* hoặc màu sắc mong muốn khi được chọn */
+}
+
+

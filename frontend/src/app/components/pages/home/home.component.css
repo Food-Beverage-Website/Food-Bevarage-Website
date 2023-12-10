@@ -6,6 +6,10 @@
     @apply px-[50px] py-2  flex justify-center h-[200px]  items-center  ;
 }
 
+p{
+    @apply mb-0
+}
+
 .type{
     @apply ml-[20px]
 }

@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="card bg-secondary bg-opacity-10">
+        <div class="container-fluid">
+            <div class="row justify-content-md-center py-3 border-bottom border-gray">
+                <div class="col col-lg-5">
+                    <img src="/frontend/src/assets/Images/{{products.productInfo.Hinh}}" alt="" class="w-100 rounded-8"
+                        style="height: 400px;">
+                </div>
+                <div class="py-3 col-lg-7">
+                    <h2>{{products && products.productInfo && products.productInfo.TenSP}}</h2>
+
+                    <div class="row border-bottom border-gray">
+                        <div class="col-2 px-2" *ngFor="let item of products.productInfo.DonGia">
+                            <div class="form-check">
+                                <input class="form-check-input hidden-input" type="radio" name="sizegia"
+                                    [id]="item.Size" [value]="item.Gia" (click)="selectSize(item.Gia, item.Size)">
+
+                                <label class="form-check-label d-flex" [for]="item.Size"
+                                    [ngClass]="(selectedSizePrice === item.Gia) ? 'selected' : ''">
+                                    <span class="material-symbols-outlined">
+                                        {{ getIconName(item.Size) }} </span>
+                                    {{item.Size}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topping -->
+                    <div class="row border-bottom border-gray mb-3" *ngFor="let item of products.toppings">
+                        <!-- <div class="col-4 py-1">
+                            <input class="form-check-input" type="checkbox" name="toppinggia" id="None" value="0"
+                                (click)="selectTopping(0, 'Không')">
+                            <label class="form-check-label" for="None">
+                                Không
+                            </label>
+                        </div> -->
+
+                        <div class="col-6 py-1 d-flex align-items-center" *ngFor="let item2 of item.Topping">
+                            <!-- <img class="" src="assets/Images/{{item2.hinh}}" width="20px" height="20px"> -->
+                        
+                            <img src="/frontend/src/assets/Images/{{item2.hinh}}"
+                                class="w-10 rounded-circle" />
+                            <input (click)="toppingQuantity.value = +toppingQuantity.value > 0 ? '0' : '1'"
+                                class="form-check-input hidden-input" type="checkbox" name="toppinggia"
+                                [id]="item2.tentopping" [value]="item2.gia"
+                                (input)="selectTopping(item2._id, item2.gia, item2.tentopping, +toppingQuantity.value)">
+                            <label class="form-check-label"
+                                [ngClass]="isSelectedTopping(item2.tentopping) ? 'selected' : ''"
+                                [for]="item2.tentopping" title="{{ item2.tentopping }}">
+                                {{ truncateName(item2.tentopping, 15) }} | {{ formatPrice(item2.gia) }}
+                            </label>
+                            <input style="width:70px;"
+                                (change)="selectTopping(item2._id, item2.gia, item2.tentopping, +toppingQuantity.value)"
+                                type="number" id="{{item2.tentopping}}" min="0" max="10" class="form-control ml-3 "
+                                value="" #toppingQuantity>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col-auto">
+                            <p> Giá ly (giá gốc): {{showgiaSize()}}đ </p>
+                        </div>
+                        <div class="col-auto">
+                            <p> Tổng giá Topping: {{showTongGiaTopping()}}đ</p>
+                        </div>
+                        <div class="col-auto d-flex align-items-center">
+                            <p class="mb-2">Số ly: </p>
+                            <input style="width:70px;" type="number" name="quantity" id="quantity" min="1" max="10"
+                                class="form-control" [(ngModel)]="selectedSoluongPrice">
+                        </div>
+                    </div>
+                    <!-- 
+                    <div *ngIf="getPhanTramKhuyenMai_SanPham() != 0">
+                        <p class="text-orange"> {{calculateTotalPrice_CoKhuyenMai(getPhanTramKhuyenMai_SanPham())}} </p>
+                        <p> <del>{{ calculateTotalPrice() }}</del> đ <span class="text-orange">{{getPhanTramKhuyenMai_SanPham()}}%</span></p>
+                    </div> -->
+
+                    <p *ngIf="PhanTramGiam != 0"><span class="text-warning fs-3">-{{PhanTramGiam}}% giá size</span> </p>
+
+                    <p *ngIf="PhanTramGiam != 0">
+                        <span class="text-danger fs-3">{{calculateTotalPrice_CoKhuyenMai()}}đ</span> <span class="fs-5"
+                            *ngIf="calculateTotalPrice_CoKhuyenMai()!=0"><del>{{calculateTotalPrice()}}đ</del> </span>
+                    </p>
+
+                    <h3 *ngIf="PhanTramGiam == 0">
+                        {{ calculateTotalPrice() }}đ
+                    </h3>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-auto">
+                            <a (click)="truyenDetailProductJson()" class="btn btn-primary d-flex align-items-center">
+                                <mat-icon class="mr-2">add_shopping_cart</mat-icon> Thêm vào giỏ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 ">
+                    <div class="d-flex align-items-center">
+                        <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
+                            style="width: 45px; height: 45px" />
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{products.productInfo.MaCH.TenCuaHang}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <p>{{products.productInfo.MieuTa}}</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

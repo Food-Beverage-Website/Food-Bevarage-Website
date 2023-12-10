@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../shared/models/user';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { HttpClient } from '@angular/common/http';
-import { USER_LOGIN_URL } from '../shared/constants/urls';
+import { USER_LOGIN_URL, DELETE_TOPPING_GIOHANG_BY_JSON_BUYER, EDIT_COUNT_TOPPING_GIOHANG_BY_JSON_BUYER, PRODUCT_BY_JSON_PRODUCT_DETAIL, USER_CART_PRODUCT, DELETE_PRODUCT_GIOHANG_BY_JSON_BUYER, EDIT_COUNT_PRODUCT_GIOHANG_BY_JSON_BUYER } from '../shared/constants/urls';
 import { ToastrService } from 'ngx-toastr';
 
 const user_key='User';
@@ -56,5 +56,33 @@ export class UserService {
     if(userJson) return JSON.parse(userJson) as User;
     return new User();
   }
-  
+  getProductDetailJson(productJson: any): Observable<any> {
+    const url = `${PRODUCT_BY_JSON_PRODUCT_DETAIL}`;
+    return this.http.post<any>(url, { productJson });
+  }
+
+  getCartProDuct(idKhachHang: any): Observable<any> {
+    const url = `${USER_CART_PRODUCT}`;
+    return this.http.post<any>(url, { idKhachHang });
+  }
+  dete1ProductGioHangJson(productGioHangJson: any): Observable<any> {
+    const url = `${DELETE_PRODUCT_GIOHANG_BY_JSON_BUYER}`;
+    return this.http.post<any>(url, { productGioHangJson });
+  }
+
+  edit1ProductGioHangJson(productGioHangJson: any): Observable<any> {
+    const url = `${EDIT_COUNT_PRODUCT_GIOHANG_BY_JSON_BUYER}`;
+    return this.http.post<any>(url, { productGioHangJson });
+  }
+
+  edit1ToppingProductGioHangJson(productGioHangJson: any): Observable<any> {
+    const url = `${EDIT_COUNT_TOPPING_GIOHANG_BY_JSON_BUYER}`;
+    return this.http.post<any>(url, { productGioHangJson });
+  }
+
+  dete1ToppingGioHangJson(productGioHangJson: any): Observable<any> {
+    const url = `${DELETE_TOPPING_GIOHANG_BY_JSON_BUYER}`;
+    return this.http.post<any>(url, { productGioHangJson });
+  }
+
 }

@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/pages/home/home.component';
 import { FooterComponent } from './components/partials/footer/footer.component';
 import { ProductlistComponent } from './components/pages/productlist/productlist.component';
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbAlertModule   } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -18,7 +18,8 @@ import { UserComponent } from './components/pages/user/user.component';
 import { UserInforComponent } from './components/partials/user-infor/user-infor.component';
 import { UserOrderComponent } from './components/partials/user-order/user-order.component';
 import { UserProfileComponent } from './components/partials/user-profile/user-profile.component';
-import { ChitietProductComponent } from './components/pages/chitiet-product/chitiet-product.component';
+import { DetailProductComponent } from './components/pages/detail-product/detail-product.component';
+import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ChitietProductComponent } from './components/pages/chitiet-product/chit
     UserInforComponent,
     UserOrderComponent,
     UserProfileComponent,
-    ChitietProductComponent,
+    DetailProductComponent,
+    CartPageComponent,
     
   ],
   imports: [

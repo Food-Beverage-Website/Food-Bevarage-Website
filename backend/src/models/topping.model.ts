@@ -24,7 +24,7 @@ export interface Topping1 {
   id:ObjectId;
   MaCH: ObjectId;  
   Topping: [{
-    idtopping: ObjectId;
+    _id: ObjectId;
     tentopping: string;
     hinh: string;
     gia: number;
@@ -37,7 +37,7 @@ export interface Topping1 {
       MaCH: { type: Schema.Types.ObjectId, ref: 'cuahang' },    
       Topping: [
         {
-          idtopping: {type:Schema.Types.ObjectId},
+          _id: {type:Schema.Types.ObjectId},
           tentopping: String,
           hinh: String,
           gia: Number,

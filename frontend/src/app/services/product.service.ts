@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PRODUCT_ALL_BY_NAME_GET_URL, PRODUCT_ALL_GET_URL, PRODUCT_BY_ID_CHITIET} from '../shared/constants/urls';
+import { PRODUCT_ALL_BY_NAME_GET_URL, PRODUCT_ALL_GET_URL, PRODUCT_BY_ID_CHITIET, PRODUCT_BY_JSON_PRODUCT_DETAIL} from '../shared/constants/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +23,6 @@ export class ProductService {
     const url = `${PRODUCT_BY_ID_CHITIET}/${chitietsanpham}`;
     return this.http.get<any[]>(url);
   }
+
+ 
 }

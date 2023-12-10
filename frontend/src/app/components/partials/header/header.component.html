@@ -24,7 +24,7 @@
                 
         <button (click)="search(s.value)"  class="bnt-search">Search</button>
         <div *ngIf="user.TaiKhoan" class="flex"> <!-- Tài khoản khách hàng tồn tại (buyer)-->
-            <div ><mat-icon >shopping_cart</mat-icon></div> 
+            <div (click)="cartUser()"><mat-icon >shopping_cart</mat-icon></div> 
             <div (click)="youruser()"  class="icon-cart"><mat-icon >reorder</mat-icon></div>
         </div>
 

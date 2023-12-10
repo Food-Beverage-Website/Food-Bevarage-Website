@@ -3,24 +3,24 @@ import asynceHandler from 'express-async-handler';
 import { ProductModel } from "../models/product.model";
 import { StoreModel } from "../models/store.model";
 import { ToppingModel } from "../models/topping.model";
+import { VoucherModel } from "../models/voucher.model";
 
 const mongoose = require('mongoose');
 
 const router = Router();
 
-router.get("/check",asynceHandler(
-    async (req,res)=>{ 
+router.get("/check", asynceHandler(
+    async (req, res) => {
         const productsCount = await ProductModel.countDocuments();
-        if(productsCount >0)
-        {
+        if (productsCount > 0) {
             res.send("Get is ready");
             return;
         }
-        else{
+        else {
             res.send("Get isnt ready");
             return;
         }
-     }
+    }
 
 ))
 
@@ -41,12 +41,12 @@ router.get("/", asynceHandler(async (req, res) => {
 
 
 router.get("/getProduct", asynceHandler(async (req, res) => {
- 
-        const productsWithStoreInfo = await ProductModel.find().populate('MaCH');
-        productsWithStoreInfo.sort(() => Math.random() - 0.5);
 
-        res.send(productsWithStoreInfo);
-    
+    const productsWithStoreInfo = await ProductModel.find().populate('MaCH');
+    productsWithStoreInfo.sort(() => Math.random() - 0.5);
+
+    res.send(productsWithStoreInfo);
+
 }));
 
 
@@ -64,7 +64,7 @@ router.get("/GetAllProductbyName")
 router.get("/getProductById/:productId", asynceHandler(async (req, res) => {
     const productId = req.params.productId;
 
-    const productInfo = await ProductModel.findById(productId);
+    const productInfo = await ProductModel.findById(productId).populate('MaCH');
 
     // Kiểm tra xem sản phẩm có tồn tại hay không
     if (!productInfo) {
@@ -74,9 +74,23 @@ router.get("/getProductById/:productId", asynceHandler(async (req, res) => {
 
         if (storeInfo) {
             const toppings = await ToppingModel.find({ MaCH: storeInfo._id });
+
+            let productInfo2: any[] = [];
+            productInfo2.push(await ProductModel.findById(productId).populate('MaCH'));
+
+            let danhsachKhuyenMai: any[] = [];
+
+            for (const item of productInfo2) {
+
+                let km = await VoucherModel.find({ MaCH: item.MaCH._id, "SanPhams.idsp": item._id });
+                danhsachKhuyenMai.push(km);
+            }
+
             const productWithToppings = {
                 productInfo,
                 toppings,
+                storeInfo,
+                danhsachKhuyenMai
             };
             res.send(productWithToppings);
             return; // Exit the function after sending the response
@@ -86,6 +100,7 @@ router.get("/getProductById/:productId", asynceHandler(async (req, res) => {
     res.send(productInfo);
 }));
 
+// Trong file server của bạn
 
 
 

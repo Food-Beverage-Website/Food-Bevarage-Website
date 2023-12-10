@@ -1,29 +1,37 @@
 export class User {
-    _id!: string;
-    TenKhachHang!: string;
-    SDT!: string;
-    DiaChi!: string;
-    MatKhau!: string;
-    TaiKhoan!: string;
-    TichDiem!: string;
-    GioHang: GioHangItem[] = [];
-    DiaChis: diaChis[]=[];
-  }
-  export class diaChis {
-    TenNhanHang!: string;
-    DiaChi!: string;
-    SDT!: string;
-  }
+  _id!: string;
+  TenKhachHang!: string;
+  SDT!: string;
+  DiaChi!: string;
+  MatKhau!: string;
+  TaiKhoan!: string;
+  TichDiem!: string;
+  GioHang: GioHangItem[] = [];
+  DiaChis: diaChis[] = [];
+}
+export class diaChis {
+  TenNhanHang!: string;
+  DiaChi!: string;
+  SDT!: string;
+}
 
-  export class GioHangItem {
-    MaID!: number;
-    MaSP!: string;
-    SL!: number;
-    DonGia!: {
-      Size: string;
-      Dongia: number;
-    };
-    ThanhTien!: number;
-    GhiChu!: string;
-  }
-  
+export class GioHangItem {
+  MaSP!: string;
+  ThoiGianThemGH!: Date;
+  SL!: number;
+  DonGiaSizeLy!: {
+    SL: number;
+    Size: string;
+    Dongia: number;
+  };
+  DongiaToppings!: [
+    {
+      _id: string;
+      tenTopping: string;
+      soluongtopping: number;
+      giatopping: number;
+    }
+  ]; 
+  ThanhTien!: number;
+  GhiChu!: string;
+}

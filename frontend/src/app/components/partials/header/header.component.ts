@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
   }
 
   login():void{
@@ -29,6 +29,10 @@ export class HeaderComponent implements OnInit {
 
   youruser():void{
     this.router.navigateByUrl('/user/infor');
+  }
+
+  cartUser():void{
+    this.router.navigateByUrl('/cart_page');
   }
 
 

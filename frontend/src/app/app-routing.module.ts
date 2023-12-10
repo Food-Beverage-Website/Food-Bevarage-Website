@@ -6,7 +6,9 @@ import { LoginPageComponent } from './components/pages/login-page/login-page.com
 import { UserComponent } from './components/pages/user/user.component';
 import { UserInforComponent } from './components/partials/user-infor/user-infor.component';
 import { UserOrderComponent } from './components/partials/user-order/user-order.component';
-import { ChitietProductComponent } from './components/pages/chitiet-product/chitiet-product.component';
+import { DetailProductComponent } from './components/pages/detail-product/detail-product.component';
+import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
+
 
 const routes: Routes = [
 {path:'',component:HomeComponent},
@@ -30,7 +32,8 @@ const routes: Routes = [
      component:UserOrderComponent
   }]
  },
- {path: 'chitietsanpham/:productId', component:ChitietProductComponent},
+ {path: 'detailproduct/:productId', component:DetailProductComponent},
+ {path: 'cart_page', component:CartPageComponent},
 
 ];
 
