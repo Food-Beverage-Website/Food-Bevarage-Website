@@ -37,6 +37,14 @@ const DonHangSchema = new mongoose.Schema({
         DonGia: String,
         SL: Number
       }] // Topping sẽ là một mảng của các ToppingSchema
-  }] // ChiTietDonHang sẽ là một mảng của các ChiTietDonHangSchema
+  }],
+  MaCH: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'cuahang'
+  }// ChiTietDonHang sẽ là một mảng của các ChiTietDonHangSchema
 });
+
+
+
+
 export const DonHangModel = mongoose.model('donhang', DonHangSchema);

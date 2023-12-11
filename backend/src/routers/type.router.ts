@@ -1,6 +1,7 @@
 import { Router } from "express";
 import asynceHandler from 'express-async-handler';
 import { TypeModel } from "../models/type.model";
+import { ProductModel } from "../models/product.model";
 
 
 const router = Router();
@@ -29,6 +30,16 @@ router.get("/",asynceHandler(
      }
 ))
 
+
+
+router.get("/getProductbyIdType/:idType",asynceHandler(
+    async (req,res)=>{ 
+        const idType = req.params.idType;
+        const Products = await ProductModel.find({MaTieuMuc:idType});
+
+        res.send(Products);
+     }
+))
 
 
 

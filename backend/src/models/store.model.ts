@@ -11,6 +11,11 @@ export interface Store {
     GioDongCua: String,
     TaiKhoan: String,
     MatKhau: String,
+    Gmail:String,
+    ThucDons: [{
+      ID: ObjectId;
+      TenThucDon: string;
+    }];
   }
 
   export const StoreSchema = new Schema<Store>(
@@ -24,8 +29,12 @@ export interface Store {
         GioMoCua: { type: String, required: true },
         GioDongCua: { type: String, required: true },
         TaiKhoan: { type: String, required: true },
-        MatKhau: { type: String, required: true }
-      
+        MatKhau: { type: String, required: true },
+        Gmail:{ type: String, required: true },
+        ThucDons: [{
+          ID: {type:Schema.Types.ObjectId},
+          TenThucDon: { type: String, required: true }
+        }],
     }, {
       toJSON: {
         virtuals: true

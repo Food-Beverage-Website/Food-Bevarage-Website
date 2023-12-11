@@ -1,0 +1,131 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+
+
+<div class="w-[1201px] h-[700px] bg-pink-50 py-2 relative"  >
+    <video class="absolute w" autoplay muted loop>
+        <source src="assets/Images/pexels-free-creative-stuff-5561379 (2160p).mp4" type="video/mp4">
+      </video>
+    	<div class="row z-50 mt-[80px]">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a  class="active" id="account-form-link">Tài khoản</a>
+							</div>
+							<div class="col-xs-6">
+								<a id="store-form-link">Cửa hàng</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+                                <form id="account-form" action="" method="post" role="form" style="display: block;" (ngSubmit)="onSubmit()">
+                                    <div class="form-group">
+                                      <input type="text" name="username" id="username" [(ngModel)]="username" tabindex="1" class="form-control" placeholder="Username">
+                                    </div>
+                                    <div class="form-group">
+                                      <input type="password" name="password" id="password" [(ngModel)]="password" tabindex="2" class="form-control" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                      <input type="text" name="fullName" id="fullName" [(ngModel)]="fullName" tabindex="3" class="form-control" placeholder="Họ tên">
+                                    </div>
+                                    <div class="form-group">
+                                      <input name="address" id="address" [(ngModel)]="address" tabindex="4" class="form-control" placeholder="Địa chỉ">
+                                    </div>
+                                    <div class="form-group">
+                                      <input type="number" name="phone" id="phone" [(ngModel)]="phone" tabindex="5" class="form-control" placeholder="Số điện thoại">
+                                    </div>
+                                    <div class="form-group">
+                                      <input type="email" name="email" id="email" [(ngModel)]="email" tabindex="6" class="form-control" placeholder="Mail">
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                          <input type="submit" tabindex="7" class="form-control btn btn-register" value="Register Now">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </form>
+								<form (ngSubmit)="onSubmit_s()" id="store-form" action="" method="post" role="form" style="display: none;">
+									<div class="form-group">
+										<input  name="storename" id="storename"  [(ngModel)]="storename_s"  tabindex="1" class="form-control" placeholder="Tên cửa hàng" value="">
+									</div>
+									<div class="form-group">
+										<input type="text" name="owner" id="owner" [(ngModel)]="owner_s"  tabindex="1" class="form-control" placeholder="Chủ sở hữu" value="">
+									</div>
+                                    <div class="form-group">
+										<input type="text" name="phone_s" id="phone_s" [(ngModel)]="phone_s" tabindex="1" class="form-control" placeholder="Số điện thoại cửa hàng" value="">
+									</div>
+                                    <div class="form-group">
+										<input  name="address" id="address_s" [(ngModel)]="address_s"  tabindex="1" class="form-control" placeholder="Địa chỉ cửa hàng" value="">
+									</div>
+                                    <div class="form-group">
+										<input type="text" name="cccd" [(ngModel)]="cccd_s"  id="cccd" tabindex="1" class="form-control" placeholder="CCCD" value="">
+									</div>                                    
+									<div class="form-group">
+										<input  name="taikhoan" id="taikhoan" [(ngModel)]="taikhoan_s"  tabindex="2" class="form-control" placeholder="Tài khoản cửa hàng">
+									</div>
+									<div class="form-group">
+										<input type="password" name="confirm-password" [(ngModel)]="password_s"  id="confirm-password" tabindex="2" class="form-control" placeholder="Password shop">
+									</div>
+
+                                    <div class="form-group">
+										<input type="email" name="email" id="email" [(ngModel)]="email_s"  tabindex="2" class="form-control" placeholder="Mail shop">
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Shop Now">
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<div *ngIf="isVerify_buyer" class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+
+
+<div *ngIf="isVerify_buyer" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+  <div class="w-[400px] h-[230px]" >    
+    <div>
+        <div class="flex justify-center"><img height="80px" width="80px" src="assets/Images/google-gmail.png"></div>
+        <div class="flex justify-center"><p class="text-[15px] font-bold">Kiểm tra gmail của bạn</p></div>
+        <div class="flex justify-center"><input [(ngModel)]="passcode_buyer" class="text-[20px] w-[250px] h-[50px] border-2 text text-center " type="text"></div>
+        <div class="flex justify-center">
+            <button (click)="check_verify_buyer()"  class="mt-[30px] py-2 px-4 bg-yellow-500 text-white border-none rounded cursor-pointer hover:bg-yellow-700">Xác nhận</button>
+            <button (click)="close_Verify_buyer()" class=" ml-[5px] mt-[30px]  py-2 px-4 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">Thoát</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="isVerify_shoper" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+	<div class="w-[400px] h-[230px]" >    
+	  <div>
+		  <div class="flex justify-center"><img height="80px" width="80px" src="assets/Images/google-gmail.png"></div>
+		  <div class="flex justify-center"><p class="text-[15px] font-bold">Kiểm tra gmail của bạn</p></div>
+		  <div class="flex justify-center"><input [(ngModel)]="passcode_shoper" class="text-[20px] w-[250px] h-[50px] border-2 text text-center " type="text"></div>
+		  <div class="flex justify-center">
+			  <button (click)="check_verify_shoper()"  class="mt-[30px] py-2 px-4 bg-yellow-500 text-white border-none rounded cursor-pointer hover:bg-yellow-700">Xác nhận</button>
+			  <button (click)="close_Verify_shoper()" class=" ml-[5px] mt-[30px]  py-2 px-4 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">Thoát</button>
+		  </div>
+	  </div>
+	</div>
+  </div>

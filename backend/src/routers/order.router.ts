@@ -32,5 +32,25 @@ router.get("/getAll",asynceHandler(
 ))
 
 
+router.get("/getOrderConfirm/:idStore",asynceHandler(
+    async (req,res)=>{ 
+        const idStore = req.params.idStore;
+        const DonHang = await DonHangModel.find({TinhTrangDonHang:'Chờ xác nhận', MaCH:idStore}).populate('KhachHang','TenKhachHang DiaChi');
+
+        res.send(DonHang);
+        
+     }
+))
+
+
+router.get("/getAllOrderbyIdStore/:idStore",asynceHandler(
+    async (req,res)=>{ 
+        const idStore = req.params.idStore;
+        const DonHang = await DonHangModel.find({ MaCH:idStore}).populate('KhachHang','TenKhachHang DiaChi');
+
+        res.send(DonHang);
+     }
+))
+
 
 export default router;

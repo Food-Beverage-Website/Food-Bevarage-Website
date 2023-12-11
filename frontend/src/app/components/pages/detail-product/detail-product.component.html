@@ -1,104 +1,123 @@
-<div class="container">
-    <div class="card bg-secondary bg-opacity-10">
-        <div class="container-fluid">
-            <div class="row justify-content-md-center py-3 border-bottom border-gray">
-                <div class="col col-lg-5">
-                    <img src="/frontend/src/assets/Images/{{products.productInfo.Hinh}}" alt="" class="w-100 rounded-8"
-                        style="height: 400px;">
+<div class="px-[100px] mt-[20px] ">
+   
+      
+            <div class="flex ">
+                <div class="w-[500px]">
+                    <img [src]="'assets/Images/' + products.productInfo.Hinh"  alt="" class="w-[500px] rounded-8 "
+                        style="height: 480px; ">
                 </div>
-                <div class="py-3 col-lg-7">
-                    <h2>{{products && products.productInfo && products.productInfo.TenSP}}</h2>
 
-                    <div class="row border-bottom border-gray">
-                        <div class="col-2 px-2" *ngFor="let item of products.productInfo.DonGia">
-                            <div class="form-check">
-                                <input class="form-check-input hidden-input" type="radio" name="sizegia"
-                                    [id]="item.Size" [value]="item.Gia" (click)="selectSize(item.Gia, item.Size)">
+                <div class="ml-3 w-[500px] ">
+                    <div class="">
+                        
+                        <div class="flex">
+                            <h2 class="ml-[20px]">{{products && products.productInfo && products.productInfo.TenSP}}</h2>
+                            <p class="text-danger" *ngIf="PhanTramGiam != 0"><span class=" ml-[10px] " style="color: red;"  >-{{PhanTramGiam}}% </span> </p>
+                        </div>
+                        <div class="flex gap-x-[15px] w-full  grid grid-cols-2 ">
+                            <div class="flex w-[350px] justify-center" >
+                                <div class="" *ngFor="let item of products.productInfo.DonGia">
+                                    <input class="form-check-input hidden-input" type="radio" name="sizegia"
+                                        [id]="item.Size" [value]="item.Gia" (click)="selectSize(item.Gia, item.Size)">
 
-                                <label class="form-check-label d-flex" [for]="item.Size"
-                                    [ngClass]="(selectedSizePrice === item.Gia) ? 'selected' : ''">
-                                    <span class="material-symbols-outlined">
-                                        {{ getIconName(item.Size) }} </span>
-                                    {{item.Size}}
-                                </label>
+                                    <label class="form-check-label d-flex" [for]="item.Size"
+                                        [ngClass]="(selectedSizePrice === item.Gia) ? 'selected' : ''">
+                                        <span style="font-size: 40px;" class="material-symbols-outlined ">
+                                            {{ getIconName(item.Size) }} </span>
+                                        {{item.Size}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="flex w-[150px] ml-[50px] bg-red-500 justify-center rounded-8 items-center">
+                                <p class="text-center text-[20px] font-bold " style="color: aliceblue;"> {{showgiaSize() | currency:'VND':'symbol':'1.0-0'}} </p>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Topping -->
-                    <div class="row border-bottom border-gray mb-3" *ngFor="let item of products.toppings">
-                        <!-- <div class="col-4 py-1">
-                            <input class="form-check-input" type="checkbox" name="toppinggia" id="None" value="0"
-                                (click)="selectTopping(0, 'Không')">
-                            <label class="form-check-label" for="None">
-                                Không
-                            </label>
-                        </div> -->
-
-                        <div class="col-6 py-1 d-flex align-items-center" *ngFor="let item2 of item.Topping">
-                            <!-- <img class="" src="assets/Images/{{item2.hinh}}" width="20px" height="20px"> -->
                         
-                            <img src="/frontend/src/assets/Images/{{item2.hinh}}"
-                                class="w-10 rounded-circle" />
-                            <input (click)="toppingQuantity.value = +toppingQuantity.value > 0 ? '0' : '1'"
-                                class="form-check-input hidden-input" type="checkbox" name="toppinggia"
-                                [id]="item2.tentopping" [value]="item2.gia"
-                                (input)="selectTopping(item2._id, item2.gia, item2.tentopping, +toppingQuantity.value)">
-                            <label class="form-check-label"
-                                [ngClass]="isSelectedTopping(item2.tentopping) ? 'selected' : ''"
-                                [for]="item2.tentopping" title="{{ item2.tentopping }}">
-                                {{ truncateName(item2.tentopping, 15) }} | {{ formatPrice(item2.gia) }}
-                            </label>
-                            <input style="width:70px;"
-                                (change)="selectTopping(item2._id, item2.gia, item2.tentopping, +toppingQuantity.value)"
-                                type="number" id="{{item2.tentopping}}" min="0" max="10" class="form-control ml-3 "
-                                value="" #toppingQuantity>
+
+                       
+                        <div class="grid grid-cols-2  w-[500px] mt-[20px] h-[200px] overflow-y-scroll">
+
+                            <ng-container *ngFor="let item of products.toppings; let i = index">
+                              <div class="flex" *ngFor="let item2 of item.Topping; let j = index">
+                                <div class="flex">
+                                  <ul class="flex gap-x-1 two-column-list">
+                                    <li>
+                                      <img [src]="'assets/Images/' + '10ba5f40e01fce490b80f27b8217c3df.png'" class="w-10 rounded-circle" />
+                                    </li>
+                                    <li class="w-[110px]">
+                                      <input (click)="toppingQuantity.value = +toppingQuantity.value > 0 ? '0' : '1'" class="form-check-input hidden-input" type="checkbox" name="toppinggia"
+                                        [id]="item2.tentopping" [value]="item2.gia"
+                                        (input)="selectTopping(item2._id, item2.gia, item2.tentopping, +toppingQuantity.value)">
+                                      <label class="form-check-label text-[12px]" [ngClass]="isSelectedTopping(item2.tentopping) ? 'selected' : ''"
+                                        [for]="item2.tentopping" title="{{ item2.tentopping }}">
+                                        {{ truncateName(item2.tentopping, 15) }}
+                                      </label>
+                                    </li>
+                                    <li>
+                                      <div class="text-[12px] flex">{{ formatPrice(item2.gia) | currency:'VND':'symbol':'1.0-0' }}</div>
+                                    </li>
+                                    <li>
+                                      <input style="height: fit-content;width:50px;border: solid rgb(226 232 240); font-size: 12px; "
+                                        (change)="selectTopping(item2._id, item2.gia, item2.tentopping, +toppingQuantity.value)" type="number"
+                                        id="{{item2.tentopping + i + j}}" min="0" max="10" class="form-control ml-3 border-2 bg-blue-500" value="" #toppingQuantity>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </ng-container>
                         </div>
-                    </div>
+                          
 
+                        <hr style="border: solid 1px gray ;">
 
-
-
-                    <div class="row">
-                        <div class="col-auto">
-                            <p> Giá ly (giá gốc): {{showgiaSize()}}đ </p>
+                        <div class="">
+                           
+                            <div class="">
+                                <p class="text-[15px] font-bold text-gray-500"> Thức uống kèm: {{showTongGiaTopping() | currency:'VND':'symbol':'1.0-0'}} </p>
+                            </div>
+                            <div class="flex ">
+                                <div class="flex items-center gap-x-2">
+                                <p class="mb-2 font-bold text-gray-500">Số ly: </p>
+                                <input style="width:70px;" type="number" name="quantity" id="quantity" min="1" max="10"
+                                style="height: fit-content;width:50px;border: solid rgb(226 232 240); font-size: 12px; " class="form-control" [(ngModel)]="selectedSoluongPrice">
+                            </div>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <p> Tổng giá Topping: {{showTongGiaTopping()}}đ</p>
+                      
+
+                        
+                        <div class="flex">
+                            <h4 class="ml-auto" *ngIf="PhanTramGiam != 0">
+                                Thanh toán:
+                                <span class="">{{calculateTotalPrice_CoKhuyenMai() | currency:'VND':'symbol':'1.0-0'}}</span> <span class="text-red-500 text-[15px]"
+                                    *ngIf="calculateTotalPrice_CoKhuyenMai()!=0"><del>{{calculateTotalPrice() | currency:'VND':'symbol':'1.0-0'}}</del> </span>
+                            </h4>
+
                         </div>
-                        <div class="col-auto d-flex align-items-center">
-                            <p class="mb-2">Số ly: </p>
-                            <input style="width:70px;" type="number" name="quantity" id="quantity" min="1" max="10"
-                                class="form-control" [(ngModel)]="selectedSoluongPrice">
+                       
+
+                        <div class="flex">
+                            <h4 class="ml-auto" *ngIf="PhanTramGiam == 0">
+                               Thanh toán: {{ calculateTotalPrice() | currency:'VND':'symbol':'1.0-0'}}
+                            </h4>
+
                         </div>
-                    </div>
-                    <!-- 
-                    <div *ngIf="getPhanTramKhuyenMai_SanPham() != 0">
-                        <p class="text-orange"> {{calculateTotalPrice_CoKhuyenMai(getPhanTramKhuyenMai_SanPham())}} </p>
-                        <p> <del>{{ calculateTotalPrice() }}</del> đ <span class="text-orange">{{getPhanTramKhuyenMai_SanPham()}}%</span></p>
-                    </div> -->
-
-                    <p *ngIf="PhanTramGiam != 0"><span class="text-warning fs-3">-{{PhanTramGiam}}% giá size</span> </p>
-
-                    <p *ngIf="PhanTramGiam != 0">
-                        <span class="text-danger fs-3">{{calculateTotalPrice_CoKhuyenMai()}}đ</span> <span class="fs-5"
-                            *ngIf="calculateTotalPrice_CoKhuyenMai()!=0"><del>{{calculateTotalPrice()}}đ</del> </span>
-                    </p>
-
-                    <h3 *ngIf="PhanTramGiam == 0">
-                        {{ calculateTotalPrice() }}đ
-                    </h3>
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-auto">
-                            <a (click)="truyenDetailProductJson()" class="btn btn-primary d-flex align-items-center">
-                                <mat-icon class="mr-2">add_shopping_cart</mat-icon> Thêm vào giỏ
-                            </a>
+                        
+                        
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-auto">
+                                <a (click)="truyenDetailProductJson()" class="btn btn-primary d-flex align-items-center">
+                                    <mat-icon class="mr-2">add_shopping_cart</mat-icon> Thêm vào giỏ
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
 
-            <div class="row">
+            <div class="row mt-[20px]">
                 <div class="col-8 ">
                     <div class="d-flex align-items-center">
                         <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
@@ -114,7 +133,6 @@
             </div>
 
 
-        </div>
-    </div>
+    
 
 </div>

@@ -1,0 +1,12 @@
+ <div (click)="showOrder()"  class=" z-10 h-[317px] w-[290px] bg-blue-800 rounded-b-[20px] px-1">
+    <div class="text-center font-bold text-[17px] text-white">Chờ xác nhận</div>
+    <div class="h-[270px] bg-blue-500   overflow-y-scroll  ">
+        <div *ngFor="let item of inforOrder" class="order">
+            <div class="time">{{item.NgayDat.slice(0, 10)}}| {{  (item.KhachHang.DiaChi.length > 30) ? (item.KhachHang.DiaChi | slice:0:30) + '...' : item.KhachHang.DiaChi}}</div>
+            <div class="state">{{item._id}} | <span class="block-inline px-1 bg-red-500">{{item.TinhTrangDonHang}}</span></div>
+            <div class="price"><mat-icon class="text-[5px]">money</mat-icon> Đơn hàng: {{item.TongTien | currency:'VND':'symbol':'1.0-0'}}</div>
+        </div>
+       
+    </div>
+    <div class="font-bold text-center text-[15px] text-white cursor-pointer">Xem tất cả>></div>
+</div>

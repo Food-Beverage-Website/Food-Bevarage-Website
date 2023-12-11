@@ -1,0 +1,32 @@
+<div class="font-sans  flex mx-[10px] mt-2">
+   
+    <aside class="w-[250px] bg-blue-900  rounded-[20px] h-screen text-white flex justify-center relative">
+
+        <video  class="absolute bg-cove h-[100%] opacity-40 object-cover rounded-[20px]" autoplay muted loop id="myVideo">
+            <source src="assets/Images/ffffff.mp4" type="video/mp4">
+          </video>
+
+        <div class="py-6 w-full z-50">
+            <img class="h-[100px] w-[100px] mx-auto rounded-full" src="assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg">
+            <p class="text-center font-bold text-[18px] ">{{store.TenCuaHang}}</p>
+            <ul class="sidebar z-50">
+                <li><a routerLink="/storee/infor"> <mat-icon>home</mat-icon> Quản lý Cửa hàng</a></li>
+                <li><a routerLink="/storee/product"> <mat-icon>coffee_maker</mat-icon> Quản lý Sản Phẩm</a></li>
+                <li><a  routerLink="/storee/order"> <mat-icon>package_2</mat-icon> Quản lý Đơn Hàng</a></li>
+                <li><a  routerLink="/storee/voucher"> <mat-icon>celebration</mat-icon> Quản lý Khuyến Mãi</a></li>
+                <li><a  routerLink="/storee/category"> <mat-icon>category</mat-icon> Quản lý Danh mục</a></li>
+                <li><a> <mat-icon>monitoring</mat-icon> Quản lý Thống Kê</a></li>
+                <hr>
+               
+                <li  (click)="show()"><a > <mat-icon>visibility</mat-icon> Hiển thị</a></li>
+                <li (click)="logout()" ><a > <mat-icon>logout</mat-icon> Đăng Xuất</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 bg-gray-100 rounded-[20px] ml-2">
+        <router-outlet ></router-outlet>
+    </main>
+</div>
+

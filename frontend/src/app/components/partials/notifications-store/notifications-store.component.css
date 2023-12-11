@@ -1,0 +1,20 @@
+.order{
+    @apply bg-white border-b-2 px-0
+}
+
+.time{
+    @apply text-[12px] text-red-700
+}
+
+.state{
+    @apply text-[12px] font-bold
+}
+
+
+.price{
+    @apply text-[12px] flex items-center
+}
+
+
+
+

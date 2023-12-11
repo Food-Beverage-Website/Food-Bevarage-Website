@@ -26,3 +26,22 @@
 .change-address a{
     @apply px-4 text-[12px]
 }
+
+/* Đây là css cho form thêm địa chỉ */
+
+.add-address{
+    @apply w-[600px] h-[200px]
+}
+
+.name-recipient, .address-recipient, .phone-recipient{
+    @apply flex mt-[10px]
+}
+
+.name-recipient label, .address-recipient label, .phone-recipient label{
+    @apply block text-gray-700 font-bold mb-2
+}
+
+.name-recipient input, .address-recipient input, .phone-recipient input{
+    @apply border-2 border-gray-300  w-[400px] ml-auto
+}
+

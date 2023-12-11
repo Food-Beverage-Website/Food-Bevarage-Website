@@ -1,21 +1,54 @@
-<div class="banner-result">
+<div class="banner-result z-0">
     <div class="img-banner" style="background-image: url(assets/Images/pexels-photo-2228559.jpeg); background-size: cover;">
         <div class="text-banner ">
             <p>result for "{{result}}"</p>
         </div>
     </div>
 </div>
+<p *ngIf="store" class="px-[150px] text-[15px] font-bold mt-[5px]">Rearch for shop: </p>
+<div *ngIf="store" class="px-[150px] mt-[10px] flex ">
+   
+    <div class="img-store"  style="background-image: url(assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg); background-size: cover;">
+        
+    </div>
+
+    <div class="infor-store">
+        <div>
+            <div class="name">{{store.TenCuaHang}}</div>
+            <div class="address">{{store.DiaChi}}</div>
+            <div class="phone">{{store.SDT}}</div>
+        </div>
+        <hr>
+        
+        <div class="flex gap-x-[30px] mt-[5px]">
+            <div class="number_product"><mat-icon class="text-red-500">inventory_2</mat-icon> Thức uống:{{countProducts()}}</div>
+            <div class="number_cate"><mat-icon class="text-red-500">category</mat-icon> Danh mục: {{countMenus(store.ThucDons)}}</div>
+            <div class="number_product "><mat-icon class="text-red-500">timer</mat-icon> Open: {{store.GioMoCua}}| Close:  {{store.GioDongCua}} </div>
+        </div>
+        <div (click)="goToShop(store._id)" class=" mt-[5px] rounded-r-[20px] text-[15px] text-red-600 font-bold inline-block px-[40px] bg-red-100">
+            <p>Go to shop</p>
+        </div>
+
+        
+        
+    </div>
+
+</div>
+
+
 
 <br>
+<p class="px-[150px] text-[15px] font-bold">Rearch for product:</p>
 
 <div class="list-product">
     <div class="item-product" *ngFor="let item of products">
-        <img  src="assets/Images/poster_banh.jpeg">
+        <img [src]="'assets/Images/' + item.Hinh"  >
         <div class="infor-product">
         <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
         <div class="flex"> 
             <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
-            <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+            <p *ngIf="item.TinhTrang!=='Hết hàng'" class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+            <p *ngIf="item.TinhTrang==='Hết hàng'" class="product-price">Hết Hàng</p>
         </div>
         <div class="product-button">
             <div class="icon"><mat-icon>monetization_on</mat-icon></div>

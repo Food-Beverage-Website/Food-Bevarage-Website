@@ -1,0 +1,157 @@
+
+<div class="mt-[5px]">
+    <ul class="filter-product flex">
+        <li  class="border-r-[1px]">Tất cả [{{countAllTopping()}}]</li>
+       
+    </ul>
+</div>
+
+<div class="flex mt-[10px]">
+
+    <div class="flex">
+
+        <input class="w-[300px] px-[10px]"  placeholder="Nhập từ khóa cần tìm" type="search">
+        <div class="flex border-[1px] bg-blue-900 px-[5px] text-white"> <mat-icon>search</mat-icon> Tìm kiếm</div>
+    </div>
+
+    <div class="ml-auto flex  gap-x-[15px] mr-[35px]"> 
+      <div (click)="addNewTopping = true"  class="cursor-pointer inline-block px-[7px] py-[2px] border font-bold bg-cyan-600 text-white ">Thêm mới</div>
+    </div>
+</div>
+
+
+<div class="h-[450px]  overflow-y-scroll">
+    <table class="table-auto product-list">
+        <thead>
+          <tr>
+            <th class="w-[200px]">ID</th>
+            <th class="w-[300px]">Topping</th>
+            <th class="w-[150px]">Đơn giá</th>
+            <th class="w-[120px]">Hình</th>
+            <th class="w-[100px]">Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of itemTopping; let j = index">
+            <!-- Dữ liệu hàng -->
+            <tr [ngClass]="{'even-row': j % 2 === 0, 'odd-row': j % 2 !== 0, 'selected-row': j === selectedRow}"  >
+              <td>{{item._id}}</td>
+              <td class="text-blue-500 cursor-pointer">{{item.tentopping}}<mat-icon (click)="modifyTopping_id(item._id)"  style="font-size: 12px;" class="mt-[0px]">edit</mat-icon></td>
+              <td class="text-center">{{ item.gia| currency:'VND':'symbol':'1.0-0' }}</td>
+              <td class=""><img style="object-fit: cover;" class="h-[40px] w-[40px] mx-auto object-fill" [src]="'assets/Images/'+item.hinh"></td>
+              <td class="text-center">
+                N/A
+              </td>
+            </tr>
+            
+          </ng-container>
+        </tbody>
+      </table>
+      
+      
+</div>
+
+
+
+
+
+<div *ngIf="addNewTopping || modifyTopping" class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+
+
+<div *ngIf="addNewTopping" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+  <div class="add-product" >
+    <div class="flex">
+        <p class="text-blue-700 font-bold ml-[160px]">Thêm topping mới</p>
+        <button (click)="closeAlert_AddTopping()"  class=" ml-auto py-1 px-3 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">X</button>
+    </div>
+
+    <div class="  overflow-y-scroll ">
+        
+            <div class="input_frame items-center flex mt-[20px] py-2 border-b-2 justify-center">
+                <div class="flex  gap-x-[10px]">
+                    <label class="ml-[0px] text-neutral-400" for="exampleInput" >Tên topping:</label>
+                    <input [(ngModel)]="inputToppingName"  id="exampleInput1" type="text" class="border w-[150px] h-[25px] " />
+                </div>
+
+                <div class="ml-[15px] flex gap-x-[10px] py-1">
+                    <label class=" text-neutral-400" for="exampleInput" >Giá:</label>
+                    <input [(ngModel)]="inputToppingPrice"  id="exampleInput1" type="text" class="border w-[100px]  h-[25px] " />
+                </div>
+
+            
+                <div class="ml-[15px]">
+                    <img [src]="urllink" class="ml-[12px] h-[30px] w-[30px]" >
+                    <input type="file" id="myFileInput" (change)="handleFileInput($event)" style="display: none">
+                    <label class="border-[2px] text-white text-[10px] bg-cyan-600 px-[4px]" for="myFileInput">Chọn File</label>
+                  </div>
+
+                
+              
+            </div>
+
+           
+
+      
+    </div>
+   
+        <div class="flex gap-x-[10px] ">
+          
+            <button (click)="submitTopping()"  class="mt-[10px] ml-auto py-1 px-4 bg-green-500 text-white border-none rounded cursor-pointer hover:bg-green-700">Lưu</button>
+           
+        </div>
+       
+    
+  </div>
+
+  
+</div>
+
+
+
+<div *ngIf="modifyTopping" class=" border-[2px] border-yellow-500 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+    <div class="add-product" >
+      <div class="flex">
+          <p class="text-blue-700 font-bold ml-[160px]">Chỉnh sửa topping</p>
+          <button (click)="closeAlert_ModifyTopping()"  class=" ml-auto py-1 px-3 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">X</button>
+      </div>
+  
+      <div class="  overflow-y-scroll ">
+          
+              <div class="input_frame items-center flex mt-[20px] py-2 border-b-2 justify-center">
+                  <div class="flex  gap-x-[10px]">
+                      <label class="ml-[0px] text-neutral-400" for="exampleInput" >Tên topping:</label>
+                      <input [(ngModel)]="modifyToppingName"  id="exampleInput1" type="text" class="border w-[150px] h-[25px] " />
+                  </div>
+  
+                  <div class="ml-[15px] flex gap-x-[10px] py-1">
+                      <label class=" text-neutral-400" for="exampleInput" >Giá:</label>
+                      <input [(ngModel)]="modifyToppingPrice"  id="exampleInput1" type="text" class="border w-[100px]  h-[25px] " />
+                  </div>
+  
+              
+                  <div class="ml-[15px]">
+                      <img [src]="urllinkk" class="ml-[12px] h-[30px] w-[30px]" >
+                      <input type="file" id="myFileInput" (change)="handleFileInput($event)" style="display: none">
+                      <label class="border-[2px] text-white text-[10px] bg-cyan-600 px-[4px]" for="myFileInput">Chọn File</label>
+                    </div>
+  
+                  
+                
+              </div>
+  
+             
+  
+        
+      </div>
+     <div class="flex">
+          <div class="gap-x-[10px]  ml-auto">
+            <button (click)="updateTopping()"  class=" mr-[5px] mt-[10px] ml-auto py-1 px-4 bg-yellow-500 text-white border-none rounded cursor-pointer hover:bg-yellow-700">Cập nhật</button>
+              <button (click)="deleteTopping()"  class="  mt-[10px] ml-auto py-1 px-4 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">Xóa</button>
+             
+          </div>
+         
+     </div>
+    </div>
+  
+    
+  </div>

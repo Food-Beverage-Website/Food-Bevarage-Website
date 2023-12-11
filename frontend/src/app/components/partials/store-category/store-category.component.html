@@ -1,0 +1,85 @@
+<div class="flex px-3">
+   <p class=" text-[20px] text-blue-900 font-bold">Danh mục sản phẩm</p> 
+   <div  class="bg-blue-900 text-white px-3 py-1 ml-auto flex">
+   <mat-icon class="mr-[5px]">add</mat-icon> Tạo mới danh mục
+   </div>
+</div>
+
+<hr class="mt-[15px] border-2">
+<div class="flex mt-[15px]" >
+    <div>Tổng danh mục: {{countCategory()}}</div>
+    <div class="ml-[5px] cursor-pointer" (click)="loadProduct()"> | Tất cả</div>
+    <div class="flex ml-auto">
+        <input type="text" class="border w-[250px]">
+        <div class="px-3 bg-blue-900 text-white">Tìm kiếm</div>
+    </div>
+</div>
+
+
+<div class="flex mt-[15px] overflow-y-scroll h-[130px]">
+    <table class="table-auto w-[600px] mx-auto">
+      <thead>
+        <tr class="title-voucher bg-blue-900 text-white">
+          <th>Mã</th>
+          <th>Danh mục</th>
+          <th>Số lượng</th>
+        
+        </tr>
+      </thead>
+      
+      <tbody class="bg-white ">
+        <ng-container *ngFor="let item of store.ThucDons; let i = index" >
+          <tr class="border-b-[1px]" [class.selected-row]="i === selectedRowIndex" (click)="selectRow(i,item._id)">
+            <td >{{item._id}}</td>
+            <td ><div class="flex">{{item.TenThucDon}}  <mat-icon *ngIf="item.TenThucDon!=='Tất cả'" (click)="modifyCategory(item._id)"   style="font-size: 12px;" class="ml-[10px]">edit</mat-icon></div></td>
+            
+            <td>{{countProduct_Cate(item._id)}}</td>
+           
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="flex mt-[20px]"><div class="mx-auto font-bold text-[15px]">Danh sách sản phẩm theo danh mục</div></div>
+  
+<div class="mt-[5px]  overflow-y-scroll h-[300px] bg-white">
+    <table class="table-auto w-full ">
+        <thead>
+          <tr class="title-voucher bg-blue-500 text-white">
+            <th class="w-[80px]">Mã</th>
+            <th class="w-[250px]">Tên sản phẩm</th>
+            <th class="w-[150px]">Phân loại</th>
+            <th class="w-[50px]">Hình</th>
+            <th class="w-[100px]">Tình trạng</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+            <ng-container *ngFor="let item of product">
+          <tr class="border-b-[1px] ">
+            <td>{{item._id}}</td>
+            <td class="flex">{{item.TenSP}} <mat-icon (click)="modifyProduct_id(item._id)"   style="font-size: 12px;" class="ml-[10px]">edit</mat-icon></td>
+            <td>{{loadCatebyID(item.MaThucDon)}}</td>
+            <td><img class="mx-auto h-[20px] w-[20px]" [src]="'assets/Images/'+item.Hinh"></td>
+            <td>{{item.TinhTrang}}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+</div>
+
+
+<div *ngIf="modifyProduct" class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+<div *ngIf="modifyProduct" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+    <div class="add-product" >
+      <div class="flex">
+          <p class="text-blue-700 font-bold ml-[240px]">Chỉnh sửa sản phẩm</p>
+          <button (click)="closeAlert_ModifyProduct()"  class=" ml-auto py-1 px-3 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">X</button>
+      </div>
+      
+    
+        <app-store-modify-product (dataToParent)="closeAlert_ModifyProduct1($event)" [store]="store" [idProduct]="idProduct" [tieumucs]="tieumucs" ></app-store-modify-product>
+    </div>
+    
+  </div>
+  

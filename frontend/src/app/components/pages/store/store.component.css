@@ -1,0 +1,156 @@
+.store{
+    @apply flex px-[180px]
+}
+
+.img-store{
+    @apply h-[150px] w-[300px] bg-pink-500 relative rounded-[15px]
+}
+.name-store{
+    @apply bg-black opacity-60 h-full w-full flex justify-center items-center rounded-[15px]
+}
+
+.name-store p{
+    @apply text-white  text-[50px]
+}
+
+.infor-store{
+    @apply mx-[40px]
+}
+
+.name{
+    @apply font-bold
+}
+
+.number_product{
+    @apply flex text-[15px] text-red-700 font-bold
+}
+
+.number_cate{
+    @apply flex text-[15px] text-red-700 font-bold
+}
+
+.category{ 
+    @apply flex  justify-center
+}
+
+.category li{
+    @apply w-[150px]  flex  justify-center font-bold 
+}
+
+.category li:hover{
+    @apply bg-red-200 
+}
+
+/* 
+Đây là css cho list product  */
+
+.list-product{
+    @apply grid grid-cols-4 px-[200px] gap-[20px]
+}
+
+.item-product{
+    @apply h-[265px] w-full bg-orange-50
+}
+
+.infor-product{
+    @apply px-3
+}
+
+.img-banner{
+    @apply h-[200px] w-full
+}
+
+.item-product img{
+    @apply h-[200px] w-full
+}
+
+.product-address{
+    @apply text-[7px] font-light text-orange-600 flex mt-[2px]
+}
+
+
+.product-address mat-icon {
+    @apply text-[14px] font-light text-orange-600
+}
+.product-name {
+    @apply text-[12px] font-medium
+}
+
+.product-price{
+    @apply text-[12px]  ml-auto 
+}
+
+.product-button{
+    @apply flex 
+}
+
+.product-button .icon{
+    @apply bg-sky-950 text-white items-center h-[20px] w-[20px] 
+}
+
+.product-button .icon mat-icon{
+    @apply  text-white text-[15px] mt-[3px] ml-[2px] 
+}
+
+.product-button p{
+    @apply  bg-red-600 text-white text-[12px] font-medium h-[20px] w-[100px] text-center
+}
+
+
+.product-sold-button{
+    @apply flex 
+}
+
+.product-sold-button .icon{
+    @apply bg-sky-950 text-white items-center h-[20px] w-[20px] 
+}
+
+.product-sold-button .icon mat-icon{
+    @apply  text-white text-[15px] mt-[3px] ml-[2px] 
+}
+
+.product-sold-button p{
+    @apply  bg-slate-300 text-white text-[12px] font-medium h-[20px] w-[100px] text-center
+}
+
+
+.filter-store{
+    @apply w-[320px] h-[400px] bg-red-50
+}
+
+
+.filter-title{
+    @apply w-full h-[50px] bg-red-800 flex gap-[5px] justify-center items-center text-white font-bold
+}
+
+
+.filter-store ul{
+    @apply w-full
+}
+
+.filter-store ul li{
+    @apply w-full h-[40px] border-b-2 flex  justify-center font-bold  items-center
+}
+
+
+.filter-store ul li:hover{
+    @apply bg-red-400
+}
+
+.list-product-store{
+    @apply px-1 flex gap-x-4 grid-cols-3 grid gap-y-2
+}
+
+.ribbon {
+    width: 40px;
+    font-size: 12px;
+    padding: 4px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    text-align: center;
+    border-radius: 25px;
+    transform: rotate(20deg);
+    background-color: #DD0000;
+    color: white;
+  }

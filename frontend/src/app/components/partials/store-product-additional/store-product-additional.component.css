@@ -1,0 +1,6 @@
+.input_frame div{
+    @apply mt-[10px]
+}
+input{
+    @apply px-[3px]
+}

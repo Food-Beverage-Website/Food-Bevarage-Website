@@ -1,11 +1,13 @@
 import { ObjectId, Schema,model } from "mongoose";
 
 export interface Product {
-  id:ObjectId;
+  _id:ObjectId;
   TenSP: string;
   MieuTa: string;
   DonGia: { Size: string; Gia: number }[];
-  Hinh: string[];
+  Hinh: string;
+  NgayDang: string;
+  TinhTrang:string;
   MaCH: ObjectId;
   MaThucDon: ObjectId;
   MaTieuMuc: ObjectId;
@@ -19,14 +21,16 @@ export interface Product {
   }
 
   const ProductSchema = new Schema<Product>(
-    {
-      id:{type:Schema.Types.ObjectId},
+  {
+      _id:{ type: Schema.Types.ObjectId, required: false },
       TenSP: { type: String, required: true },
       MieuTa: { type: String, required: true },
       DonGia: [{ Size: String, Gia: Number }],
-      Hinh: [String],
+      Hinh:{ type: String, required: true },
+      NgayDang :{ type: String, required: true },
+      TinhTrang :{ type: String, required: true },
       MaCH: { type: Schema.Types.ObjectId, ref: 'cuahang' },
-      MaThucDon: { type:Schema.Types.ObjectId },
+      MaThucDon: { type: Schema.Types.ObjectId},
       MaTieuMuc: { type:Schema.Types.ObjectId },
       DanhGia: [
         {
@@ -50,5 +54,20 @@ export interface Product {
   );
 
 
+
+  export interface Product1{
+    id:ObjectId,
+    TenSP: string;
+    MieuTa: string;
+    DonGia: { Size: string; Gia: number }[];
+    Hinh: string;
+    NgayDang: string;
+    TinhTrang:string;
+    MaCH: ObjectId;
+    MaThucDon: ObjectId;
+    MaTieuMuc: ObjectId;
+    DanhGia: [];
+  
+    }
   
   export const ProductModel=model<Product>('sanpham',ProductSchema);

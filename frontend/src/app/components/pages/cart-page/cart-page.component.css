@@ -1,3 +1,5 @@
+@import "~MDB5-STANDARD-UI-KIT-Free-7.0.0/css/mdb.min.css";
+
 p{
     @apply mb-0
 }
@@ -6,4 +8,22 @@ p{
     visibility:visible;
 }
 
+td, th{
+    @apply text-[12px]
+}
 
+th{
+    @apply text-center
+}
+
+td{
+    @apply px-3
+}
+
+.form-check-input {
+    background-color: aliceblue;
+}
+
+.form-check-input:checked {
+    background-color: red;
+}

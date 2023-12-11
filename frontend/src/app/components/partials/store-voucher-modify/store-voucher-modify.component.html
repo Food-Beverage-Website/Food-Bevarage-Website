@@ -1,0 +1,154 @@
+
+    <div class="border-2 border-blue-600 w-[500px] rounded-[15px]  p-2" >
+        <div class="flex">
+            <div>
+                <div>
+                    <label>Tên chương trình:</label>
+                    <input [(ngModel)]="inputVoucherName" class="border ml-[5px]" type="text">
+                </div>
+
+                <div class="mt-[3px]">
+                    <div>
+                        <label>Ngày bắt đầu:</label>
+                        <input [(ngModel)]="inputVoucherStart" class="px-2 w-[135px] border ml-[29px] " type="date" id="birthday" name="birthday">
+                    </div>
+                    
+                    <div>
+                        <label>Ngày kết thúc:</label>
+                        <input [(ngModel)]="inputVoucherEnd" class="mt-[3px] px-2 w-[135px] border ml-[26px]" type="date" id="birthday" name="birthday">
+                    </div>
+                    
+                </div>
+
+                <div class="mt-[3px]">
+                    <div>
+                        <label>Phần trăm:</label>
+                        <input [(ngModel)]="inputVoucerPercent" class="ml-[52px] w-[40px] border" placeholder="%" type="text">
+                    </div>
+                    
+                </div>
+            </div>
+            
+                <div class="mx-auto mr-[40px] mt-[5px]">
+                    <img [src]="urllink" class="h-[80px] w-[80px]" >
+                    <input type="file" id="myFileInput" (change)="handleFileInput($event)" style="display: none">
+                    <label class="border-[2px] text-white ml-[15px] text-[10px] bg-cyan-600 px-[4px]" for="myFileInput">Chọn File</label>
+                </div>
+    
+           
+        </div>
+
+    </div>
+
+<div class="flex">
+
+    <div class="w-[470px]">
+        <div class="flex justify-center"><p class="font-bold text-blue-900">Sản phẩm đang áp dụng</p></div>
+        <div class="h-[290px] overflow-y-scroll">
+            <table class="table-auto w-full ">
+                <thead>
+                <tr class="title-voucher bg-blue-900 text-white">
+                    <th class="w-[30px]">X</th>
+                    <th class="w-[50px]">Mã</th>
+                    <th class="w-[300px]">Tên sản phẩm</th>
+                    <th class="w-[150px]">Hình</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of appliedVoucher; let i = index">
+                <tr  class="title-voucher">
+                    <td class="justify-center"><div class="flex justify-center"><input  (change)="onCheckboxChange_Applied(i)" type="checkbox"></div></td>
+                    <td class="text-center">{{item._id.slice(-5)}}</td>
+                    <td class="px-2">{{item.TenSP}}</td>
+                    <td class="px-[2px] mx-auto" ><img class="mx-auto h-[20px] w-[20px]" [src]="'assets/Images/'+item.Hinh"></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="4">
+                        <table class="table-auto ml-[72px] ">
+                            <thead>
+                            <tr class="title-voucher bg-blue-50">
+                                <th class="w-[150px]">Kích thước</th>
+                                <th class="w-[115px]">Giá</th>
+                                <th class="w-[130px]">Giá áp dụng</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="title-voucher "  *ngFor="let i of item.DonGia">
+                                <td class="text-center">{{i.Size}}</td>
+                                <td class="px-2">{{i.Gia | currency:'VND':'symbol':'1.0-0'}}  </td>
+                                <td  class="px-2">{{calPercent(i.Gia) | currency:'VND':'symbol':'1.0-0' }}</td>
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-[2px] flex">
+            <div (click)="save_table_1()" class=" inline-block bg-red-500 px-2 text-white rounded-full flex"><mat-icon>save</mat-icon></div>
+        </div>
+
+    </div>
+
+    <div class="w-[470px]  ">
+        <div class="flex justify-center"><p class="font-bold text-blue-900">Sản phẩm chưa áp dụng</p></div>
+        <div class="h-[290px]  overflow-y-scroll">
+            <table class="table-auto w-full ">
+                <thead>
+                <tr class="title-voucher bg-green-900 text-white">
+                    <th class="w-[30px]">X</th>
+                    <th class="w-[50px]">Mã</th>
+                    <th class="w-[300px]">Tên sản phẩm</th>
+                    <th class="w-[150px]">Hình</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of noneApplyVoucher; let i = index">
+                <tr  class="title-voucher">
+                    <td class="justify-center"><div class="flex justify-center"><input (change)="onCheckboxChange_AddNew(i)"  type="checkbox"></div></td>
+                    <td class="text-center">{{item._id.slice(-5)}}</td>
+                    <td class="px-2">{{item.TenSP}}</td>
+                    <td class="px-[2px] mx-auto" ><img class="mx-auto h-[20px] w-[20px]" [src]="'assets/Images/'+item.Hinh"></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="4">
+                        <table class="table-auto ml-[72px] ">
+                            <thead>
+                            <tr class="title-voucher bg-blue-50">
+                                <th class="w-[150px]">Kích thước</th>
+                                <th class="w-[90px]">Giá</th>
+                              
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="title-voucher "  *ngFor="let i of item.DonGia">
+                                <td class="text-center">{{i.Size}}</td>
+                                <td class="px-2">{{i.Gia | currency:'VND':'symbol':'1.0-0'}}  </td>
+        
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-[2px] flex">
+            <div (click)="save_table_2()" class="inline-block bg-green-500 px-2 text-white rounded-full flex"><mat-icon>save</mat-icon></div>
+            <div (click)="updateVoucher()" class="ml-auto inline-block bg-yellow-500 px-2 text-white mr-[5px]">Cập nhật</div>
+            <div (click)="deleteVoucher()" class=" inline-block bg-red-500 px-2 text-white">Xóa</div>
+        </div>
+   
+    </div>
+        
+</div>
+

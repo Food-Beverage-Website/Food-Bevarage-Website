@@ -1,0 +1,93 @@
+<div class="h-full w-full">
+<div class="flex">
+    <p class="text-blue-700 font-bold text-[19px] ml-[240px]">Thêm sản phẩm mới</p>
+    
+</div>
+
+<div class="mt-[25px]">
+    <div class="flex">
+        <div class="input_frame">
+            <div class="flex gap-x-[10px]">
+                <label for="exampleInput" class="ml-[100px] text-neutral-400" >Phân loại hàng (*):</label>
+                <select [(ngModel)]="inputType"  class=" border-[1px] w-[170px]"  id="fruit" name="fruit" >
+                    <ng-container  *ngFor="let item of tieumucs">
+                        <option  [value]="item._id"  class="font-light" >{{item.TenTieuMuc}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            
+            <div class="flex gap-x-[10px]">
+                <label class="ml-[128px] text-neutral-400" for="exampleInput" >Tên sản phẩm:</label>
+                <input [(ngModel)]="inputProductName"  id="exampleInput1" type="text" class="border w-[250px] " />
+            </div>
+
+            <div class="flex gap-x-[5px]">
+                <label class="ml-[172px] text-neutral-400" for="exampleInput" >Miêu tả:</label><br>
+                <input  [(ngModel)]="inputDescribed"  id="exampleInput" type="text" class="h-[100px] w-[250px] border " />
+            </div>
+
+            <div class="flex gap-x-[10px]">
+                <label class="ml-[18px] text-neutral-400" for="exampleInput" >Phân loại sản phẩm cửa hàng:</label>
+                
+                <div class="flex">
+                <select [(ngModel)]="inputCategory" class="w-[170px] border" id="" name="">
+                    <ng-container *ngFor="let item of store.ThucDons">
+                      <option [value]="item._id">
+                        {{ item.TenThucDon === 'Tất cả' ? 'None' : item.TenThucDon }}
+                      </option>
+                    </ng-container>
+                  </select>
+
+                
+                </div>
+                <div class="border flex w-[26px] ml-[15px] mt-[10px] bg-blue-900" (click)="addInput()" for="exampleInput" > <mat-icon style="color: aliceblue;">add</mat-icon></div>
+            </div>
+
+            <div class="flex gap-x-[10px]">
+                <label class="ml-[90px] text-neutral-400" for="exampleInput" >Chế độ hiển thị (**):</label>
+                <select [(ngModel)]="inputState" class="border  w-[170px]" id="" name="" >
+                    <option [value]="'Hoạt động'">Hiện</option>
+                    <option [value]="'Ẩn'">Ẩn</option>
+                
+                </select>
+            </div>
+
+   
+            
+
+        </div>
+
+        <div class="ml-auto mr-[100px]">
+            <img class="h-[190px] w-[150px]" [src]="urllink">
+            <input type="file" id="myFileInput" (change)="handleFileInput($event)" style="display: none">
+            <label class="border-[2px] text-white ml-[50px] text-[10px] bg-cyan-600 px-[4px]" for="myFileInput">Chọn File</label>
+        </div>
+
+    </div>
+    <div>
+        <div class="border flex w-[26px] ml-[237px] mt-[10px] bg-cyan-900" (click)="addInput()" for="exampleInput" > <mat-icon style="color: aliceblue;">add</mat-icon></div>
+        
+        <div class="flex ml-[240px] mt-[10px] gap-x-[10px]">
+            <div  *ngFor="let input of inputPrice; let i = index">
+                <p class="flex">Giá [{{i}}] <span  (click)="removeItem(i)" class="ml-[5px] my-auto text-center h-[15px] bg-red-500 rounded-full"> <mat-icon style="font-size: 15px;" class=" text-white">remove</mat-icon></span></p>
+                <input  [(ngModel)]="input.Size" placeholder="Size {{i}}"  type="text" class="border w-[100px] px-[3px]" ><br>
+                <input [(ngModel)]="input.Gia"  placeholder="Giá {{i}}"  type="text" class="border w-[100px] px-[3px] mt-[5px]" >
+            </div>
+        </div>
+        
+
+    </div>
+    
+</div>
+    
+
+    <div class="flex gap-x-[10px] flex  items-start  mt-[80px]">
+        <div class="text-red-500 text-[12px]  ">
+            (*) Sản phẩm sẽ được phân loại theo danh mục mà chúng tôi đặt làm mặc định trên gian hàng sản phẩm chung.<br>
+            (**) Cửa hàng sẽ chọn ẩn hoặc hiện trên giao diện. Nếu chọn "Ẩn" sản phẩm sẽ không được tiếp cận với khách hàng và ngược lại.
+          </div>
+        <button (click)="submitProduct()"  class="ml-auto py-2 px-8 bg-green-500 text-white border-none rounded cursor-pointer hover:bg-green-700">Lưu</button>
+       
+    </div>
+
+</div>

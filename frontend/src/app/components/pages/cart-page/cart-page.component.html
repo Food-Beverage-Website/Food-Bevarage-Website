@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container flex">
 
 
 
@@ -6,24 +6,27 @@
 
         <div class="card col-lg-10">
 
-            <div class="row table-responsive">
-                <table class="table bg-light table-hover text-center ">
-                    <thead class="table-light">
-                        <tr>
-                            <th scope="col" class="d-flex align-items-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="tatca"
-                                        (input)="toggleSelectionCTatCa($event)" />
-
+            <div class="">
+                <table class="   w-[800px] bg-red-50">
+                    <thead class="table-light  ">
+                        <tr class="bg-pink-900 px-[10px]" style="color: aliceblue; ">
+                            <th class="w-[100px]" scope="col ">
+                                <div class="flex items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input "  style="" type="checkbox" value="" id="tatca"
+                                            (input)="toggleSelectionCTatCa($event)" />
+    
+                                    </div>
+                                    <p>Tất cả</p>
                                 </div>
-                                <p>Tất cả</p>
+                               
                             </th>
-                            <th scope="col">Ảnh</th>
-                            <th scope="col" colspan="2">Sản phẩm</th>
-                            <th scope="col">Size</th>
-                            <th scope="col">Số ly (size)</th>
-                            <th scope="col" colspan="2">Đơn giá ly (size)</th>
-                            <th scope="col" colspan="3">Thao tác</th>
+                            <th class="w-[70px] " scope="col">Ảnh</th>
+                            <th class="w-[150px]" scope="col" colspan="2">Sản phẩm</th>
+                            <th class="w-[50px]" scope="col">Size</th>
+                            <th class="w-[100px]" scope="col">Số lượng</th>
+                            <th class="w-[100px]" scope="col" colspan="2">Đơn giá</th>
+                            <th  class="w-[100px]" scope="col" colspan="3">Thao tác</th>
 
 
                         </tr>
@@ -35,8 +38,8 @@
                                 <div class="form-check d-flex align-items-center">
                                     <input class="form-check-input cuahang" type="checkbox" [id]="item.MaSP.MaCH._id"
                                         (input)="toggleSelectionCuaHang(item.MaSP.MaCH._id, $event)" />
-                                    <mat-icon class="text-orange-600 ">storefront</mat-icon>
-                                    <p class="" style="font-size: 20px;">
+                                    <mat-icon class="text-pink-600 ">storefront</mat-icon>
+                                    <p class="ml-[5px] font-bold" style="font-size: 15px;">
                                         {{item.MaSP.MaCH.TenCuaHang}}
                                         {{mucCuaHang(item.MaSP.MaCH.TenCuaHang)}} |
                                         {{truncateName(item.MaSP.MaCH.DiaChi, 16)}}
@@ -46,22 +49,22 @@
                         </tr>
 
 
-                        <tr>
-                            <td>
+                        <tr class="" style="border-bottom: solid 1px rgb(229 231 235);">
+                            <td class="flex justify-center">
                                 <div class="form-check">
-                                    <input class="form-check-input sanpham" type="checkbox"
+                                    <input class="form-check-input sanpham " style="" type="checkbox"
                                         [id]="item.MaSP.MaCH._id + '||' + item.MaSP._id + item.DonGiaSizeLy.Size"
                                         (input)="toggleSelectionSanPham(item, $event)" />
                                 </div>
                             </td>
                             <td class="">
-                                <img src="/frontend/src/assets/Images/{{item.MaSP.Hinh}}"
+                                <img [src]="'assets/Images/' + item.MaSP.Hinh"
                                     class="w-10 rounded-circle" alt="...">
                             </td>
 
                             <td colspan="2">
                                 <p
-                                    style="font-size: 15px; text-shadow: 2px 2px 4px rgba(32, 122, 128, 0.5); color: #2286ea;">
+                                    style="font-size: 15px; color: #2286ea;">
                                     {{item.MaSP.TenSP}}
                                 </p>
                             </td>
@@ -70,23 +73,23 @@
                                 <p>{{item.DonGiaSizeLy.Size}}</p>
                             </td>
 
-                            <td>
-                                <form action="" class="d-flex align-items-center">
-                                    <button type="button" data-mdb-ripple-init data-mdb-ripple-color="dark"
-                                        class="btn btn-link btn-floating" (click)="giamSoLuongSanPhamGioHang(item)">
-                                        <span class="material-symbols-outlined">
+                            <td class="flex justify-center">
+                                <form action="" class="d-flex align-items-center  ">
+                                    <button  type="button" data-mdb-ripple-init data-mdb-ripple-color="dark"
+                                        class="bg-pink-900 " (click)="giamSoLuongSanPhamGioHang(item)">
+                                        <span class="material-symbols-outlined "  style="font-size: 13px; color: aliceblue;">
                                             remove
                                         </span>
                                     </button>
-                                    <input style="width:55px;" type="number" min="1" max="3" class="form-control"
+                                    <input type="number" min="1" max="3" style="font-size: 13px;" class="text-center w-10"
                                         value="{{item.DonGiaSizeLy.SL}}" (input)="thayDoiSoLuong(item, $event)"
                                         [id]="item.DonGiaSizeLy.Size + '||' + item.MaSP._id">
 
-
+                                   
                                     <button type="button" data-mdb-ripple-init data-mdb-ripple-color="dark"
-                                        class="btn btn-link btn-floating" (click)="tangSoLuongSanPhamGioHang(item)">
+                                    class="bg-pink-900 " (click)="tangSoLuongSanPhamGioHang(item)">
 
-                                        <span class="material-symbols-outlined">
+                                        <span class="material-symbols-outlined" style="font-size: 13px; color: aliceblue;">
                                             add
                                         </span>
                                     </button>
@@ -95,23 +98,28 @@
 
                             <td colspan="2">
                                 <div *ngIf="timKhuyenMai(item) != 0">
-                                    <p><del>{{item.DonGiaSizeLy.Dongia}}</del>đ <span class="text-warning fs-6">(-{{timKhuyenMai(item)}}%)</span>
-                                    </p>
-                                    <p class="text-danger fs-5">{{tinhGIaKhuyenMai_SanPham(item.DonGiaSizeLy.Dongia, timKhuyenMai(item))}}đ</p>
+
+                                    <p class="">{{tinhGIaKhuyenMai_SanPham(item.DonGiaSizeLy.Dongia, timKhuyenMai(item))| currency:'VND':'symbol':'1.0-0'}}đ</p>
+
+                                    <p class="flex">
+                                        <del>{{item.DonGiaSizeLy.Dongia | currency:'VND':'symbol':'1.0-0'}}</del> 
+                                        <span  style="font-size: 7px;" class="text-red-500   ">(-{{timKhuyenMai(item)}}%)</span>
+                                    </p> 
+                                    
                                 </div>
 
                                 <div *ngIf="timKhuyenMai(item) == 0">
-                                    <p>{{item.DonGiaSizeLy.Dongia}}đ</p>
+                                    <p>{{item.DonGiaSizeLy.Dongia | currency:'VND':'symbol':'1.0-0'}}</p>
                                     
                                 </div>
                               
                             </td>
-                            <td colspan="3" class="">
+                            <td colspan="3">
                                 <div class="d-flex align-items-center justify-content-lg-center">
                                     <button type="button"
                                         class="btn btn-tag btn-rounded btn-sm fw-bold d-flex align-items-center"
                                         data-mdb-ripple-color="dark" (click)="toggleCollapse(item)"
-                                        style="font-size: 13px;"
+                                        style="font-size: 7px;"
                                         [attr.aria-expanded]="!isCollapsed[item.MaSP._id + item.DonGiaSizeLy.Size]"
                                         [attr.aria-controls]="item.MaSP._id + item.DonGiaSizeLy.Size">
                                         <mat-icon>layers</mat-icon>
@@ -130,44 +138,44 @@
                             </td>
                         </tr>
 
-                        <tr [ngbCollapse]="!isCollapsed[item.MaSP._id + item.DonGiaSizeLy.Size]" class="fw-bold">
-                            <td colspan="2"></td> <!-- Ô trống, cột 1 -->
-                            <td colspan="2">Tên Topping</td> <!-- Cột 3 -->
-                            <td colspan="2">Số lượng Topping</td>
-                            <td colspan="1">Giá topping</td>
-                            <td colspan="2">Thao tác </td>
+                        <tr [ngbCollapse]="!isCollapsed[item.MaSP._id + item.DonGiaSizeLy.Size]" style="color: black;" class="fw-bold bg-gray-200">
+                            <td  colspan="2"></td> <!-- Ô trống, cột 1 -->
+                            <td colspan="1">Tên Topping</td> <!-- Cột 3 -->
+                            <td   colspan="2">Số lượng</td>
+                            <td colspan="1">Đơn giá</td>
+                            <td  colspan="1">Thao tác </td>
                         </tr>
 
                         <tr [ngbCollapse]="!isCollapsed[item.MaSP._id + item.DonGiaSizeLy.Size]"
                             *ngFor="let item2 of item.DongiaToppings">
                             <td colspan="2"></td> <!-- Ô trống, cột 1 -->
-                            <td colspan="2">{{item2.tenTopping}}</td> <!-- Cột 3 -->
-                            <td colspan="2">
-                                <form action="" class="d-flex justify-content-lg-center align-items-center">
+                            <td colspan="1">{{item2.tenTopping}}</td> <!-- Cột 3 -->
+                            <td colspan="2" >
+                                <form action="" class="d-flex align-items-center  ">
                                     <button type="button" data-mdb-ripple-init data-mdb-ripple-color="dark"
-                                        class="btn btn-link btn-floating"
+                                        class="bg-gray-200"  style="font-size: 13px; color: aliceblue;"
                                         (click)="giamSoLuongSanPhamToppingGioHang(item, item2._id, item2.soluongtopping)">
-                                        <span class="material-symbols-outlined">
+                                        <span  style="font-size: 13px; color: aliceblue;" class="material-symbols-outlined">
                                             remove
                                         </span>
                                     </button>
-                                    <input style="width:55px;" type="number" min="1" max="3" class="form-control"
+                                    <input type="number" min="1" max="3" style="font-size: 13px;" class="text-center w-10"
                                         value="{{item2.soluongtopping}}"
                                         [id]="item2._id + '||' + item.DonGiaSizeLy.Size + '||' + item.MaSP._id"
                                         (input)="thayDoiSoLuongTopping(item, $event, item2._id)">
 
                                     <button type="button" data-mdb-ripple-init data-mdb-ripple-color="dark"
-                                        class="btn btn-link btn-floating"
+                                    class="bg-gray-200"   style="font-size: 13px; color: aliceblue;"
                                         (click)="tangSoLuongToppingSanPhamGioHang(item, item2._id, item2.soluongtopping)">
 
-                                        <span class="material-symbols-outlined">
+                                        <span  style="font-size: 13px; color: aliceblue;" class="material-symbols-outlined">
                                             add
                                         </span>
                                     </button>
                                 </form>
                             </td>
-                            <td colspan="1">{{item2.giatopping}}</td>
-                            <td colspan="2" class="">
+                            <td colspan="1">{{item2.giatopping | currency:'VND':'symbol':'1.0-0'}}</td>
+                            <td colspan="1" class="">
                                 <button type="button" class="btn btn-link btn-sm fw-bold" data-mdb-ripple-init
                                     data-ripple-color="primary" (click)="xoa1ToppingGioHang(item, item2._id)">
                                     <span class="material-symbols-outlined">
@@ -181,12 +189,39 @@
             </div>
         </div>
 
-        <div class="card col-lg-2">
-            <p>Tổng số ly: {{calculateSLLy()}}</p>
-            <p>Tổng số topping: {{calculateSLTopping()}}</p>
-            <p>Tổng giá ly: {{calculateGiaSizeLy()}}đ</p>
-            <p>Tổng giá topping: {{calculateTotalGiaTopping()}}đ</p>
-            <p>Tổng tiền: {{calculateTotals()}}đ</p>
-        </div>
+    
     </div>
+
+    <div class="w-[300px] ml-[10px] bg-green-50 h-[205px] rounded-b-[20px] ">
+        <div class="flex bg-green-500  ">
+            <p class="text-center font-bold mx-auto" style="color: aliceblue;">Thanh toán</p>
+        </div>
+        <div class="px-2">
+            <div class="flex gap-x-1">
+                <p class="font-bold text-gray-400 ">Tổng số sản phẩm: </p>
+                <p>{{calculateSLLy()}} | {{calculateGiaSizeLy() | currency:'VND':'symbol':'1.0-0'}}</p>
+            </div>
+
+            <div class="flex gap-x-1">
+                <p class="font-bold text-gray-400">Tổng số thức ăn kèm: </p>
+                <p>{{calculateSLTopping()}} | {{calculateTotalGiaTopping() | currency:'VND':'symbol':'1.0-0'}}</p>
+            </div>
+
+            <div>
+                <p class="font-bold">Tổng tiền: {{calculateTotals1()| currency:'VND':'symbol':'1.0-0'}}</p>
+            </div>
+          
+            
+        </div>
+
+        <div class="flex justify-center mt-[20px]">
+            <div class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
+                <p style="color: white;" class="font-bold">Đặt hàng</p>
+            </div>
+        </div>
+
+    </div>
+
+
+
 </div>

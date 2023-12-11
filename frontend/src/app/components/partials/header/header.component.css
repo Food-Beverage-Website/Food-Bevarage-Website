@@ -27,20 +27,20 @@ header{
 }
 
 .bnt-search{
-    @apply h-[30px] bg-sky-400 text-[15px] px-2 py-1 text-white rounded-r-full
+    @apply h-[30px] bg-sky-400 text-[10px] px-1 text-white rounded-r-full mt-[1px]
 }
 
 
 .header-icon{
-    @apply flex;
+    @apply flex w-full gap-x-[30px];
 }
 
 .header-icon div{
-    @apply ml-[40px];
+    @apply ml-[10px] ;
 }
 
 .header-icon div mat-icon{
-    @apply text-[25px] h-[45px] w-[45px] mt-[10px];
+    @apply text-[35px] h-[50px] w-[50px] mt-[0px];
 }
 
 header .div-header,  .header-icon{
@@ -61,3 +61,56 @@ header .div-header,  .header-icon{
    @apply w-[100px]
 }
 
+
+
+  .main-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .main-menu li {
+    padding: 0px;
+    position: relative;
+  }
+  
+  .main-menu a {
+    text-decoration: none;
+    color: #260808;
+  }
+  
+  .sub-menu {
+    position: relative;
+  }
+  
+  .sub-menu-items {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+  
+  .sub-menu:hover .sub-menu-items {
+    display: block;
+  }
+  
+  .sub-menu-items li {
+    padding: 0px;
+  }
+
+
+
+
+  .ribbon {
+    width: 20px;
+    font-size: 14px;
+    height: 20;
+    position: absolute;
+    margin-left: 20px;
+    text-align: center;
+    border-radius: 25px;
+  
+    background-color: #ff9800;
+    color: white;
+  }

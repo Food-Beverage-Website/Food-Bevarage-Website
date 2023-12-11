@@ -1,0 +1,190 @@
+<div class="flex px-3">
+   <p class=" text-[20px] text-blue-900 font-bold">Chương trình khuyến mãi</p> 
+   <div (click)="click_createVoucher()" class="bg-blue-900 text-white px-3 py-1 ml-auto flex">
+   <mat-icon class="mr-[5px]">add</mat-icon> Tạo khuyến mãi
+   </div>
+</div>
+<hr class="mt-[15px] border-2">
+<div class="flex gap-x-[10px] mt-[10px]">
+    <input  placeholder="Nhập mã hoặc tên chương trình khuyến mãi" type="text" class="w-[300px] text-[13px] border-2 border-gray-300" >
+
+    <div >
+        <select class="border-2" id="" name="">
+            <option value="default" selected>Tất cả</option>
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="orange">Orange</option>
+            <option value="grape">Grape</option>
+            <!-- Add more options as needed -->
+          </select>
+    </div>
+    
+    <div class="flex bg-blue-500 px-2 border-2 text-white">
+       <mat-icon>search</mat-icon> Tìm kiếm
+    </div>
+
+    <div class="flex gap-x-[15px] ml-auto">
+        <div class="flex gap-x-[2px]">
+            <label for="birthday">Từ:</label>
+            <input class="px-2 w-[135px]" type="date" id="birthday" name="birthday">
+        </div>
+
+        <div class="flex gap-x-[2px]">
+            <label for="birthday">Đến:</label>
+            <input class="px-2 w-[135px]" type="date" id="birthday" name="birthday">
+        </div>
+    </div>
+</div>
+
+<div class="flex gap-x-1">
+    <div class="mt-[10px] w-[550px] h-[480px]">
+
+        <div>
+            <table class="table-auto border-[1px] w-full h-full">
+                <thead>
+                  <tr class="title-voucher border-[1px] bg-cyan-600 text-white">
+                    <th class="w-[100px] ">Trạng thái</th>
+                    <th class="w-[200px]">Chương trình KM</th>
+                    <th>Mã</th>
+                    <th>Thời gian</th>
+                    <th class="w-[50px]">%</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of vouchers; let i = index">
+                    <tr 
+                      (click)="showProductList(item._id,i,item.PhanTramGiam)"
+                      class=" title-voucher bg-white"
+                      [class.selected]="selectedRow1 === i"
+                    >
+                      <td class="text-center">
+                        <label class="switch">
+                          <input type="checkbox">
+                          <span class="slider round"></span>
+                        </label>
+                      </td>
+                      <td class="px-[2px] flex">{{item.TenKhuyenMai}} <mat-icon (click)=" click_modifyVoucher(item._id)"   style="font-size: 8px;" class="cursor-pointer mt-[0px] ml-[2px]">edit</mat-icon></td>
+                      <td class="text-center">{{item._id.slice(-5)}}</td>
+                      <td class="text-center"><span>{{item.NgayBatDau}}</span> - <span>{{item.NgayKetThuc}}</span></td>
+                      <td class="text-center"> {{item.PhanTramGiam}}</td>
+                    </tr>
+                  </ng-container>
+                
+                </tbody>
+              </table>
+        </div>
+
+    </div>
+
+    <div class=" w-[350px] h-[480px]">
+      
+        <table class="table-auto mt-[10px] w-full">
+            <thead>
+              <tr class="title-voucher border-[1px] bg-cyan-900 text-white">
+                <th class="w-[50px]">Mã</th>
+                <th class="w-[400px]">Sản phẩm</th>
+                <th class="w-[70px]">Hình</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of productsList; let j = index">
+              <tr class="title-voucher bg-white"  (click)="handleRowClick(j)"   [class.selected]="selectedRow === j" >
+                <td class="text-center">{{item._id.slice(-5)}}</td>
+                <td class="px-[3px]">{{item.TenSP}}</td>
+                <td class="px-[2px] mx-auto" ><img class="mx-auto h-[20px] w-[20px]" [src]="'assets/Images/'+item.Hinh"></td>
+                
+              </tr>
+              <tr [style.display]="isRowVisible[j] ? 'table-row' : 'none'">
+                <td colspan="3">
+                  <div class="">
+                    <table class="inner-table">
+                      <thead>
+                        <tr  class="title-voucher bg-gray-100">
+                         
+                          <th class="w-[135px]">Kích thước</th>
+                          <th class="w-[113px]">Giá gốc</th>
+                          <th class="w-[113px]">Giá áp dụng</th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white">
+                        <tr class="title-voucher" *ngFor="let i of item.DonGia">
+                          <td class="text-center">{{i.Size}}</td>
+                          <td class="px-3">{{i.Gia | currency:'VND':'symbol':'1.0-0' }}</td>
+                          <td class="px-3">{{calPercent(i.Gia) | currency:'VND':'symbol':'1.0-0' }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+
+              
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+<div *ngIf="modifyVoucher || createVoucher" class="  fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+
+
+<div *ngIf="modifyVoucher" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+  <div class="w-[900px] h-[500px]">
+    <div class="flex">
+        <p class="text-blue-700 font-bold text-[18px] ml-[40px]">Cập nhật chương trình khuyến mãi</p>
+        <div class="flex bg-red-500 ml-auto" (click)="close_modify()"><mat-icon>close</mat-icon></div>
+    </div>
+    <app-store-voucher-modify *ngIf="itemVoucher" [voucher]="itemVoucher"></app-store-voucher-modify>
+  </div>
+</div>
+
+
+<div *ngIf="createVoucher" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+  <div class="w-[600px] h-[210px]">
+    <div class="flex justify-center"><p class="font-bold text-blue-700">Tạo mới khuyến mãi</p></div>
+    
+    <div class="flex">
+    <div>
+        <div class="grid grid-cols-2 px-[40px] gap-x-2 mt-[20px]">
+          <label class="ml-auto">Tên khuyến mãi:</label>
+          <input [(ngModel)]="inputName" class="border " type="text" >
+        </div>
+
+        <div class="grid grid-cols-2 px-[40px] gap-x-2 mt-2">
+          <label class="ml-auto">Ngày bắt đầu:</label>
+          <input [(ngModel)]="inputvoucherStart" class="border w-[135px] " type="date" >
+        </div>
+
+        <div class="grid grid-cols-2 px-[40px] gap-x-2 mt-2">
+          <label class="ml-auto">Ngày kết thúc:</label>
+          <input [(ngModel)]="inputvoucherEnd" class="border w-[135px]" type="date" >
+        </div>
+
+        <div class="grid grid-cols-2 px-[40px] gap-x-2 mt-2">
+          <label class="ml-auto ">Phần trăm:</label>
+          <input [(ngModel)]="inputvoucherPercent" class="border w-[80px] " type="text" >
+        </div>
+    </div>
+
+    <div>
+
+      <img [src]="urllink" class="h-[100px] w-[100px]" >
+      <input type="file" id="myFileInput" (change)="handleFileInput($event)"  style="display: none">
+      <label class="border-[2px] text-white ml-[20px] text-[10px] bg-cyan-600 px-[4px]" for="myFileInput">Chọn File</label>
+
+    </div>
+  </div>
+
+  <div class="flex px-[10px]">
+      <div (click)="creatVoucher()" class="ml-auto mr-[5px] px-2 bg-green-500 text-white">
+        Thêm mới
+      </div>
+
+      <div (click)="close_createVoucher()" class="px-2 bg-red-500 text-white ">
+        Hủy
+      </div>
+  </div>
+
+  </div>
+</div>

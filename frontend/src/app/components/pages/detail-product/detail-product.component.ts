@@ -200,11 +200,9 @@ export class DetailProductComponent implements OnInit {
 
   // Trong file .ts của component
   formatPrice(gia: number): string {
-    if (gia >= 1000) {
-      return (gia / 1000).toFixed(0) + 'k';
-    } else {
+   
       return gia.toString();
-    }
+    
   }
 
   truncateName(tentopping: string, maxLength: number): string {

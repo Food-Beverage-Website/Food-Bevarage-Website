@@ -1,0 +1,17 @@
+.sidebar{
+    @apply mt-5 ml-[0px]
+}
+
+
+.sidebar li{
+    @apply w-full h-[40px] my-[13px]  flex justify-start text-[15px] px-[25px] rounded-r-[5px]
+}
+
+.sidebar li a{
+    @apply h-full w-full flex gap-x-4 items-center 
+}
+
+.sidebar li:hover{
+    @apply bg-white text-black
+}
+

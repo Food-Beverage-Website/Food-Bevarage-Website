@@ -1,5 +1,5 @@
 export class Type{
-    id!:string;
+    _id!:string;
     TenTieuMuc!:string;
     Poster!:string;
 }

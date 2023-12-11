@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, ObjectId } from "mongoose";
 
 // Interface cho ThucDon
 interface MenuItem {
@@ -9,7 +9,7 @@ interface MenuItem {
 // Interface cho MaThucDon
 export interface Menu extends Document {
   MaThucDon: string;
-  MaCH: string;
+  MaCH: ObjectId;
   ThucDons: MenuItem[];
 }
 
@@ -17,7 +17,7 @@ export interface Menu extends Document {
 const MenuSchema = new Schema<Menu>(
   {
     MaThucDon: { type: String, required: true },
-    MaCH: { type: String, required: true },
+    MaCH: { type:Schema.Types.ObjectId, required: true, ref: 'cuahang' },
     ThucDons: [
       {
         ID: String,

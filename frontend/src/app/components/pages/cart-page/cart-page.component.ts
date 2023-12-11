@@ -185,6 +185,10 @@ export class CartPageComponent {
     return -1;
   }
 
+  calculateTotals1():number
+  {
+   return this.calculateGiaSizeLy()+ this.calculateTotalGiaTopping()
+  }
 
   calculateTotals() {
     if (this.selectedSanPhams.length == 0) {

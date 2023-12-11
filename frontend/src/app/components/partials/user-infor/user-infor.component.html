@@ -7,26 +7,18 @@
 
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs flex">
 	<li [ngbNavItem]="1">
-		<button class="btn-option border-r-4" ngbNavLink>Hồ sơ</button>
-		<ng-template ngbNavContent>
-			<app-user-profile></app-user-profile>
-		</ng-template>
+	  <button (click)="active = 1" class="btn-option border-r-4" >Hồ sơ</button>
+	  <ng-template ngbNavContent>
+		<app-user-profile *ngIf="active === 1"></app-user-profile>
+	  </ng-template>
 	</li>
 	<li [ngbNavItem]="2">
-		<button class="btn-option border-r-4" ngbNavLink>Đổi mật khẩu</button>
-		<ng-template ngbNavContent>
-			<p>
-				Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-				farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-				ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-				helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-				8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-				stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-			</p>
-		</ng-template>
+	  <button (click)="active = 2" class="btn-option border-r-4" >Đổi mật khẩu</button>
+	  <ng-template ngbNavContent>
+		<!-- <app-user-profile *ngIf="active === 2"></app-user-profile> -->
+	  </ng-template>
 	</li>
-	
-</ul>
+  </ul>
 
 <div [ngbNavOutlet]="nav" class="mt-2"></div>
 

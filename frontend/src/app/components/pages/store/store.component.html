@@ -1,0 +1,154 @@
+<div class="store mt-[20px]">
+    <div class="img-store"  style="background-image: url(assets/Images/bg-store.jpeg); background-size: cover;">
+        <div class="name-store"><p>FooDie</p></div>
+    </div>
+
+    <div class="infor-store">
+        <div>
+            <div class="name">{{store.TenCuaHang}}</div>
+            <div class="address">{{ store.DiaChi | slice:0:50 }} ...</div>
+            <div class="phone">{{store.SDT}}</div>
+        </div>
+        <hr>
+        
+        <div class="flex gap-x-[30px] mt-[20px]">
+            <div class="number_product"><mat-icon class="text-red-500">inventory_2</mat-icon> Thức uống: {{countProducts()}}</div>
+            <div class="number_cate"><mat-icon class="text-red-500">category</mat-icon> Danh mục: {{countMenus(store.ThucDons)}}</div>
+        </div>
+        <div class="number_product mt-2"><mat-icon class="text-red-500">timer</mat-icon> Open: {{store.GioMoCua}} | Close: {{store.GioDongCua}} </div>
+        
+    </div>
+</div>
+
+<div class=" mt-[10px] px-[200px]">
+
+    <div class="   bg-red-100   ">
+        <div class="flex">
+            <ul class="category w-full" *ngFor="let thucDon of store.ThucDons.slice(0,4)">
+                <li  (click)="productbyMenu(thucDon._id)">{{ thucDon.TenThucDon }}</li>
+              </ul>
+              <select *ngIf="countMenus(store.ThucDons) > 4" class="ml-auto bg-red-100" (change)="productbyMenu_dropdown($event)">
+                <option>Xem thêm</option>
+                <option *ngFor="let thucDon of store.ThucDons.slice(4)" [value]="thucDon._id">{{ thucDon.TenThucDon }}</option>
+                <option value="all">Tất cả</option>
+              </select>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="px-[200px] mt-[20px] ">
+    <div class="w-full h-[100px]">
+        <video class="w-full h-full object-cover rounded-tl-[20px] rounded-br-[20px] " autoplay muted loop >
+          <source src="assets/Images/banner_store.mp4" type="video/mp4">
+        </video>
+     </div>
+
+</div>
+
+
+
+<div class="px-[200px] mt-[10px]">
+    <div class="flex">
+        <div class="filter-store">
+            <div class=" filter-title"><mat-icon >tune</mat-icon> xếp theo</div>
+            <ul>
+                <li (click)="getNewProduct()">Mới nhất</li>
+                <li (click)="getBestSeller()">Phổ biến</li>
+                <li (click)="getVoucherProduct()">Khuyến mãi</li>
+                <li>
+                    <select (change)="sort($event)" class="ml-auto bg-red-50 h-full w-full text-center border-none">
+                        <option>Giá</option>
+                        <option  value="PriceDecrease">Giá: Từ cao đến thấp</option>
+                        <option value="PriceAscending">Giá: Từ thấp đến cao</option>
+                    </select>
+                    
+                </li>
+               
+            </ul>
+        </div>
+        <div class="all-product-store w-full ml-[30px]">
+            <div class="text-center flex justify-center" *ngIf="product?.length === 0">CỬA HÀNG SẼ ĐƯỢC CẬP NHẬT SAU...</div>
+            <div class="list-product-store">
+                
+
+                
+                <ng-container  *ngFor="let item of pagedProducts | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems }"  >
+                <div *ngIf="item.TinhTrang!=='Ẩn'" class="item-product relative" >
+                   
+                    <span *ngIf="checkNew(item.NgayDang)" class="ribbon">NEW</span>
+                    <img  [src]="'assets/Images/' + item.Hinh"  >
+                    <div class="infor-product">
+                    
+                  
+                        <p class="product-name">{{ (item.TenSP.length > 23) ? (item.TenSP | slice:0:23) + '...' : item.TenSP }}</p>
+                        <div class="flex">
+                           <div *ngIf="checkvoucherProduct(item._id)!==1">
+                                <p  class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                           </div>
+                               
+                           <div class="flex" *ngIf="checkvoucherProduct(item._id)===1">
+                            <p  class="product-price">{{ voucherProduct(item._id,getMinPrice(item.DonGia).toString()) | currency:'VND':'symbol':'1.0-0' }}</p>
+                                <p  class="line-through text-[8px] ml-[5px]">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                            </div>
+                             
+                        
+                           
+                        </div>
+                       
+                    
+                    <div *ngIf="item.TinhTrang!=='Hết hàng'" class="product-button">
+                        <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+                        
+                        <p>Mua ngay</p>
+                    </div>
+
+                    <div *ngIf="item.TinhTrang==='Hết hàng'" class=" product-sold-button">
+                        <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+                        
+                        <p>SOLD OUT</p>
+                    </div>
+                    </div>
+                   
+                </div>
+            </ng-container>
+            </div>
+            <div *ngIf="countProducts()>9" class="pagination w-full flex justify-center mt-[10px]">
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="px-[200px] mt-[10px]">
+    <div class="flex">
+        <p class="">Gợi ý sản phẩm</p>
+      
+    </div>
+</div>
+
+<div class="list-product">
+    <div class="item-product">
+        <img  src="assets/Images/poster_banh.jpeg">
+        <div class="infor-product">
+        
+        <div class="flex"> 
+            <p class="product-name">Trà Sửa ý nhi</p>
+            <p class="product-price">10.150 VND</p>
+        </div>
+        <div class="product-button">
+            <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+            
+            <p>Mua ngay</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<hr>
+

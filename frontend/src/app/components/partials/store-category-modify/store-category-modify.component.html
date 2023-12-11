@@ -1,0 +1,114 @@
+<div class="flex">
+    <p class="text-blue-900 text-[20px] font-bold">Chi tiết phân loại sản phẩm: </p>
+    <p class="text-blue-900 text-[20px] ml-[5px] "> {{loadNameCategory()}}</p>
+</div>
+<hr class="border-2 mt-[10px]">
+
+<div class="flex mt-[20px]">
+    <div class="flex">
+        <label >Tên phân loại:</label>
+        <input [(ngModel)]="inputName" type="text" class="border ml-[5px] px-2">
+    </div>
+
+    <div class="ml-[20px] flex">
+        <div (click)="updateMenu()" class="px-3  bg-blue-900 text-white">Cập nhật</div>
+        <div (click)="opentAlert_removeMenu()" class="px-3 ml-[5px]  bg-red-500 text-white">Xóa</div>
+    </div>
+</div>
+
+<div class="flex ml-[10px]">
+    <div class="w-[430px]">
+        <div class=" flex mt-[15px]">
+            <p class="mx-auto text-[15px] text-blue-900">Sản phẩm trong danh mục</p>
+        </div>
+        <div class="mt-[5px] w-[430px] bg-white h-[400px]  overflow-y-scroll">
+            
+            <table class="table-auto w-full">
+                <thead class="">
+                <tr class="title-voucher text-white bg-blue-900">
+                    <th>X</th>
+                    <th>Mã</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Hình</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of products; let i = index">
+                <tr class="border-b-[1px]">
+                    <td class=""><div class="flex mx-auto"><input (change)="save_1(i)" type="checkbox"></div></td>
+                    <td>{{item._id}}</td>
+                    <td>{{item.TenSP}}</td>
+                    <td><img class="mx-auto h-[20px] w-[20px]" [src]="'assets/Images/'+item.Hinh"></td>
+                </tr>
+                </ng-container>
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="bg-white flex border-t-[1px] rounded-b-[20px]">
+            <div (click)="save_table_1()" class="ml-auto px-4"><mat-icon style="color: rgb(6 182 212);">save</mat-icon></div>
+        </div>
+    </div>
+
+    <div class="w-[430px] ml-[25px]">
+        <div class=" flex mt-[15px]">
+            <p class="mx-auto text-[15px] text-yellow-900">Sản phẩm chưa có danh mục</p>
+        </div>
+        <div class="mt-[5px] w-[430px] bg-white h-[400px]  overflow-y-scroll">
+            
+            <table class="table-auto w-full">
+                <thead class="">
+                <tr class="title-voucher text-white bg-yellow-900">
+                    <th>X</th>
+                    <th>Mã</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Hình</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of noneproducts;let i =index">
+                <tr class="border-b-[1px]">
+                    <td class=""><div class="flex mx-auto"><input type="checkbox" (change)="save_2(i)"></div></td>
+                    <td>{{item._id}}</td>
+                    <td>{{item.TenSP}}</td>
+                    <td><img class="mx-auto h-[20px] w-[20px]" [src]="'assets/Images/'+item.Hinh"></td>
+                </tr>
+                </ng-container>
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="bg-white flex border-t-[1px] rounded-b-[20px]">
+            <div (click)="save_table_2()" class="ml-auto px-4"><mat-icon style="color: rgb(234 179 8);">save</mat-icon></div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="removeMenu" class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+<div *ngIf="removeMenu" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+    <div class="h-[130px] w-[450px]" >
+      <div class="flex">
+          <p class="text-red-500 font-bold mx-auto">Bạn có muốn xóa Danh mục này!</p>
+        
+      </div>
+
+      <div class="flex text-[12px] mt-[20px]">
+        <mat-icon  style="color: orangered;">warning</mat-icon>
+        <p class="ml-[15px]">Lưu ý: Khi bạn xóa danh mục này, cách sản phẩm trong danh mục này sẽ tự động trở về mặc định</p>
+      </div>
+
+      <div class="flex mt-[20px] mx-auto">
+        <div class="mx-auto flex">
+            <div  (click)="deleteMenu()" class="px-2 bg-green-500 text-white">Đồng ý</div>
+            <div (click)="closeAlert_removeMenu()" class="px-2 bg-red-500 ml-[10px] text-white">Hủy</div>
+
+        </div>
+            
+      </div>
+      
+    
+       
+    </div>
+    
+  </div>
+  

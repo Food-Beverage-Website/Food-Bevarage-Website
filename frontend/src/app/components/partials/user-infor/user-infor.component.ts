@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class UserInforComponent {
   active = 1;
+  isProfileVisible = true; 
+  isProfileVisible1 = true; 
+  
 }

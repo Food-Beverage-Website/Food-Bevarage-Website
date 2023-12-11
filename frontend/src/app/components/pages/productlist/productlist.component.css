@@ -1,17 +1,47 @@
  .banner-result .img-banner{
-    @apply relative w-full h-[150px] 
+    @apply relative w-full h-[80px] z-0
 }
 
  .text-banner{
-    @apply absolute bg-black opacity-60 h-full w-full flex justify-center items-center
+    @apply absolute bg-black opacity-60 h-full w-full flex justify-center items-center z-0
 }
 
 .text-banner p{
     @apply text-white  text-[50px]
 } 
 
-/* Đây là css cho list sản phẩm  */.list-product{
-    @apply grid grid-cols-4 px-[100px] gap-[30px]
+/* Đây là css cho thông tin cửa hàng */
+
+.img-store{
+    @apply h-[130px] w-[300px] bg-pink-500 relative rounded-[15px]
+}
+.name-store{
+    @apply bg-black opacity-60 h-full w-full flex justify-center items-center rounded-[15px]
+}
+
+.name-store p{
+    @apply text-white  text-[50px]
+}
+
+.infor-store{
+    @apply mx-[40px]
+}
+
+.name{
+    @apply font-bold
+}
+
+.number_product{
+    @apply flex text-[15px] text-red-700 font-bold
+}
+
+.number_cate{
+    @apply flex text-[15px] text-red-700 font-bold
+}
+
+/* Đây là css cho list sản phẩm  */
+.list-product{
+    @apply grid grid-cols-4 px-[150px] gap-[30px] mt-[5px]
 }
 
 .item-product{

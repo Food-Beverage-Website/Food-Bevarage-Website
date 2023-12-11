@@ -1,0 +1,31 @@
+.state-order li p{
+    @apply text-center
+}
+
+.state-order{
+    @apply w-full
+}
+
+.state-order li{
+    @apply w-[210px] 
+}
+
+.count {
+    @apply font-bold text-blue-900
+}
+
+.title-voucher{
+    @apply text-[13px]
+}
+
+.title-voucher th{
+    @apply border-[1px]
+}
+
+.title-voucher td{
+    @apply border-[1px]
+}
+
+td{
+    @apply px-[3px] text-[13px]
+}

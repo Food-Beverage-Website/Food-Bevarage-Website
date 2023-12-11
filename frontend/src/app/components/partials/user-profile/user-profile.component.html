@@ -6,8 +6,8 @@
 <br>
 <div class="banner-address border-b-4">
    <p class="title-infor">Địa chỉ của tôi</p> 
+   <button (click)="showAlert = true" class="flex"><mat-icon>add</mat-icon>Thêm địa chỉ mới</button>
 
-   <button class="flex"><mat-icon class=" ">add</mat-icon>Thêm địa chỉ mới</button>
 </div>
 <br>
 <div *ngFor="let item of user.DiaChis">
@@ -19,10 +19,49 @@
         </div>
         <div class="change-address">
             <a>Cập nhật</a>
-            <a>Xóa</a>
+            
+            <button><a (click)="deleteAddress(item._id)">Xóa</a></button>
         </div>
     </div>
     <br>
     
 
 </div>
+
+
+
+
+
+
+<div *ngIf="showAlert" class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+
+
+<div *ngIf="showAlert" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-90 p-8 border border-gray-300 shadow-md z-50">
+  <div class="add-address" >
+        <p class="text-blue-700 font-bold">Thêm địa chỉ giao hàng</p>
+
+        <div class="name-recipient">
+            <label for="exampleInput" >Tên người nhận:</label>
+            <input id="exampleInput" type="text"  [(ngModel)]="tenNguoiNhan" />
+        </div>
+
+
+        <div class="address-recipient">
+            <label for="exampleInput" >Địa chỉ:</label>
+            <input id="exampleInput" type="text"  [(ngModel)]="diaChi" />
+        </div>
+
+        <div class="phone-recipient">
+            <label for="exampleInput" >SĐT:</label>
+            <input id="exampleInput" type="text" [(ngModel)]="SDT"  />
+        </div>
+
+        <div class="flex gap-x-[10px] justify-end">
+            <button (click)="saveAddress()" class="mt-4 py-2 px-4 bg-green-500 text-white border-none rounded cursor-pointer hover:bg-green-700">Lưu</button>
+            <button (click)="closeAlert()" class="mt-4 py-2 px-4 bg-blue-500 text-white border-none rounded cursor-pointer hover:bg-blue-700">Đóng</button>
+        </div>
+    
+  </div>
+</div>
+
+

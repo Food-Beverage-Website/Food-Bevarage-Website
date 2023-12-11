@@ -1,0 +1,11 @@
+.title-voucher{
+    @apply text-[12px]
+}
+
+.title-voucher th{
+    @apply border-[1px]
+}
+
+.title-voucher td{
+    @apply border-[1px]
+}

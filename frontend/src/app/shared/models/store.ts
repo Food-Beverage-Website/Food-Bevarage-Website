@@ -9,5 +9,9 @@ export class Store {
     GioDongCua!: string;
     TaiKhoan!: string;
     MatKhau!: string;
+    ThucDons!: {
+      _id:string;
+      TenThucDon: string;
+    }[];
   }
   

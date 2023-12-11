@@ -1,0 +1,19 @@
+.product-list th{
+    @apply  border-2 border-r-[2px] text-[10px] text-white bg-sky-950
+}
+
+.product-list td{
+    @apply  border-2 border-r-[2px] text-[12px]  px-[5px]
+}
+
+.even-row {
+    @apply  bg-sky-50 /* Màu của dòng chẵn */
+  }
+  
+  .odd-row {
+    background-color: #ffffff; /* Màu của dòng lẻ */
+  }
+
+  .add-product{
+    @apply w-[550px] h-[180px]
+}

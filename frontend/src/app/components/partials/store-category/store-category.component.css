@@ -1,0 +1,23 @@
+.title-voucher{
+    @apply text-[12px]
+}
+
+.title-voucher th{
+    @apply border-[1px]
+}
+
+.title-voucher td{
+    @apply border-[1px]
+}
+
+td{
+    @apply px-2 text-[12px]
+}
+
+.add-product{
+    @apply w-[800px] h-[490px]
+}
+
+.selected-row {
+   @apply bg-sky-50
+  }

@@ -2,44 +2,182 @@ import { Router } from "express";
 import asynceHandler from 'express-async-handler';
 import { BuyerModel } from "../models/buyer.model";
 import jwt from "jsonwebtoken";
-import { ProductModel } from "../models/product.model";
 import { ToppingModel } from "../models/topping.model";
+import { ProductModel } from "../models/product.model";
 
 
 const router = Router();
 
-router.get("/check1", asynceHandler(
-  async (req, res) => {
-    const productsCount = await BuyerModel.countDocuments();
-    if (productsCount > 0) {
-      res.send("Get is ready");
-      return;
-    }
-    else {
-      res.send("Get isnt ready");
-      return;
-    }
-  }
+router.get("/check1",asynceHandler(
+    async (req,res)=>{ 
+        const productsCount = await BuyerModel.countDocuments();
+        if(productsCount >0)
+        {
+            res.send("Get is ready");
+            return;
+        }
+        else{
+            res.send("Get isnt ready");
+            return;
+        }
+     }
 
 ))
 
-router.post("/login", asynceHandler(async (req, res) => {
-  const { account, password } = req.body;
-  const user = await BuyerModel.findOne({ TaiKhoan: account, MatKhau: password });
-  if (user) {
-    res.send(generateTokenResponse(user));
-  } else {
-    res.status(400).send("Account or password isn't true");
+
+router.post("/addAddress", asynceHandler(async (req, res) => {
+    try {
+      const { idKhachHang, TenNhanHang, DiaChi, SDT } = req.body;
+  
+      const user = await BuyerModel.findOne({ _id: idKhachHang });
+  
+      const newAddress = {
+        TenNhanHang: TenNhanHang,
+        DiaChi: DiaChi,
+        SDT: SDT
+      };
+      user.DiaChis.push(newAddress);
+      await user.save();
+  
+      res.status(200).json({ message: 'Thêm địa chỉ mới thành công' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error });
+    }
+}));
+
+
+
+router.get("/delAddress/:idKhachHang/:idDiaChi", asynceHandler(async (req, res) => {
+    try {
+      
+      const idKhachHang = req.params.idKhachHang;
+        const idDiaChi= req.params.idDiaChi;
+      const user = await BuyerModel.findOne({ _id: idKhachHang });
+  
+      if (user) {
+        const result = await user.updateOne(
+          { $pull: { DiaChis: { _id: idDiaChi } } }
+        );
+  
+        if (result.nModified > 0) {
+          res.status(200).json({ message: "Xóa thành công" });
+        } else {
+          res.status(404).json({ message: "Không tìm thấy địa chỉ để xóa." });
+        }
+      } else {
+        res.status(404).json({ message: "Người dùng không tồn tại." });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error });
+    }
+  }));
+
+
+
+
+
+
+router.get("/getBuyerByID/:idKhachHang", asynceHandler(async (req, res) => {
+    try {
+        const idKhachHang = req.params.idKhachHang;
+    
+        const user = await BuyerModel.findOne({ _id: idKhachHang });
+        res.send(user);
+      
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error });
+      }
+}));
+
+router.get("/signin", asynceHandler(async (req, res) => {
+  try {
+    var nodemailer = require('nodemailer');
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'hoakhuu80@gmail.com',
+        pass: 'iuytnsgroogcykvv'  // Hoặc mật khẩu ứng dụng nếu đã kích hoạt xác thực 2 yếu tố
+      }
+    });
+
+    var mailOptions = {
+      from: 'hoakhuu80@gmail.com',
+      to: 'ohshit781@gmail.com',
+      subject: 'Sending Email using Node.js',
+      text: 'That was easy!'
+    };
+
+    transporter.sendMail(mailOptions, function (error: Error | null, info: any) {
+      if (error) {
+        console.log('Error sending email:', error);
+        res.status(500).json({ message: 'Error sending email'+error });
+      } else {
+        console.log('Email sent:', info.response);
+        res.status(200).json({ message: 'Email sent successfully' });
+      }
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error });
   }
 }));
 
-const generateTokenResponse = (user: any) => {
-  const token = jwt.sign({ Account: user.TaiKhoan }, "keyyyyy", {
-    expiresIn: "30d"
-  });
-  user.token = token
-  return user;
+
+
+
+
+router.post("/register", asynceHandler(async (req, res) => {
+  try {
+    const { user, password, TenKhachHang, DiaChi, SDT, Gmail } = req.body;
+
+    const defaultCustomer = new BuyerModel({
+      TenKhachHang: TenKhachHang,
+      SDT: SDT,
+      DiaChi: DiaChi,
+      MatKhau: password,
+      TaiKhoan: user,
+      TichDiem: 0,
+      Gmail: Gmail,
+      GioHang: [],
+      DiaChis: [],
+    });
+
+    // Save the new document to the database
+    const savedCustomer = await defaultCustomer.save();
+
+    res.status(201).json(savedCustomer); // Respond with the saved document
+  } catch (error) {
+    console.error('Lỗi khi thêm khách hàng:', error);
+    res.status(500).json({ message: 'Lỗi khi thêm khách hàng', error: error });
+  }
+}));
+
+
+
+
+router.post("/login", asynceHandler(async (req, res) => {
+    const { account, password } = req.body;
+    const user = await BuyerModel.findOne({ TaiKhoan: account, MatKhau: password });
+    if (user) {
+        res.send(generateTokenResponse(user));
+    } else {
+        res.status(400).send("Account or password isn't true");
+    }
+}));
+
+const generateTokenResponse = (user: any)=> {
+    const token = jwt.sign({ Account: user.TaiKhoan}, "keyyyyy",{
+        expiresIn:"30d"
+    });
+   user.token=token
+   return user;
 };
+
 
 router.post("/themGioHang", asynceHandler(async (req, res) => {
   try {
@@ -269,6 +407,7 @@ router.post("/loadGioHang", asynceHandler(async (req, res) => {
   }
 }));
 
+
 router.post("/xoa1SanPhamGioHang", asynceHandler(async (req, res) => {
   const productGioHangJson = req.body.productGioHangJson;
   const buyerId = req.body.productGioHangJson.idKhachHang;
@@ -307,6 +446,7 @@ router.post("/xoa1SanPhamGioHang", asynceHandler(async (req, res) => {
   }
 
 }));
+
 
 
 router.post("/sua1SanPhamGioHang", asynceHandler(async (req, res) => {
@@ -449,5 +589,6 @@ router.post("/xoa1ToppingGioHang", asynceHandler(async (req, res) => {
   }
 
 }));
+
 
 export default router;

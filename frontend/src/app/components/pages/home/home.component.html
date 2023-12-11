@@ -37,24 +37,33 @@
 <br>
 
 <div class="list-product">
-    <div class="item-product" *ngFor="let item of products">
-        <a [href]="'/detailproduct/' + item._id">
-            <img  src="assets/Images/poster_banh.jpeg">
-          </a>
+    <ng-container *ngFor="let item of products">
+    <a [href]="'/detailproduct/' + item._id">
+        <div class="item-product" *ngIf="item.TinhTrang!=='Ẩn'">
+            <img [src]="'assets/Images/' + item.Hinh"  >
+            <div class="infor-product">
+            <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...  </p>
+            <p  class="product-store">{{ item.MaCH.TenCuaHang | slice:0:27 }} </p>
+        
+                <p class="product-name ">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
+                <div class="" *ngIf="checkvoucherProduct(item._id)!==1"> 
+                        <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                </div>
+                <div class="flex" *ngIf="checkvoucherProduct(item._id)===1">
+                    <p  class="">{{ voucherProduct(item._id,getMinPrice(item.DonGia).toString()) | currency:'VND':'symbol':'1.0-0' }}</p>
+                    <p  class="line-through text-[10px] text-red-500 ml-[5px] ">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                </div>
 
-        <div class="infor-product">
-        <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
-        <div class="flex"> 
-            <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
-            <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+
+            <div (click)="goToShop(item.MaCH._id)" class="product-button">
+                <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+                
+                <p>Go shop</p>
+            </div>
+            </div>
         </div>
-        <div class="product-button">
-            <div class="icon"><mat-icon>monetization_on</mat-icon></div>
-            
-            <p>Go shop</p>
-        </div>
-        </div>
-    </div>
+    </a>
+</ng-container>
 </div>
 <br>
 

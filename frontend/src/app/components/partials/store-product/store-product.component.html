@@ -1,0 +1,267 @@
+<div class="flex gap-x-[10px]">
+    <p class="text-[23px] ">Sản phẩm</p>
+  
+    <div>
+        <div class="inline-block px-[7px] py-[2px] border font-bold bg-white border-cyan-600 text-cyan-600 ">Import</div>
+    </div>
+    <div>
+        <div class="inline-block px-[7px] py-[2px] border font-bold bg-white border-cyan-600 text-cyan-600 ">Export</div>
+    </div>
+
+    <div class=" flex ml-auto mr-[10px]">
+
+      <div (click)="issProduct()" class="flex inline-block px-[7px] py-[2px] border font-bold bg-white border-cyan-600 text-cyan-600 ">
+        <mat-icon  >coffee</mat-icon>
+        Thức uống
+      
+      </div>
+      
+
+      <div  (click)="issTopping()"  class="ml-[5px] flex inline-block px-[7px] py-[2px] border font-bold bg-white border-cyan-600 text-cyan-600 ">
+        <mat-icon>icecream</mat-icon>
+        Topping
+      
+      </div>
+  </div>
+
+</div>
+<!-- ----------------------------------------------------------------- -->
+<div  *ngIf="isTopping">
+  <app-store-topping [store]="store"></app-store-topping>
+</div>
+
+
+
+<div *ngIf="isProduct">
+<div class="mt-[5px]">
+    <ul class="filter-product flex">
+        <li  (click)="showAllProduct()"class="border-r-[1px]">Tất cả [{{countPosted()}}]</li>
+        <li (click)="showProduct()" class="border-r-[1px]">Hoạt động [{{countProduct()}}]</li>
+        <li (click)="hideProduct()"  class="border-r-[1px]">Ẩn [{{countHideProduct()}}]</li>
+        <li (click)="soldoutProduct()" class="border-r-[1px]">Hết hàng [{{countSoldOutProduct()}}]</li>
+        <li>Sort</li>
+    </ul>
+</div>
+
+
+<div class="flex  mt-[4px]">
+    <div class="filter-product1 flex gap-x-[5px]">
+        <div>
+            <select  (change)="onCategoryChange($event)" name="filter-category">
+                <option value="" disabled selected hidden>Filter by category</option>
+             
+                <option *ngFor="let item of store.ThucDons" value="{{item._id}}" [ngValue]="item._id"><div  *ngIf="item.TenThucDon !== 'Tất cả'">{{item.TenThucDon}}</div></option>
+
+                <option value="Tất cả">None</option>
+            </select>
+        </div>
+    
+    
+    
+    </div>
+
+    <div class="flex ml-[340px]">
+
+        <input class="w-[300px] px-[10px]"  placeholder="Nhập từ khóa cần tìm" type="search">
+        <div class="flex border-[1px] bg-blue-900 px-[5px] text-white"> <mat-icon>search</mat-icon> Tìm kiếm</div>
+    </div>
+
+
+</div>
+
+<div class="flex mt-[15px]">
+
+    <div class=" flex  gap-x-[15px] mr-[5px]"> 
+        <div class="flex"><mat-icon class=" text-green-500">adjust</mat-icon>  Hoạt động</div>
+        <div class="flex"><mat-icon class=" text-red-500">adjust</mat-icon>  Ẩn</div>
+    </div>
+
+    <div class="ml-auto flex  gap-x-[15px] mr-[15px]"> 
+      <div  (click)="additionalProduct()"  class="cursor-pointer inline-block px-[7px] py-[2px] border font-bold bg-cyan-600 text-white ">Thêm mới</div>
+    </div>
+</div>
+
+
+<div class="h-[450px]  overflow-y-scroll">
+    <table class="table-auto product-list">
+        <thead>
+          <tr>
+            <th class="w-[200px]">ID</th>
+            <th class="w-[300px]">Sản phẩm</th>
+            <th class="w-[150px]">Danh mục</th>
+            <th class="w-[120px]">Ngày Tạo</th>
+            <th class="w-[100px]">Hình</th>
+            <th class="w-[100px]">Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of productsList; let j = index">
+            <!-- Dữ liệu hàng -->
+            <tr [ngClass]="{'even-row': j % 2 === 0, 'odd-row': j % 2 !== 0, 'selected-row': j === selectedRow}"  (click)="handleRowClick(j)">
+              <td>{{item._id}}</td>
+              <td class="text-blue-500 cursor-pointer">{{item.TenSP}}<mat-icon (click)="modifyProduct_id(item._id)"   style="font-size: 12px;" class="mt-[0px]">edit</mat-icon></td>
+              <td>{{getNameCaterogyByID(item.MaThucDon)}}</td>
+              <td class="text-center">{{item.NgayDang}}</td>
+              <td class=""><img style="object-fit: cover;" class="h-[40px] w-[40px] mx-auto object-fill" [src]="'assets/Images/'+item.Hinh"></td>
+              <td class="text-center">
+                <mat-icon *ngIf="item.TinhTrang=='Hoạt động'" class="text-green-500">adjust</mat-icon>
+                <mat-icon *ngIf="item.TinhTrang=='Ẩn'" class="text-red-500">adjust</mat-icon>
+                <mat-icon *ngIf="item.TinhTrang=='Hết hàng'" class="text-yellow-500">adjust</mat-icon>
+              </td>
+            </tr>
+            <!-- Dòng chi tiết hàng -->
+            <tr [style.display]="isRowVisible[j] ? 'table-row' : 'none'">
+              <td colspan="6">
+                <div class="">
+                  <table class="inner-table ml-[452px]">
+                    <thead>
+                      <tr>
+                       
+                        <th class="w-[135px]">Kích thước</th>
+                        <th class="w-[113px]">Đơn giá</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                      <tr *ngFor="let item of item.DonGia">
+                       
+                        <td>{{item.Size}}</td>
+                        <td>{{ item.Gia | currency:'VND':'symbol':'1.0-0' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      
+      
+</div>
+
+
+
+<div *ngIf="addNewProduct || modifyProduct" class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+
+
+<div *ngIf="addNewProduct" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+  <div class="add-product" >
+    <div class="flex">
+        <p class="text-blue-700 font-bold ml-[240px]">Thêm sản phẩm mới</p>
+        <button (click)="closeAlert()"  class=" ml-auto py-1 px-3 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">X</button>
+    </div>
+    
+    <div>
+        <div class="flex">
+            <div class="input_frame">
+                <div class="flex gap-x-[10px]">
+                    <label for="exampleInput" class="ml-[100px] text-neutral-400" >Phân loại hàng (*):</label>
+                    <select [(ngModel)]="inputType"  class=" border-[1px] w-[170px]"  id="fruit" name="fruit" >
+                        <ng-container  *ngFor="let item of tieumucs">
+                            <option  [value]="item._id"  class="font-light" >{{item.TenTieuMuc}}</option>
+                        </ng-container>
+                    </select>
+                </div>
+                
+                <div class="flex gap-x-[10px]">
+                    <label class="ml-[128px] text-neutral-400" for="exampleInput" >Tên sản phẩm:</label>
+                    <input [(ngModel)]="inputProductName"  id="exampleInput1" type="text" class="border w-[250px] " />
+                </div>
+
+                <div class="flex gap-x-[5px]">
+                    <label class="ml-[172px] text-neutral-400" for="exampleInput" >Miêu tả:</label><br>
+                    <input  [(ngModel)]="inputDescribed"  id="exampleInput" type="text" class="h-[100px] w-[250px] border " />
+                </div>
+
+                <div class="flex gap-x-[10px]">
+                    <label class="ml-[18px] text-neutral-400" for="exampleInput" >Phân loại sản phẩm cửa hàng:</label>
+                    <select [(ngModel)]="inputCategory" class="w-[170px] border" id="" name="">
+                        <ng-container *ngFor="let item of store.ThucDons">
+                          <option [value]="item._id">
+                            {{ item.TenThucDon === 'Tất cả' ? 'None' : item.TenThucDon }}
+                          </option>
+                        </ng-container>
+                      </select>
+                </div>
+
+                <div class="flex gap-x-[10px]">
+                    <label class="ml-[90px] text-neutral-400" for="exampleInput" >Chế độ hiển thị (**):</label>
+                    <select [(ngModel)]="inputState" class="border  w-[170px]" id="" name="" >
+                        <option [value]="'Hoạt động'">Hiện</option>
+                        <option [value]="'Ẩn'">Ẩn</option>
+                    
+                    </select>
+                </div>
+            </div>
+
+            <div class="ml-auto mr-[100px]">
+                <img class="h-[120px] w-[120px]" [src]="urllink">
+                <input type="file" id="myFileInput" (change)="handleFileInput($event)" style="display: none">
+                <label class="border-[2px] text-white ml-[30px] text-[10px] bg-cyan-600 px-[4px]" for="myFileInput">Chọn File</label>
+            </div>
+
+        </div>
+        <div>
+            <div class="border flex w-[26px] ml-[237px] mt-[10px]" (click)="addInput()" for="exampleInput" > <mat-icon>add</mat-icon></div>
+            
+            <div class="flex ml-[240px] mt-[10px] gap-x-[10px]">
+                <div  *ngFor="let input of inputPrice; let i = index">
+                    <p class="flex">Giá [{{i}}] <span  (click)="removeItem(i)" class="ml-[5px] my-auto text-center h-[15px] bg-red-500 rounded-full"> <mat-icon style="font-size: 15px;" class=" text-white">remove</mat-icon></span></p>
+                    <input  [(ngModel)]="input.Size" placeholder="Size {{i}}"  type="text" class="border w-[100px] px-[3px]" ><br>
+                    <input [(ngModel)]="input.Gia"  placeholder="Giá {{i}}"  type="text" class="border w-[100px] px-[3px] mt-[5px]" >
+                </div>
+            </div>
+            
+
+        </div>
+        
+    </div>
+        
+
+        <!-- <div class="name-recipient">
+            <label for="exampleInput" >Tên người nhận:</label>
+            <input id="exampleInput" type="text"  />
+        </div>
+
+
+        <div class="address-recipient">
+            <label for="exampleInput" >Địa chỉ:</label>
+            <input id="exampleInput" type="text"   />
+        </div>
+
+        <div class="phone-recipient">
+            <label for="exampleInput" >SĐT:</label>
+            <input id="exampleInput" type="text" />
+        </div> -->
+
+        <div class="flex gap-x-[10px] ">
+            <div class="text-red-500 text-[10px] mt-[40px]">
+                (*) Sản phẩm sẽ được phân loại theo danh mục mà chúng tôi đặt làm mặc định trên gian hàng sản phẩm chung.<br>
+                (**) Cửa hàng sẽ chọn ẩn hoặc hiện trên giao diện. Nếu chọn "Ẩn" sản phẩm sẽ không được tiếp cận với khách hàng và ngược lại.
+              </div>
+            <button (click)="submitProduct()"  class="mt-[40px] ml-auto py-2 px-4 bg-green-500 text-white border-none rounded cursor-pointer hover:bg-green-700">Lưu</button>
+           
+        </div>
+       
+    
+  </div>
+
+  
+</div>
+
+
+
+<div *ngIf="modifyProduct" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+  <div class="add-product" >
+    <div class="flex">
+        <p class="text-blue-700 font-bold ml-[240px]">Chỉnh sửa sản phẩm</p>
+        <button (click)="closeAlert_ModifyProduct()"  class=" ml-auto py-1 px-3 bg-red-500 text-white border-none rounded cursor-pointer hover:bg-red-700">X</button>
+    </div>
+    
+  
+      <app-store-modify-product (dataToParent)="closeAlert_ModifyProduct1($event)" [store]="store" [idProduct]="idProduct" [tieumucs]="tieumucs" ></app-store-modify-product>
+  </div>
+  
+</div>
+
+</div>
