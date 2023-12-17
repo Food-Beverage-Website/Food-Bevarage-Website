@@ -6,6 +6,10 @@ import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
 import { Store } from 'src/app/shared/models/store';
 import { User } from 'src/app/shared/models/user';
+import { LoadingComponent } from '../loading/loading.component';
+import { LoadingService } from 'src/app/services/loading.service';
+import { DistanceService } from 'src/app/services/distance.service';
+import { DistanceBuyerService } from 'src/app/services/session/distance_buyer';
 
 @Component({
   selector: 'app-header',
@@ -19,8 +23,22 @@ export class HeaderComponent implements OnInit {
   store!:Store;
   countInfor!:number;
 
+  lat!:string;
+  lon!:string;
+
+  address:any;
+
+  diachi!:string;
+
   isSubMenuVisible = false;
-  constructor(private orderService:OrderService,private router:Router, private userService:UserService, private storeService:StoreService){
+  constructor(private orderService:OrderService,
+    private router:Router,
+     private userService:UserService,
+      private storeService:StoreService,
+      private loadingService:LoadingService,
+      private distanceService:DistanceService,
+      private distanceBuyer:DistanceBuyerService
+      ){
   
     userService.userObservable.subscribe((newUser)=>{
       this.user= newUser;
@@ -30,13 +48,16 @@ export class HeaderComponent implements OnInit {
       this.store=newStore;
       this.loadSL_Shop();
     })
+
+    this.loadMap()
   }
 
   ngOnInit(): void {
-   
+    this.loadMap()
   }
 
   cartUser():void{
+
     this.router.navigateByUrl('/cart_page');
   }
 
@@ -78,5 +99,36 @@ export class HeaderComponent implements OnInit {
 
   get isAuth(){
     return this.user.TaiKhoan;
+  }
+
+
+  loadMap() {
+    this.distanceService.getCurrentPosition().then(
+      (position) => {
+        this.distanceBuyer.currentLatitude = position.coords.latitude;
+        this.distanceBuyer.currentLongitude = position.coords.longitude;
+        this.lat = position.coords.latitude;
+        this.lon = position.coords.longitude;
+  
+        this.distanceService.getAddress(this.lat, this.lon).subscribe((item) => {
+     
+          this.diachi =  item.address.village || item.address.road ||item.address.quarter||item.address.suburb|| item.address.country  ;
+  
+        });
+      },
+      (error) => {
+        console.error('Error getting location', error);
+      }
+    );
+  }
+
+  loadAddressCurrent()
+  {
+   
+   
+  }
+
+  home(){
+    this.router.navigateByUrl('/');
   }
 }

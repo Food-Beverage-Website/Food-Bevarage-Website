@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from 'src/app/services/product.service';
@@ -7,7 +7,30 @@ import { User } from 'src/app/shared/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { retry } from 'rxjs';
 import { VoucherService } from 'src/app/services/voucher.service';
+import { PaymentService } from 'src/app/services/payment.service';
+import { DathangDialogComponent } from '../dathang-dialog/dathang-dialog.component';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+@Component({
+	selector: 'ngbd-modal-content',
+	standalone: true,
+	template: `
+		<div class="modal-header">
+			<h4 class="modal-title">Hi there!</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<p>Hello,!</p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+		</div>
+	`,
+})
+export class NgbdModalContent {
+	activeModal = inject(NgbActiveModal);
+
+}
 
 
 @Component({
@@ -19,8 +42,9 @@ export class CartPageComponent {
   cart_products: any;
   user!: User;
   danhsachKhuyenMai: any;
+  danhsachPhuongThucThanhToan: any;
 
-  constructor(private voucherService: VoucherService, private toastr: ToastrService, private productService: ProductService, private activatedRoute: ActivatedRoute, private userService: UserService) {
+  constructor(private paymentService: PaymentService, private voucherService: VoucherService, private toastr: ToastrService, private productService: ProductService, private activatedRoute: ActivatedRoute, private userService: UserService) {
     this.activatedRoute.params.subscribe((params) => {
 
       userService.userObservable.subscribe((newUser) => {
@@ -40,6 +64,10 @@ export class CartPageComponent {
           console.log(cart_products);
         });
       }
+
+      this.paymentService.getAllPayment().subscribe((danhsachPhuongThucThanhToan) =>{
+        this.danhsachPhuongThucThanhToan = danhsachPhuongThucThanhToan;
+      });
 
 
     });
@@ -206,18 +234,26 @@ export class CartPageComponent {
         let sltopping = 0;
         let giatopping = 0;
         let tien = 0;
+        let tienly = 0;
 
         for (const item of GioHang) {
+          tienly = 0;
+
           // Tính tổng DongiaSizeLy
           let phantramKM = this.timKhuyenMai(item);
           if(phantramKM != 0)
           {
-            gialy = this.tinhGIaKhuyenMai_SanPham(item.DonGiaSizeLy.Dongia, phantramKM) * item.DonGiaSizeLy.SL;
+            gialy += this.tinhGIaKhuyenMai_SanPham(item.DonGiaSizeLy.Dongia, phantramKM) * item.DonGiaSizeLy.SL;
+            tienly = gialy;
+            item.KhuyenMai = phantramKM.toString() + '%';
+            item.DonGiaKhuyenMai = this.tinhGIaKhuyenMai_SanPham(item.DonGiaSizeLy.Dongia, phantramKM);
           }
           else
           {
             gialy += item.DonGiaSizeLy.Dongia * item.DonGiaSizeLy.SL;
-
+            tienly = gialy;
+            item.KhuyenMai = '0%';
+            item.DonGiaKhuyenMai = 0;
           }
           sly += item.DonGiaSizeLy.SL;
 
@@ -226,8 +262,10 @@ export class CartPageComponent {
             // Kiểm tra kiểu trước khi thực hiện phép cộng
             giatopping += topping.giatopping * topping.soluongtopping;
             sltopping += topping.soluongtopping;
+            tienly += topping.giatopping * topping.soluongtopping;
           }
-          tien += item.ThanhTien;
+          item.ThanhTien = tienly;
+          tien += gialy + giatopping;
 
           // Tính tổng ThanhTien
           this.totalThanhTien = tien;
@@ -258,7 +296,7 @@ export class CartPageComponent {
 
 
       // Di chuyển lệnh return ra khỏi vòng lặp
-      return this.totalThanhTien;
+      return this.calculateGiaSizeLy() + this.calculateTotalGiaTopping();
     } catch (error) {
       console.error('Đã xảy ra lỗi trong quá trình tính toán:', error);
       return 0;
@@ -660,4 +698,27 @@ export class CartPageComponent {
 
     }
   }
+
+
+  private modalService = inject(NgbModal);
+
+	open() {
+    if(this.selectedSanPhams.length == 0)
+    {
+      this.toastr.error('Hãy chọn sản phẩm muốn đặt!', 'Thông báo lỗi!');
+      return;
+    }
+
+
+		const modalRef = this.modalService.open(DathangDialogComponent, { size: 'xl' });
+    modalRef.componentInstance.thongtinUser =  this.cart_products;
+    modalRef.componentInstance.danhsachPhuongThucThanhToan = this.danhsachPhuongThucThanhToan;
+    modalRef.componentInstance.sotienthanhtoan = this.calculateTotals();
+    modalRef.componentInstance.danhsachSPdathang = this.selectedSanPhams;
+  }
+
+  open_thu() {
+		const modalRef = this.modalService.open(NgbdModalContent);
+		modalRef.componentInstance.name = 'World';
+	}
 }

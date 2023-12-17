@@ -208,20 +208,18 @@
             </div>
 
             <div>
-                <p class="font-bold">Tổng tiền: {{calculateTotals1()| currency:'VND':'symbol':'1.0-0'}}</p>
+                <p class="font-bold">Tổng tiền: {{calculateTotals()| currency:'VND':'symbol':'1.0-0'}}</p>
             </div>
           
             
         </div>
 
         <div class="flex justify-center mt-[20px]">
-            <div class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
+            <div (click)="open()" class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
                 <p style="color: white;" class="font-bold">Đặt hàng</p>
             </div>
         </div>
 
     </div>
-
-
-
 </div>
+

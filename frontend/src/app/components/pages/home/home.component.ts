@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
+import { DistanceService } from 'src/app/services/distance.service';
 import { ProductService } from 'src/app/services/product.service';
+import { DistanceBuyerService } from 'src/app/services/session/distance_buyer';
 import { StoreService } from 'src/app/services/store.service';
 import { TypeService } from 'src/app/services/type.service';
 import { VoucherService } from 'src/app/services/voucher.service';
@@ -28,6 +30,8 @@ export class HomeComponent implements OnInit {
     private typeService:TypeService,
     private productService:ProductService,
     private voucherService:VoucherService, 
+    private distanceService:DistanceService,
+    private distanceBuyer:DistanceBuyerService,
     activatedRouter: ActivatedRoute)
   {
     let typeObservable:Observable<Type[]>
@@ -131,8 +135,30 @@ export class HomeComponent implements OnInit {
     return minPrice;
   }
 
+
+  calMap(toado: string): string {
+    const latB = this.distanceBuyer.currentLatitude;
+    const lonB = this.distanceBuyer.currentLongitude;
+    if(latB!==0 && lonB!==0 )
+    {
+      const [latA, lonA] = toado.split(',').map(parseFloat); 
+
+ 
+      const distance = this.distanceService.calculateDistance(latA, lonA, latB, lonB);
+      return distance.toFixed(2);
+    }
+    return ' '
+  }
+  
+
+  
+
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
+
+  
+
   
 }

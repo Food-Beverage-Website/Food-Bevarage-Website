@@ -1,0 +1,27 @@
+ul{
+    @apply flex
+}
+
+.title{
+    @apply w-[150px]  text-gray-700 text-[12px]
+}
+
+.content{
+    @apply font-bold  text-[12px]
+}
+
+.title-voucher{
+    @apply text-[12px]
+}
+
+.title-voucher th{
+    @apply border-[1px]
+}
+
+.title-voucher td{
+    @apply border-[1px]
+}
+
+td{
+    @apply px-2
+}

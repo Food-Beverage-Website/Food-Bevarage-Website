@@ -7,7 +7,7 @@
           </video>
 
         <div class="py-6 w-full z-50">
-            <img class="h-[100px] w-[100px] mx-auto rounded-full" src="assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg">
+            <img class="h-[100px] w-[100px] mx-auto rounded-full" [src]="'assets/Images/'+store.Hinh">
             <p class="text-center font-bold text-[18px] ">{{store.TenCuaHang}}</p>
             <ul class="sidebar z-50">
                 <li><a routerLink="/storee/infor"> <mat-icon>home</mat-icon> Quản lý Cửa hàng</a></li>
@@ -15,7 +15,7 @@
                 <li><a  routerLink="/storee/order"> <mat-icon>package_2</mat-icon> Quản lý Đơn Hàng</a></li>
                 <li><a  routerLink="/storee/voucher"> <mat-icon>celebration</mat-icon> Quản lý Khuyến Mãi</a></li>
                 <li><a  routerLink="/storee/category"> <mat-icon>category</mat-icon> Quản lý Danh mục</a></li>
-                <li><a> <mat-icon>monitoring</mat-icon> Quản lý Thống Kê</a></li>
+                <li><a routerLink="/storee/thongke"> <mat-icon>monitoring</mat-icon> Quản lý Thống Kê</a></li>
                 <hr>
                
                 <li  (click)="show()"><a > <mat-icon>visibility</mat-icon> Hiển thị</a></li>

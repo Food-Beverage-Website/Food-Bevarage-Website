@@ -1,0 +1,87 @@
+<div class="px-[100px] mt-[20px] ">
+    <div class="ml-3 w-[400px] h-[400px]" style="float: left;">
+        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+        <canvas class="chart" baseChart [data]="barChartSoDon3ThangData" [options]="barChartSoDon3ThangOptions"
+            [type]="barChartSoDon3ThangType" (chartHover)="chartSoDon3ThangHovered($event)"
+            (chartClick)="chartSoDon3ThangClicked($event)" style="display: block; box-sizing: border-box;">
+        </canvas>
+        <p style="text-align: center;">Số đơn hàng 3 tháng gần nhất</p>
+        <div (click)="randomizeSoDon3Thang()"
+            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
+            <p style="color: white;" class="font-bold">Load data</p>
+        </div>
+    </div>
+
+    <div class="ml-3 w-[400px] h-[400px]" style="float: right">
+        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+        <canvas class="chart" baseChart [data]="barChartSoDon7NgayData" [options]="barChartSoDon7NgayOptions"
+            [type]="barChartSoDon7NgayType" (chartHover)="chartSoDon7NgayHovered($event)"
+            (chartClick)="chartSoDon7NgayClicked($event)" style="display: block; box-sizing: border-box;">
+        </canvas>
+        <p style="text-align: center;">Số đơn hàng 7 ngày gần nhất</p>
+        <div (click)="randomizeSoDon7Ngay()"
+            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
+            <p style="color: white;" class="font-bold">Load data</p>
+        </div>
+    </div>
+
+    <div class="ml-3 w-[400px] h-[400px]"style="float: left;">
+        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+        <canvas class="chart" baseChart [data]="barChartDoanhThu3ThangData" [options]="barChartDoanhThu3ThangOptions"
+            [type]="barChartDoanhThu3ThangType" (chartHover)="chartDoanhThu3ThangHovered($event)"
+            (chartClick)="chartDoanhThu3ThangClicked($event)" style="display: block; box-sizing: border-box;">
+        </canvas>
+        <p style="text-align: center;">Doanh thu 3 tháng gần nhất (đ)</p>
+        <div (click)="randomizeDoanhThu3Thang()"
+            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
+            <p style="color: white;" class="font-bold">Load data</p>
+        </div>
+    </div>
+
+    <div class="ml-3 w-[400px] h-[400px]" style="float: right">
+        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+        <canvas class="chart" baseChart [data]="barChartDoanhThu7NgayData" [options]="barChartDoanhThu7NgayOptions"
+            [type]="barChartDoanhThu7NgayType" (chartHover)="chartDoanhThu7NgayHovered($event)"
+            (chartClick)="chartDoanhThu7NgayClicked($event)" style="display: block; box-sizing: border-box;">
+        </canvas>
+        <p style="text-align: center;">Doanh thu 7 ngày gần nhất (đ)</p>
+        <div (click)="randomizeDoanhThu7Ngay()"
+            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
+            <p style="color: white;" class="font-bold">Load data</p>
+        </div>
+    </div>
+
+
+    <div style="width: 500px; float: left;" *ngIf="danhsachTop5_SP_BanChayNhat.soLuongArray.length != 0">
+        <canvas baseChart class="chart"
+            [data]="pieChartTop5_BanChayNhatData(danhsachTop5_SP_BanChayNhat.tenSPArray, danhsachTop5_SP_BanChayNhat.soLuongArray)"
+            [type]="pieChartTop5_BanChayNhatType" [options]="pieChartTop5_BanChayNhatOptions"
+            [plugins]="pieChartTop5_BanChayNhatPlugins">
+        </canvas>
+
+
+        <div class="button-row">
+            <p>Top 5 sản phẩm bán chạy nhất</p>
+            <button (click)="changeLegendPosition_ChartTop5_BanChayNhat()">
+                Thu gọn
+            </button>
+        </div>
+    </div>
+
+
+    <div style="width: 500px; float: right;" *ngIf="danhsachTop5_SP_BanENhat.soLuongArray.length != 0">
+        <canvas baseChart class="chart"
+            [data]="pieChartTop5_BanENhatData(danhsachTop5_SP_BanENhat.tenSPArray, danhsachTop5_SP_BanENhat.soLuongArray)"
+            [type]="pieChartTop5_BanENhatType" [options]="pieChartTop5_BanENhatOptions"
+            [plugins]="pieChartTop5_BanENhatPlugins">
+        </canvas>
+
+
+        <div class="button-row">
+            <p>Top 5 sản phẩm bán ế nhất</p>
+            <button (click)="changeLegendPosition_ChartTop5_BanENhat()">
+                Thu gọn
+            </button>
+        </div>
+    </div>
+</div>

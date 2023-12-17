@@ -1,1 +1,113 @@
-<p>store-infor works!</p>
+<div class="flex bg-white px-3 py-2" >
+    <div>
+        <p class="text-[20px] font-bold"> Hồ sơ Shop</p>
+        <p class="text-[17px]">Xem hồ sơ Shop và cập nhật hồ sơ shop của bạn</p>
+       
+    </div>
+
+</div>
+
+<div class="bg-white px-3  mt-[5px]" >
+
+    <div class="flex mt-[15px] border-b-[2px]">
+        <ul class="flex">
+            <li [ngClass]="{'border-b-[3px] text-blue-900 border-blue-900  ': activeTab === 'tab1'}" class=" py-2 px-3" (click)="changeTab('tab1')">Thông tin cơ bản</li>
+            <li [ngClass]="{'border-b-[3px] text-blue-900 border-blue-900': activeTab === 'tab2'}" class=" py-2 px-3" (click)="changeTab('tab2')">Tối ưu vị trí</li>
+        </ul>
+    </div>
+
+    <div class="mt-[20px]" *ngIf="activeTab==='tab1'">
+        <div class="flex">
+            <p class="text-[19px]">Thông tin cơ bản</p>
+            <div class="px-3 py-1 bg-blue-900 text-white inline-block ml-auto">
+                Xem shop của tôi
+            </div>
+        </div>
+
+
+        <div class="shop-infor h-[300px]">
+
+            <div class="w-[500px] flex justify-end mr-[20px]">
+
+                <div class="ml-auto">
+                    <ul>
+                        <li  class="title">Tên Shop:</li>
+
+                        <li><input    [(ngModel)]="inputShop" type="text"></li>
+                    </ul>
+        
+                    <ul>
+                        <li  class="title">Chủ sở hữu:</li>
+                        <li><input    [(ngModel)]="inputOwner" type="text"></li>
+                    </ul>
+                
+                    <ul>
+                        <li  class="title">CCCD/CMND:</li>
+                        <li><input    [(ngModel)]="inputCCCD" type="text"></li>
+                    </ul>
+        
+                    <ul>
+                        <li  class="title">Địa chỉ:</li>
+                        <li><input    [(ngModel)]="inputAddress" type="text"></li>
+                    </ul>
+        
+                    <ul>
+                        <li  class="title">Số điện thoại:</li>
+                        <li><input    [(ngModel)]="inputPhone" type="text"></li>
+                    </ul>
+
+                    <ul>
+                        <li  class="title">Gmail:</li>
+                        <li><input  readonly  [(ngModel)]="inputGmail" type="text"></li>
+                    </ul>
+        
+                    <ul>
+                        <li  class="title">Giờ hoạt động</li>
+                        <li class="flex"><input    type="time" [(ngModel)]="inputOpen" class="w-[120px]"> đến <input [(ngModel)]="inputClose" class="w-[120px]" type="time"></li>
+                        
+                    </ul>
+
+                    <div class="flex mt-[5px]">
+                        <div (click)="updateShop()" class="px-3 bg-green-500 text-white ml-auto">Cập nhật</div>
+                    </div>
+
+                 
+                </div>
+
+                
+
+            </div>
+
+            <div>
+                <ul>
+                    <li class="title">Logo của Shop:</li>
+                    <div >
+                        <img class="h-[190px] w-[150px]" [src]="urllink">
+                        <input type="file" id="myFileInput" (change)="handleFileInput($event)" style="display: none">
+                        <label class="border-[2px] text-white ml-[50px] text-[10px] bg-cyan-600 px-[4px]" for="myFileInput">Chọn File</label>
+
+                    </div>
+                   
+                </ul>
+    
+
+
+            </div>
+
+
+            
+            
+
+            
+        </div>
+
+
+    </div>
+
+
+    <div  *ngIf="activeTab==='tab2'">
+        <app-store-modify-map [idStore]="store._id"></app-store-modify-map>
+    </div>
+
+    
+</div>

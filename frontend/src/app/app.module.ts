@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/partials/header/header.component';
@@ -38,6 +38,15 @@ import { StoreCategoryComponent } from './components/partials/store-category/sto
 import { StoreCategoryModifyComponent } from './components/partials/store-category-modify/store-category-modify.component';
 import { DetailProductComponent } from './components/pages/detail-product/detail-product.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
+import { LoadingComponent } from './components/partials/loading/loading.component';
+import { LoadingInterceptorTsInterceptor } from './shared/interceptor/loading.interceptor.ts.interceptor';
+import { StoreModifyMapComponent } from './components/partials/store-modify-map/store-modify-map.component';
+import { StoreOrderDetailComponent } from './components/partials/store-order-detail/store-order-detail.component';
+import { CarouselModule } from 'primeng/carousel';
+import { DathangDialogComponent } from './components/pages/dathang-dialog/dathang-dialog.component';
+import { StoreThongkeComponent } from './components/partials/store-thongke/store-thongke.component';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -67,8 +76,11 @@ import { CartPageComponent } from './components/pages/cart-page/cart-page.compon
     StoreCategoryModifyComponent,
     DetailProductComponent,
     CartPageComponent,
-    
-    
+    LoadingComponent,
+    StoreModifyMapComponent,
+    StoreOrderDetailComponent,
+    DathangDialogComponent,
+    StoreThongkeComponent
   ],
   imports: [
     BrowserModule,
@@ -87,9 +99,13 @@ import { CartPageComponent } from './components/pages/cart-page/cart-page.compon
       timeOut:3000,
       positionClass:'toast-bottom-right',
       newestOnTop:false
-    })
+    }),
+    CarouselModule,
+    NgChartsModule
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptorTsInterceptor,multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@
         <div class="inline-block px-[7px] py-[2px] border font-bold bg-white border-cyan-600 text-cyan-600 ">Import</div>
     </div>
     <div>
-        <div class="inline-block px-[7px] py-[2px] border font-bold bg-white border-cyan-600 text-cyan-600 ">Export</div>
+        <div (click)="exportExcel()" class="inline-block px-[7px] py-[2px] border font-bold bg-white border-cyan-600 text-cyan-600 ">Export</div>
     </div>
 
     <div class=" flex ml-auto mr-[10px]">
@@ -62,8 +62,8 @@
 
     <div class="flex ml-[340px]">
 
-        <input class="w-[300px] px-[10px]"  placeholder="Nhập từ khóa cần tìm" type="search">
-        <div class="flex border-[1px] bg-blue-900 px-[5px] text-white"> <mat-icon>search</mat-icon> Tìm kiếm</div>
+        <input [(ngModel)]="inputSearch" class="w-[300px] px-[10px]"  placeholder="Nhập từ khóa cần tìm" type="text">
+        <div (click)="search()" class="flex border-[1px] bg-blue-900 px-[5px] text-white"> <mat-icon>search</mat-icon> Tìm kiếm</div>
     </div>
 
 

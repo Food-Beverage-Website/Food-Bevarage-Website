@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menu.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -8,6 +8,8 @@ import { VoucherService } from 'src/app/services/voucher.service';
 import { Product } from 'src/app/shared/models/product';
 import { Store } from 'src/app/shared/models/store';
 import { Voucher } from 'src/app/shared/models/voucher';
+import * as L from 'leaflet';
+
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
@@ -29,7 +31,11 @@ export class StoreComponent implements OnInit {
   pageSize = 9; 
   currentPage = 1; 
   totalItems!:number;
- 
+
+
+  
+  map!: L.Map;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private storeService:StoreService,
@@ -49,17 +55,45 @@ export class StoreComponent implements OnInit {
       this.getInforProductbyStore();
       this.getAllProductbyStore();
       this.loadvoucher();
+    
   
   }
 
+  
+
   ngOnInit(): void {
+   
     
+  }
+
+  initializeMap(): void {
+    // Các thiết lập của bản đồ
+    const [latitude, longitude] = this.store.ToaDo.split(',').map(Number);
+   
+    this.map = L.map('map').setView([latitude, longitude], 12);
+  
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(this.map);
+  
+    // Tạo một biểu tượng marker mới
+    const customIcon = L.icon({
+      iconUrl: 'https://www.clearlyexpress.com/assets/img/front-end/pin.svg',  // Đường dẫn đến hình ảnh marker
+      iconSize: [32, 32],  // Kích thước của hình ảnh
+      iconAnchor: [16, 32],  // Vị trí mà marker sẽ "chạm" bản đồ
+      popupAnchor: [0, -32]  // Vị trí của popup liên quan đến marker
+    });
+  
+    L.marker([latitude, longitude], { icon: customIcon }).addTo(this.map)
+      .bindPopup('Đây là vị trí được chọn.')
+      .openPopup();
   }
 
   getInforStore()
   {
     this.storeService.getStorebyID(this.idStore).subscribe((store) => {
       this.store = store;
+      this.initializeMap()
       
     });
     

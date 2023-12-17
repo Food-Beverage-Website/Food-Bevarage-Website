@@ -9,8 +9,12 @@ const DonHangSchema = new mongoose.Schema({
     ref: 'khachhang',
     required: true
   },
+  paymentId: String,
   TongTien: Number,
-  NgayDat: Date,
+  NgayDat: {
+    type: Date,
+    default: Date.now 
+  },
   PhuongThucThanhToan: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'ptthanhtoan',
@@ -18,30 +22,36 @@ const DonHangSchema = new mongoose.Schema({
   },
   TinhTrangDonHang: String,
   ChiTietDonHang: [{
-    MaCTDH: Number,
+   
     SanPham: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'sanpham'
     },
     SL: Number,
+    KhuyenMai: String,
+    DonGiaKhuyenMai: Number,
     DonGia: {
       Size: String,
       Dongia: Number
     },
     Topping: [{
-        MaTP: String,
-        Topping: {
+      
+      MaTopping: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'topping'
         },
         DonGia: String,
-        SL: Number
+        SL: Number,
+        _id: false
       }] // Topping sẽ là một mảng của các ToppingSchema
   }],
   MaCH: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'cuahang'
-  }// ChiTietDonHang sẽ là một mảng của các ChiTietDonHangSchema
+    ref: 'cuahang',
+    required: true
+  },
+  DiachiGH: String,
+  GhiChu: String,
 });
 
 

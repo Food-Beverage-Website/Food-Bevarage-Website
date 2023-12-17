@@ -18,6 +18,8 @@ const BuyerSchema = new mongoose.Schema({
       type: Date,
       default: Date.now // Giá trị mặc định là thời gian hiện tại khi giỏ hàng được thêm vào
     },
+    KhuyenMai: String,
+    DonGiaKhuyenMai: Number,
     DonGiaSizeLy: {
       SL: Number,
       Size: String,

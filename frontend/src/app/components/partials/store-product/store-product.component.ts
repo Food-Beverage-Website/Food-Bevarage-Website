@@ -32,6 +32,8 @@ export class StoreProductComponent  {
   tieumucs:Type[]=[];
   idProduct!:string;
 
+  inputSearch!:string;
+
   inputType!:string;
   inputProductName!:string;
   inputDescribed!:string;
@@ -57,7 +59,22 @@ export class StoreProductComponent  {
     })
   }
 
-
+  search() {
+    alert(this.inputSearch);
+    let flag=1
+  
+   this.products.forEach(element => {
+      if(element.TenSP.includes(this.inputSearch) )
+      {
+        
+        if(flag===1)
+        {
+          this.productsList=[]
+        }  flag=0
+        this.productsList.push(element)
+      }
+   });
+  }
 
 
 
@@ -93,6 +110,14 @@ loadProductList()
       console.error("Cửa hàng hiện tại không phục vụ");
     }
   });
+}
+
+
+exportExcel(){
+
+  this.productService.getExcelExport(this.store._id).subscribe((item)=>{
+
+  })
 }
 
 loadCategory()

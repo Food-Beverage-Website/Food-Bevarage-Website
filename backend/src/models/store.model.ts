@@ -1,8 +1,9 @@
 import { ObjectId, Schema,model } from "mongoose";
 
 export interface Store {
-    id:ObjectId,
+
     TenCuaHang: String,
+    Hinh:String,
     ChuSoHuu: String,
     SDT:String,
     DiaChi: String,
@@ -12,16 +13,18 @@ export interface Store {
     TaiKhoan: String,
     MatKhau: String,
     Gmail:String,
+    ToaDo:String,
     ThucDons: [{
-      ID: ObjectId;
+   
       TenThucDon: string;
     }];
   }
 
   export const StoreSchema = new Schema<Store>(
     {
-        id:{type:Schema.Types.ObjectId},
+
         TenCuaHang: { type: String, required: true },
+        Hinh: { type: String, required: true },
         ChuSoHuu: { type: String, required: true },
         SDT: { type: String, required: true },
         DiaChi: { type: String, required: true },
@@ -31,8 +34,8 @@ export interface Store {
         TaiKhoan: { type: String, required: true },
         MatKhau: { type: String, required: true },
         Gmail:{ type: String, required: true },
+        ToaDo:{ type: String, required: true },
         ThucDons: [{
-          ID: {type:Schema.Types.ObjectId},
           TenThucDon: { type: String, required: true }
         }],
     }, {

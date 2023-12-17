@@ -18,6 +18,9 @@ import { StoreCategoryComponent } from './components/partials/store-category/sto
 import { StoreCategoryModifyComponent } from './components/partials/store-category-modify/store-category-modify.component';
 import { DetailProductComponent } from './components/pages/detail-product/detail-product.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
+import { StoreOrderDetailComponent } from './components/partials/store-order-detail/store-order-detail.component';
+import { DathangDialogComponent } from './components/pages/dathang-dialog/dathang-dialog.component';
+import { StoreThongkeComponent } from './components/partials/store-thongke/store-thongke.component';
 
 
 
@@ -57,6 +60,16 @@ const routes: Routes = [
   }
  ,
 
+
+ { 
+   path: 'storee/order/:name',
+   component: StoreManagementComponent,
+   children:[{
+      path:'',
+      component:StoreOrderDetailComponent
+   }]
+  }
+ ,
 
  { 
    path: 'storee/category',
@@ -114,9 +127,18 @@ const routes: Routes = [
 //================================================
 //Duy Minh
 
+{ 
+   path: 'storee/thongke',
+   component: StoreManagementComponent,
+   children:[{
+      path:'',
+      component:StoreThongkeComponent
+   }]
+  },
 
   {path: 'detailproduct/:productId', component:DetailProductComponent},
  {path: 'cart_page', component:CartPageComponent},
+ {path: 'cart_page/checkout', component:DathangDialogComponent},
 ];
 
 

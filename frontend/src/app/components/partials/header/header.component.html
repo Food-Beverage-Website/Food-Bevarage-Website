@@ -3,39 +3,54 @@
 <div *ngIf="store.TaiKhoan"  class="bg-blue-100 h-[20px]"></div>
 
 
-<header>
+<header class="flex ">
 
-    <div class="div-header">
+    <div class=" w-[550px] flex justify-center items-center">
+        <div>
         <ul class="header-menu">
-            <li>Home</li>
+            <li (click)="home()">Home</li>
             <li>Shopping</li>
             <li>Contact</li>
             <li>Us about</li>
         </ul>
     </div>
+    </div>
 
-    <div class="hr-logo" >
+    <div class=" w-[100px] flex justify-center " >
         <img  *ngIf="!store.TaiKhoan" class="header-logo" src="assets/Images/logo.jpg">
         <img *ngIf="store.TaiKhoan"  class="header-logo" src="assets/Images/Picture1.jpg">
     </div>
 
-    <div class="header-icon ">  
-       
-        <div class="flex" *ngIf="!store.TaiKhoan">
+    <div class="flex  items-center w-[550px] ">  
+       <div class="flex">
+        <div class="flex ml-[20px]" *ngIf="!store.TaiKhoan">
             <input #s (keyup.enter)="search(s.value)"  type="text" placeholder="Search" class="mt-[1px] hover:border-indigo-700 border-indigo-700 border px-[10px] rounded-l-[020px] text-[20px] h-[30px] w-[200px]">
                     
             <button (click)="search(s.value)"  class="bnt-search">Search</button>
         </div>
-        <div *ngIf="user.TaiKhoan" class="flex"> <!-- Tài khoản khách hàng tồn tại (buyer)-->
-            <div (click)="cartUser()"><mat-icon >shopping_cart</mat-icon></div>
-            <div (click)="youruser()"  class="icon-cart"><mat-icon >reorder</mat-icon></div>
+        
+        <div *ngIf="user.TaiKhoan" class="flex ml-[40px]"> <!-- Tài khoản khách hàng tồn tại (buyer)-->
+            
+            <div class="flex ">
+                <div class="w-[80px]">
+                    <div class="flex justify-center"><mat-icon (click)="loadMap()" style="font-size: 22px; color: rgb(197, 61, 61);">location_on </mat-icon></div>
+                    
+                    <p class="text-center text-[12px]">{{diachi}}</p>
+                </div>
+            </div>
+            <div class="flex gap-x-[20px] w-[100px] justify-center"> 
+                <div class="ml-[15px]"><mat-icon (click)="cartUser()">shopping_cart</mat-icon></div>
+                <div (click)="youruser()"  class="icon-cart"><mat-icon >reorder</mat-icon></div>
+            </div>
+           
+            
         </div>
 
 
-        <div style="display:  relative;" *ngIf="store.TaiKhoan"  class="flex "> <!-- Tài khoản cửa hàng-->
+        <div style="display:  relative;" *ngIf="store.TaiKhoan"  class="flex ml-[80px]  "> <!-- Tài khoản cửa hàng-->
            
             <nav class="main-menu">
-                <ul class="flex gap-x-[50px]">
+                <ul class="flex gap-x-[50px] items-center">
                     <li  class="sub-menu">
                         <span class="font-sans text-blue-700">Xin chào!</span><br> <span class="font-sans text-blue-700 font-bold">{{store.TenCuaHang}}</span>
                         <ul class="sub-menu-items">
@@ -44,11 +59,11 @@
                         </ul>
                     </li>
                   <li>
-                    <a class=" flex" (click)="toggleSubMenu()"  ><mat-icon class="block-inline" >notifications </mat-icon>  <span class="ribbon">{{countInfor}}</span></a>
+                    <a class=" flex" (click)="toggleSubMenu()"  ><mat-icon style="font-size: 28px;" class="block-inline" >notifications </mat-icon>  <span class="ribbon">{{countInfor}}</span></a>
                     
                     
                   </li>
-                 <li (click)="yourshopmanegar()" ><a> <div  class="icon-cart"><mat-icon>store</mat-icon></div></a></li>
+                 <li (click)="yourshopmanegar()" ><a> <div  class="icon-cart"><mat-icon style="font-size: 28px;">store</mat-icon></div></a></li>
                  
                 </ul>
               </nav>
@@ -60,12 +75,29 @@
         
 
 
-        <div *ngIf="!user.TaiKhoan && !store.TaiKhoan"> <!-- Giao diện client (Khách vãn lai)-->
-            <div (click)="login()" class="icon-cart"><mat-icon>supervised_user_circle </mat-icon></div>
+        <div class="flex w-[200px] ml-[10px]" *ngIf="!user.TaiKhoan && !store.TaiKhoan"> <!-- Giao diện client (Khách vãn lai)-->
+           
+            <div class=" ml-auto flex gap-x-[20px]">
+                <div (click)="loadMap()" class="icon-cart ">
+                    <div class="flex justify-center">
+                        <mat-icon style="font-size: 22px; color: rgb(197, 61, 61);">location_on </mat-icon>
+                    </div>
+                   
+                    <div>
+                        <p style="font-size: 12px; color: rgb(197, 61, 61);">{{diachi}}</p>
+                    </div>
+                </div>
+                <div (click)="login()" class="w-[50px] ml-[15px]  flex justify-center"><mat-icon style="font-size: 30px; height: 30px; width: 30px;">supervised_user_circle </mat-icon></div>
+                
+
+            </div>
+               
+     
+           
         </div>
 
 
-        
+    </div>
        
        
        

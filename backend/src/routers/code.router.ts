@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import asynceHandler from 'express-async-handler';
 import { CodeModel } from "../models/code.model";
-
+const fs = require('fs').promises;
 
 const router = Router();
 router.get("/check",asynceHandler(
@@ -27,6 +27,9 @@ router.get("/randomCode/:mail", asynceHandler(async (req, res) => {
     const mail = req.params.mail;
       const randomCode = await processRandomCode();// lấy code
 
+      const htmlTemplate = await fs.readFile('C:/Users/admin/Documents/GitHub/Food-Bevarage-Website/backend/src/routers/comfirm.html', 'utf-8');
+
+
       var nodemailer = require('nodemailer');
 
       var transporter = nodemailer.createTransport({
@@ -41,7 +44,7 @@ router.get("/randomCode/:mail", asynceHandler(async (req, res) => {
         from: 'hoakhuu80@gmail.com',
         to: mail,
         subject: 'Mở cửa hàng trực tuyến của bạn, chúng tôi lo phần còn lại!',
-        text: 'PassCode:' +randomCode +' (Lưu ý không tiết lộ mã này với người khác)'
+        html: htmlTemplate.replace('{{randomCode}}', randomCode)
       };
   
       transporter.sendMail(mailOptions, function (error: Error | null, info: any) {

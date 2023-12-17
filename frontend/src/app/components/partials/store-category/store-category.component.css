@@ -18,6 +18,10 @@ td{
     @apply w-[800px] h-[490px]
 }
 
+.add-cate{
+    @apply w-[405px] h-[120px]
+}
+
 .selected-row {
    @apply bg-sky-50
   }

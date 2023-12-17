@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { Store } from '../shared/models/store';
-import {  STORE_BEST_SELLING_GET_URL, STORE_GET_BY_ID_URL, STORE_LOGIN_URL, STORE_NEW_URL, STORE_SEARCH_BY_NAME_URL } from '../shared/constants/urls';
-import { IStoreLogin, IStoreNew } from '../shared/interfaces/IStoreLogin';
+import {STORE_THONGKE_TOP5_SP_BANE, STORE_THONGKE_TOP5_SP_BANCHAY, STORE_THONGKE_7NGAY_DOANHTHU, STORE_THONGKE_7NGAY_SODON, STORE_THONGKE_THANG_DOANHTHU, STORE_THONGKE_THANG_SODON, STORE_BEST_SELLING_GET_URL, STORE_CATEGORY_ADD_URL, STORE_GET_BY_ID_URL, STORE_LOGIN_URL, STORE_NEW_URL, STORE_SEARCH_BY_NAME_URL, STORE_UPDATE_DISTANCE_URL, STORE_UPDATE_URL } from '../shared/constants/urls';
+import { IStoreCategory, IStoreDistanceUpdate, IStoreLogin, IStoreNew, IStoreUpDate } from '../shared/interfaces/IStoreLogin';
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -37,6 +37,7 @@ export class StoreService {
     return this.http.get<Store[]>(url);
   }
 
+ 
 
   addNewStore(storeInfor:IStoreNew ): Observable<Store> {
     return this.http.post<Store>(STORE_NEW_URL, storeInfor)
@@ -56,6 +57,64 @@ export class StoreService {
       );
   }
 
+
+  addCategory(storeInfor:IStoreCategory ): Observable<Store> {
+    return this.http.post<Store>(STORE_CATEGORY_ADD_URL, storeInfor)
+      .pipe(
+        tap((response: any) => {
+          this.toastrService.success(
+            `Thêm thành công`,
+            'Add Successful'
+          );
+          
+        }),
+        catchError((error: any) => {
+          this.toastrService.error(error.error, 'Add failed');
+       
+          return throwError(error);
+        })
+      );
+  }
+
+  
+
+  patchDistanceStore(storeInfor:IStoreDistanceUpdate ): Observable<Store> {
+    return this.http.patch<Store>( STORE_UPDATE_DISTANCE_URL, storeInfor)
+      .pipe(
+        tap((response: any) => {
+          this.toastrService.success(
+            `Cập nhật vị trí thành công`,
+            'Add Successful'
+          );
+         
+        }),
+        catchError((error: any) => {
+          this.toastrService.error(error.error, 'Add failed');
+       
+          return throwError(error);
+        })
+      );
+  }
+
+
+  
+  patchStore(storeInfor:IStoreUpDate ): Observable<Store> {
+    return this.http.patch<Store>( STORE_UPDATE_URL, storeInfor)
+      .pipe(
+        tap((response: any) => {
+          this.toastrService.success(
+            `Cập nhật thông cửa hàng thành công ! Hãy đăng xuất để hệ thống cập nhật nhé`,
+            'Add Successful'
+          );
+         
+        }),
+        catchError((error: any) => {
+          this.toastrService.error(error.error, 'Add failed');
+       
+          return throwError(error);
+        })
+      );
+  }
 
 
   login(storeLogin: IStoreLogin): Observable<Store> {
@@ -96,4 +155,48 @@ export class StoreService {
     return new Store();
   }
 
+
+  getCurrentPosition(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve(position);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+  
+  get_ThongKe_Thang_SoDon_Store(MaCH: any): Observable<any> {
+    const url = `${STORE_THONGKE_THANG_SODON}`;
+    return this.http.post<any>(url, { MaCH });
+  }
+
+  get_ThongKe_Thang_DoanhThu_Store(MaCH: any): Observable<any> {
+    const url = `${STORE_THONGKE_THANG_DOANHTHU}`;
+    return this.http.post<any>(url, { MaCH });
+  }
+
+  get_ThongKe_7NGAY_SoDon_Store(MaCH: any): Observable<any> {
+    const url = `${STORE_THONGKE_7NGAY_SODON}`;
+    return this.http.post<any>(url, { MaCH });
+  }
+
+  get_ThongKe_7NGAY_DoanhThu_Store(MaCH: any): Observable<any> {
+    const url = `${STORE_THONGKE_7NGAY_DOANHTHU}`;
+    return this.http.post<any>(url, { MaCH });
+  }
+
+  get_ThongKe_Top5_SP_BanChayNhat_Store(MaCH: any): Observable<any> {
+    const url = `${STORE_THONGKE_TOP5_SP_BANCHAY}`;
+    return this.http.post<any>(url, { MaCH });
+  }
+
+  get_ThongKe_Top5_SP_BanENhat_Store(MaCH: any): Observable<any> {
+    const url = `${STORE_THONGKE_TOP5_SP_BANE}`;
+    return this.http.post<any>(url, { MaCH });
+  }
+  
 }

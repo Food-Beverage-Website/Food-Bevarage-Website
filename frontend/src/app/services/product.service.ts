@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { PRODUCT_ALL_BY_NAME_GET_URL, PRODUCT_ALL_GET_URL, PRODUCT_BEST_SELLER_BY_ID_STORE_URL, PRODUCT_DELETE_BY_ID_URL, PRODUCT_GET_BY_ID_MENU_URL, PRODUCT_GET_BY_ID_STORE_URL, PRODUCT_GET_BY_ID_URL, PRODUCT_NEW_ADD_URL, PRODUCT_UPDATE_BY_ID_URL, PRODUCT_BY_ID_CHITIET, PRODUCT_BY_JSON_PRODUCT_DETAIL} from '../shared/constants/urls';
+import { PRODUCT_ALL_BY_NAME_GET_URL, PRODUCT_ALL_GET_URL, PRODUCT_BEST_SELLER_BY_ID_STORE_URL, PRODUCT_DELETE_BY_ID_URL, PRODUCT_GET_BY_ID_MENU_URL, PRODUCT_GET_BY_ID_STORE_URL, PRODUCT_GET_BY_ID_URL, PRODUCT_NEW_ADD_URL, PRODUCT_UPDATE_BY_ID_URL, PRODUCT_BY_ID_CHITIET, PRODUCT_BY_JSON_PRODUCT_DETAIL, EXCEL_EXPORT_URL} from '../shared/constants/urls';
 import { Product } from '../shared/models/product';
 import { Injectable } from '@angular/core';
 import { IProducUpdate, IProductAdd } from '../shared/interfaces/IProduct';
@@ -54,6 +54,31 @@ export class ProductService {
     return this.http.get<Product[]>(url);
   }
 
+  getExcelExport(name: string): Observable<Blob> {
+    const url = `${EXCEL_EXPORT_URL}/${name}`;
+    
+    return this.http.get(url, { responseType: 'blob' }).pipe(
+      tap((blob: Blob) => {
+       
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'excel-'+name+'.xlsx';
+        link.click();
+        window.URL.revokeObjectURL(blobUrl); 
+      
+        this.toastrService.success('Tải xuống thành công', 'Success');
+      }),
+      catchError((error: any) => {
+        // Hiển thị thông báo thất bại
+        this.toastrService.error(error.error, 'Failed');
+        return throwError(error);
+      })
+    );
+  }
+
+
+  
 
   postNewProduct (product:IProductAdd): Observable<Product> {
     

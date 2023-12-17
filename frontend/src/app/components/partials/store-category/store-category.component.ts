@@ -28,6 +28,8 @@ export class StoreCategoryComponent implements OnInit {
   idProduct!:string;
   selectedRowIndex!: number;
 
+  inputCategory!:string
+  addNewCategory=false
 
   idStore!:string;
   constructor(
@@ -52,7 +54,10 @@ export class StoreCategoryComponent implements OnInit {
   }
 
 
-
+  addCategory()
+{
+  this.router.navigateByUrl('/storee/category/additional');
+}
 
 
   loadStore()
@@ -62,6 +67,8 @@ export class StoreCategoryComponent implements OnInit {
       this.loadProduct();
     })
   }
+
+
 
   loadProduct()
   {
@@ -134,6 +141,49 @@ export class StoreCategoryComponent implements OnInit {
     this.product = this.productList.filter(item=>item.MaThucDon===id)
   }
   
+  addNewCategoryy(){
+  
+   
+    this.storeService.addCategory({
+      IdStore:this.storeJWT._id,
+      TenDanhMuc:this.inputCategory
+    }).subscribe((item)=>{
+      this.closeAddCategory()
+      this.loadStore1()
+      this.loadProduct1();
+      
+    })
+ 
+
+  }
+
+
+  loadStore1()
+  {
+    this.storeService.getStorebyID(this.storeJWT._id).subscribe((store)=>{
+      this.store=store
+      const lastCategory = this.store.ThucDons[this.store.ThucDons.length - 1];
+      this.modifyCategory(lastCategory._id);
+      this.loadProduct();
+    })
+  }
+
+
+  loadProduct1()
+  {
+    this.productService.getAllProductbyidStore(this.store._id).subscribe((product)=>{
+      this.product=product
+      this.productList=product
+    })
+  }
+
+//=================
+closeAddCategory(){
+  this.addNewCategory=false
+}
+
+
+
 
  
 }

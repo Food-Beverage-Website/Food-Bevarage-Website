@@ -14,16 +14,16 @@
 
       <li class="border-r-2">
         <div class="">
-          <p class="count">0</p>
-          <p>Chờ xác nhận</p>
+          <p class="count">{{countDeliveringOrder()}}</p>
+          <p>Đang giao hàng</p>
         </div>
       </li>
 
 
       <li class="border-r-2"> 
         <div class="">
-          <p class="count">0</p>
-          <p>Đã nhận</p>
+          <p class="count">{{countReceived()}}</p>
+          <p>Đã giao</p>
         </div>
       </li>
 
@@ -47,9 +47,10 @@
     <div class="flex">
       <select class="w-[150px] border-[1px]" id="cars" name="cars">
         <option selected disabled value="volvo">Trạng thái </option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
+        <option value="saab">Chờ xác nhận</option>
+        <option value="mercedes">Đang giao hàng</option>
+        <option value="audi">Đã nhận</option>
+        <option value="audi">Đã hủy</option>
       </select>
       <input type="text" class="px-2 w-[250px] border-[1px]">
       <div>
@@ -68,27 +69,27 @@
   <div class="mt-[10px]  h-[330px] overflow-y-scroll">
     <table class="table-auto w-full ">
       <thead>
-        <tr class="title-voucher bg-gray-100  ">
+        <tr class="title-voucher bg-gray-100   ">
           <th class="w-[170px] px-2">Mã đơn hàng</th>
           <th class="w-[150px] px-2">Hình thức giao hàng</th>
           <th class="w-[150px] px-2">Trạng thái</th>
           <th class="w-[150px] px-2">Khách hàng phải trả</th>
-          <th class="w-[150px] px-2">Thao tác</th>
+          <th class="w-[100px] px-2">Ngày</th>
+          <th class="w-[100px] px-2">Thao tác</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let item of inforOrder">
-        <tr class="border-b-[1px]">
+        <tr (click)="orderDetail(item._id)" class="border-b-[1px]">
           <td>{{item._id}}</td>
-          <td>Giao hàng tại cửa</td>
+          <td>{{paymentOrder(item.PhuongThucThanhToan)}}</td>
           <td>{{item.TinhTrangDonHang}}</td>
           <td>{{item.TongTien | currency:'VND':'symbol':'1.0-0' }}</td>
-          <td>Xác nhận</td>
+          <td > <p class="text-[8px]">{{dateToString(item.NgayDat) }}</p></td>
+          <td class="text-center"><p *ngIf="item.TinhTrangDonHang==='Chờ xác nhận'">Xác nhận</p></td>
         </tr>
       </ng-container>
       </tbody>
     </table>
   </div>
-  
-
 </div>

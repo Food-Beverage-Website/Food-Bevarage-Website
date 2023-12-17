@@ -8,7 +8,7 @@ import { ProductModel } from "../models/product.model";
 
 const router = Router();
 
-router.get("/check1",asynceHandler(
+router.get("/check",asynceHandler(
     async (req,res)=>{ 
         const productsCount = await BuyerModel.countDocuments();
         if(productsCount >0)
@@ -302,15 +302,17 @@ router.post("/loadGioHang", asynceHandler(async (req, res) => {
           }
           else{
 
-            await BuyerModel.findOneAndUpdate(
-              {
-                "GioHang.MaSP": gioHangItem.MaSP._id,
-                "GioHang.DonGiaSizeLy.Size": gioHangItem.DonGiaSizeLy.Size
-              },
-              { $set: { "GioHang.$.DonGiaSizeLy.Dongia": sizeInfo.Gia } },
-              { new: true } // Trả về giá trị mới sau khi cập nhật
-            );
-    
+            console.log(gioHangItem.DonGiaSizeLy.Size, sizeInfo.Gia);
+            let thanhtienmoi = gioHangItem.ThanhTien + (gioHangItem.DonGiaSizeLy.SL * sizeInfo.Gia) - (gioHangItem.DonGiaSizeLy.SL * gioHangItem.DonGiaSizeLy.Dongia)
+            await BuyerModel.findByIdAndUpdate(buyerId, {
+              $set: {
+                "GioHang.$[element].DonGiaSizeLy.Dongia": sizeInfo.Gia,
+                "GioHang.$[element].ThanhTien": thanhtienmoi
+              }
+            }, { arrayFilters: [{ "element.MaSP": gioHangItem.MaSP._id, "element.DonGiaSizeLy.Size": gioHangItem.DonGiaSizeLy.Size }] });
+
+            
+
     
           }
         }
@@ -348,7 +350,7 @@ router.post("/loadGioHang", asynceHandler(async (req, res) => {
           const foundToppingInfo = topping.Topping.find((toppingInfo: any) => toppingInfo._id.toString() === toppingItem._id.toString());
 
           if (foundToppingInfo) {
-
+            gioHangItem.ThanhTien = gioHangItem.ThanhTien + ((foundToppingInfo.gia * toppingItem.soluongtopping) - (toppingItem.giatopping * toppingItem.soluongtopping) )
             toppingItem.giatopping = foundToppingInfo.gia;
           } else {
             // Nếu không tìm thấy thông tin topping, xóa nó khỏi giỏ hàng và cơ sở dữ liệu
@@ -399,6 +401,7 @@ router.post("/loadGioHang", asynceHandler(async (req, res) => {
       // Bước 3: Gán lại mảng sản phẩm đã được sắp xếp
       buyer.GioHang = [].concat(...sortedGroups);
     }
+
 
     // Gửi thông tin giỏ hàng của người mua trong res.send
     res.send(buyer);

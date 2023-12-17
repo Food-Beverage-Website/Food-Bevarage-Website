@@ -38,11 +38,15 @@
 
 <div class="list-product">
     <ng-container *ngFor="let item of products">
-    <a [href]="'/detailproduct/' + item._id">
-        <div class="item-product" *ngIf="item.TinhTrang!=='Ẩn'">
+    <a *ngIf="item.TinhTrang!=='Ẩn'" [href]="'/detailproduct/' + item._id">
+        <div class="item-product" >
             <img [src]="'assets/Images/' + item.Hinh"  >
             <div class="infor-product">
-            <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...  </p>
+                <div class="flex">
+                    <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:18 }} ...  </p>
+                    <p class="product-address ml-auto"> <mat-icon class="text-orange-600 font-bold "></mat-icon> ~{{calMap(item.MaCH.ToaDo) }}km</p>
+                </div>
+           
             <p  class="product-store">{{ item.MaCH.TenCuaHang | slice:0:27 }} </p>
         
                 <p class="product-name ">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
@@ -73,7 +77,7 @@
 <br>
 <div class="list-store" >
     <div class="list-itemStore" *ngFor="let item of stores">
-        <img class="img-store" src="assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg" >
+        <img class="img-store" [src]="'assets/Images/' + item.Hinh"  >
         <div class="infor-store">
             <div class="address-Store">
                 {{ (item.DiaChi) ? (item.DiaChi | slice:0:31) + '...' : item.DiaChi }}

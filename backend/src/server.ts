@@ -15,6 +15,8 @@ import paymentRouter from './routers/payment.router';
 import voucherRouter from './routers/voucher.router';
 import toppingRouter from './routers/topping.router';
 import codeRouter from './routers/code.router';
+import excelRouter from './routers/excel.router';
+
 dbConnect();
 const app = express();
 app.use(express.json());
@@ -33,7 +35,7 @@ app.use("/api/payment",paymentRouter);
 app.use("/api/voucher", voucherRouter);
 app.use("/api/topping", toppingRouter);
 app.use("/api/code", codeRouter);
-
+app.use("/api/excel", excelRouter);
 
 
 const port = 5000;

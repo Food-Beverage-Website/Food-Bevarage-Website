@@ -18,6 +18,11 @@ export const STORE_LOGIN_URL = BASE_URL + '/api/stores/login';
 export const STORE_GET_BY_ID_URL = BASE_URL + '/api/stores/getStorebyId';
 export const STORE_SEARCH_BY_NAME_URL = BASE_URL + '/api/stores/getStorebyname';
 export const STORE_NEW_URL = BASE_URL + '/api/stores/register';
+export const STORE_UPDATE_URL = BASE_URL + '/api/stores/updateStore';
+export const STORE_UPDATE_DISTANCE_URL = BASE_URL + '/api/stores/updateToaDo';
+export const STORE_CATEGORY_ADD_URL = BASE_URL + '/api/stores/addNewCategory';
+
+
 
 
 export const USER_LOGIN_URL = BASE_URL + '/api/buyer/login';
@@ -31,8 +36,13 @@ export const MENU_PATCH_URL = BASE_URL + '/api/stores/addApplyProduct';
 export const MENU_UPDATE_NAME_URL = BASE_URL + '/api/stores/updateThucDon';
 export const MENU_DELETE_NAME_URL = BASE_URL + '/api/stores/deleteThucDon';
 
+
+
 export const ORDER_GET_UNCONFIRM_URL = BASE_URL + '/api/order/getOrderConfirm';
 export const ORDER_GET_ALL_BY_ID_STORE_URL = BASE_URL + '/api/order/getAllOrderbyIdStore';
+export const ORDER_GET_ALL_BY_ID_ORDER_URL = BASE_URL + '/api/order/getAllOrderbyIdOrder';
+export const ODER_GIOHANG = BASE_URL + '/api/order/orderGioHang/';
+export const ODER_STATE_URL = BASE_URL + '/api/order/updateOrder/';
 
 export const TOPPING_GET_ALL_BY_ID_STORE_URL = BASE_URL + '/api/topping/getToppingbyIdstore';
 export const TOPPING_POST_ADD_TOPPING_URL = BASE_URL + '/api/topping/addNewTopping';
@@ -50,6 +60,9 @@ export const VOUCHER_UPDATE_URL=BASE_URL + '/api/voucher/updateVoucher';
 export const VOUCHER_CREATE_URL=BASE_URL + '/api/voucher/createVoucher';
 export const VOUCHER_DELETE_URL=BASE_URL + '/api/voucher/deleteVoucher';
 
+export const PAYMENT_GET_URL=BASE_URL + '/api/payment';
+
+export const EXCEL_EXPORT_URL=BASE_URL + '/api/excel/getProductByIdStore';
 
 export const CODE_SEND_URL = BASE_URL + '/api/code/randomCode';
 export const CODE_CHECK_URL = BASE_URL + '/api/code/checkCode';
@@ -65,3 +78,12 @@ export const DELETE_TOPPING_GIOHANG_BY_JSON_BUYER = BASE_URL + '/api/buyer/xoa1T
 export const GET_KHUYENMAI_THEO_CUAHANG_SANPHAM = BASE_URL + '/api/voucher/listKhuyenMaiTheoCuaHangSP';
 export const GET_KHUYENMAI_THEO_GIOHANG = BASE_URL + '/api/voucher/listKhuyenMaiTheoGioHang';
 
+//==================================ThongKe
+export const STORE_THONGKE_THANG_SODON = BASE_URL + '/api/stores/thongke_Thang_SoDon_store';
+export const STORE_THONGKE_THANG_DOANHTHU = BASE_URL + '/api/stores/thongke_Thang_DoanhThu_store';
+export const STORE_THONGKE_7NGAY_SODON = BASE_URL + '/api/stores/thongke_7ngay_SoDon_store';
+export const STORE_THONGKE_7NGAY_DOANHTHU = BASE_URL + '/api/stores/thongke_7ngay_DoanhThu_store';
+
+
+export const STORE_THONGKE_TOP5_SP_BANCHAY = BASE_URL + '/api/stores/thongke_Top5_SP_BanChayNhat_store';
+export const STORE_THONGKE_TOP5_SP_BANE = BASE_URL + '/api/stores/thongke_Top5_SP_BanE_store';

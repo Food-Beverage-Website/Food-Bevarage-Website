@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .email-container {
+            margin-left: 30%;
+            width: 450px;
+            height: 600px;
+            background-color: rgb(192, 246, 228);
+            padding: 20px;
+        }
+
+        .center-image {
+            margin: 0 auto; /* Căn giữa hình ảnh bằng cách sử dụng margin */
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+    </style>
+    <title>Your Email Template</title>
+</head>
+<body>
+    <div class="email-container">
+        <img style="margin-left: 170px;" src="https://i.pinimg.com/originals/4e/95/ff/4e95ff2406e7914e70cbbba6dd9c51d2.jpg" alt="Your Logo">
+        <h1>Mở cửa hàng trực tuyến của bạn</h1>
+        <p> Chào [Tên Cửa Hàng hoặc Tên Khách Hàng],</p>
+        <p>Chúng tôi xin gửi lời chào trân trọng và lời mời đặc biệt từ FooDie. Chúng tôi rất vui mừng thông báo về cơ hội hợp tác với bạn để tạo ra một không gian mua sắm trực tuyến độc đáo và phong cách trên trang web của chúng tôi.</p>
+        <p>PassCode: <strong>{{randomCode}}</strong></p>
+        <p>(Lưu ý không tiết lộ mã này với người khác)</p>
+        <p>Đừng bỏ lỡ cơ hội tham gia cộng đồng mua sắm trực tuyến phát triển mạnh của chúng tôi. Hãy bắt đầu ngay bằng cách truy cập [Đường Link Đăng Ký] để mở gian hàng của bạn hoặc đăng ký để trở thành thành viên ngay hôm nay!</p>
+        <br>
+        <hr>
+        <p>Trân trọng,</p>
+        <p>CEO. Jennefer</p>
+        <p>FooDy</p>
+    </div>
+</body>
+</html>

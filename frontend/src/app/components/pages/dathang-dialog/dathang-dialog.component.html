@@ -1,0 +1,116 @@
+<div *ngIf="modifyVoucher " class="  fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+
+
+<div *ngIf="modifyVoucher"
+    class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  p-2 border border-gray-300 shadow-md z-50">
+    <div class="w-[1000px] h-[500px]">
+
+        <div class=" flex bg-pink-900">
+            <h4 class=" font-bold  text-white px-2">Xác nhận thông tin đặt hàng</h4>
+
+            <div class="flex px-2 bg-red-500 text-white ml-auto" (click)="activeModal.close('Close click')">
+                <mat-icon>close</mat-icon></div>
+
+        </div>
+
+        <div class=" flex mt-[10px]">
+            <div class="bg-gray-50 w-[400px] h-[420px] text-[15px] px-2">
+                <div class="font-bold text-[15px] text-blue-900"> Thông tin người nhận</div>
+                <div class="mt-[15px]">Tên khách hàng: <strong>{{thongtinUser.TenKhachHang}}</strong> </div>
+                <div class="col-4">Số điện thoại: <strong>{{thongtinUser.SDT}}</strong></div>
+                <div class="col-12">
+                    <p>Chọn địa chỉ nhận hàng</p>
+                    <div class="row">
+                        <div class="col-6 px-2" *ngFor="let item of thongtinUser.DiaChis; let i = index">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="diaChi" [id]="i"
+                                    (click)="setDiaChi(item.DiaChi)">
+                                <label class="form-check-label d-flex" [for]="i">
+                                    {{item.TenNhanHang + ' | ' + item.DiaChi}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p>Chọn phương thức thanh toán: </p>
+                    <div class="flex">
+                        <div class="col-6 px-2" *ngFor="let item of danhsachPhuongThucThanhToan; let i = index">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tt" [id]="i+'thanhtoan'"
+                                    (click)="setThanhToan(item._id)">
+                                <label class="form-check-label d-flex" [for]="i + 'thanhtoan'">
+                                    {{item.TenPhuongThuc}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class=" flex">
+                        <p>Ghi chú:
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </p>
+                        <textarea id="form24" class="border-2 w-[300px]" rows="3" [(ngModel)]="selectedGhiChu"
+                            (change)="setGhiChu(selectedGhiChu)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" w-[600px] px-2">
+                <div class="font-bold text-[15px] text-blue-900"> Sản phẩm đặt mua</div>
+                <div class="h-[400px] overflow-y-scroll">
+
+
+
+                    <ng-container *ngFor="let item of danhsachSPdathang[0].GioHang">
+
+
+                        <div class="w-[full] px-2 flex mt-[10px] ">
+                            <img [src]="'assets/Images/'+item.MaSP.Hinh" class="w-[200px] h-[200px]" alt="" />
+                            <div class="ml-[5px]">
+                                <h6 class="font-bold">{{ item.MaSP.TenSP}}</h6>
+                                <div class="flex gap-x-1">
+                                    <p>{{item.DonGiaSizeLy.Size}} |</p>
+                                    <p>{{item.DonGiaSizeLy.Dongia | currency:'VND':'symbol':'1.0-0' }}</p>
+                                </div>
+
+                                <p>Số lượng: {{item.DonGiaSizeLy.SL}}</p>
+                                <hr>
+                                <div>Topping kèm:</div>
+                                <p *ngFor="let item2  of item.DongiaToppings"> + {{item2.tenTopping}} |
+                                    {{item2.soluongtopping}} |
+                                    đ{{item2.giatopping}}</p>
+                            </div>
+
+
+                        </div>
+                        <hr class="mt-[2px]">
+
+                    </ng-container>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="flex ">
+            <div class="ml-auto">
+                <div class="col-4">Số tiền thanh toán: <strong>{{sotienthanhtoan| currency:'VND':'symbol':'1.0-0'
+                        }}</strong></div>
+
+                <div (click)="truyenJsonDatHang()" class="px-2 bg-green-500 flex justify-center">
+                    <p class="text-white font-bold">Đặt hàng</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

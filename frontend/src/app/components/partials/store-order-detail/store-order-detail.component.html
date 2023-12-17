@@ -1,0 +1,136 @@
+<div class="flex  bg-white px-2">
+    <div class="flex  items-center gap-x-[5px]">
+        <p class="text-[20px] font-bold text-blue-900 ">Chi tiết đơn hàng</p>
+        <p>#{{order._id}}</p>
+
+        <div  [ngStyle]="{
+            'background-color': order.TinhTrangDonHang === 'Chờ xác nhận' ? 'red' :
+                               order.TinhTrangDonHang === 'Đang giao hàng' ? 'green' :
+                               order.TinhTrangDonHang === 'Đã nhận' ? 'yellow' :
+                               order.TinhTrangDonHang === 'Đã hủy' ? 'red' : ''
+          }" class="px-2 text-white font-bold">
+            {{ order.TinhTrangDonHang }}
+          </div>
+
+    </div>
+   
+</div>
+
+
+<div class="bg-white w-full h-[150px] px-2 mt-[5px]">
+    <div class="w-full h-full">
+      <p class="font-bold  ml-[20px]"> Thông tin khách hàng</p> 
+    
+
+        <div class="mt-[5px] ml-[20px]">
+            <ul>
+                <li class="title">Tên người nhận:</li>
+                <li class="content">{{order.KhachHang.TenKhachHang}}</li>
+            </ul>
+
+            <ul>
+                <li class="title">Số điện thoại:</li>
+                <li class="content">{{order.KhachHang.SDT}}</li>
+            </ul>
+
+            <ul>
+                <li class="title">Địa chỉ:</li>
+                <li class="content">{{order.DiachiGH}}</li>
+            </ul>
+
+            <ul>
+                <li class="title">Ghi chú: </li>
+                <li class="content">{{order.GhiChu}}</li>
+            </ul>
+
+            <ul>
+                <li class="title">Phương thức thanh toán:</li>
+                <li class="content">Thanh toán ngân hàng</li>
+            </ul>
+
+
+            <ul>
+                <li class="title">Tổng tiền:</li>
+                <li class="content">{{order.TongTien| currency:'VND':'symbol':'1.0-0' }}</li>
+            </ul>
+        </div>
+
+</div>
+   
+</div>
+
+
+<div class="bg-white w-full h-[380px] px-2 mt-[5px]">
+    <div class="w-full h-full">
+        <div> <p class="font-bold  ml-[20px]">Chi tiết sản phẩm mua hàng</p> </div>
+       
+        <div class="h-[300px]  overflow-y-scroll">
+            <table class="table-auto w-full">
+                <thead>
+                  <tr class="title-voucher bg-blue-900 text-white">
+                    <th class="w-[50px]">Mã</th>
+                    <th class="w-[200px]" >Tên</th>
+                    <th class="w-[100px]">Size</th>
+                    <th class="w-[100px]">Đơn giá</th>
+                    <th class="w-[70px]">Số lượng</th>
+                    <th class="w-[100px]">Thành tiền</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of order.ChiTietDonHang">
+                        <tr class="bg-blue-50">
+                            <td class="text-center">{{item.SanPham.slice(-5)}}</td>
+                            <td>{{loadSanPham(item.SanPham)}}</td>
+                            <td class="text-center">{{item.DonGia.Size}}</td>
+                            <td>{{item.DonGia.Dongia | currency:'VND':'symbol':'1.0-0' }} </td>
+                            <td class="text-center">{{item.SL}}</td>
+                            <td>{{sum(item.SL,item.DonGia.Dongia)| currency:'VND':'symbol':'1.0-0'  }}</td>
+                        </tr>
+
+                        <tr *ngIf="isTopping(item.Topping)===true" >
+                            <td colspan="6">
+                                <div>
+                            <table class="table-auto w-[785px] ml-auto">
+                                <thead>
+                                  <tr class="title-voucher bg-gray-100">
+                                    <th class="w-[50px]">Mã</th>
+                                    <th class="w-[280px]"> Topping</th>
+                                    <th class="w-[110px]">Giá</th>
+                                    <th class="w-[75px]">SL</th>
+                                    <th class="w-[110px]">Thành tiền</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let tp of item.Topping" >
+                                  <tr>
+                                    <td class="text-center">{{tp.MaTopping.slice(-5)}}</td>
+                                    <td>{{loadTopping(tp.MaTopping)}}</td>
+                                    <td>{{tp.DonGia | currency:'VND':'symbol':'1.0-0' }}</td>
+                                    <td class="text-center">{{tp.SL}}</td>
+                                    <td>{{sum(tp.SL,tp.DonGia)  | currency:'VND':'symbol':'1.0-0'}}</td>
+                                  </tr>
+                                </ng-container>
+                                 
+                                </tbody>
+                              </table>
+                            </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                 
+                </tbody>
+              </table>
+
+        </div>
+
+        <div  *ngIf="order.TinhTrangDonHang === 'Chờ xác nhận'" class=" flex">
+          <div class="flex ml-auto">
+
+            <div (click)="setState(order._id,'Đang giao hàng')" class="px-2 bg bg-green-500 text-white mr-[5px]">Xác nhận đơn</div>
+            <div (click)="setState(order._id,'Đã hủy')" class="px-2 bg bg-red-500 text-white ">Hủy đơn</div>
+          </div>
+        </div>
+
+    </div>
+</div>

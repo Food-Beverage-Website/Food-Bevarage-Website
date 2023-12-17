@@ -31,3 +31,32 @@ export interface IMenuDelete{
     idmenu:string,
 }
 
+
+export interface IStoreUpDate{
+    _id:string,
+    TenShop:string,
+    TenChu:string,
+     CCCD:string,
+     DiaChi:string,
+      SDT:string,
+       open:string,
+        clode:string,
+         hinh:string,
+}
+
+
+export interface IStoreDistanceUpdate{
+    _id:string,
+    ToaDo:string
+}
+
+export interface IStoreCategory{
+    IdStore:string,
+    TenDanhMuc:string
+}
+
+export interface IStateOrder{
+    _id:string,
+    TinhTrang:string
+}
+

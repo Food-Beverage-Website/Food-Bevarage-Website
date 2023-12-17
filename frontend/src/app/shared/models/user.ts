@@ -21,6 +21,8 @@ export class User {
     MaSP!: string;
     ThoiGianThemGH!: Date;
     SL!: number;
+    KhuyenMai!: string;
+    DonGiaKhuyenMai!: number;
     DonGiaSizeLy!: {
       SL: number;
       Size: string;

@@ -1,0 +1,16 @@
+.shop-infor ul{
+    @apply flex mt-[10px] gap-x-[10px]
+}
+
+.shop-infor{
+    @apply flex
+}
+
+.title{
+    @apply w-[120px]  text-right
+}
+
+input{
+    @apply border-[1px] px-2 bg-gray-100
+}
+
