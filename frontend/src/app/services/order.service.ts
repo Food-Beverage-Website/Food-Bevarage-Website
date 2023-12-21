@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { ORDER_GET_ALL_BY_ID_ORDER_URL, ORDER_GET_ALL_BY_ID_STORE_URL, ORDER_GET_UNCONFIRM_URL, ODER_GIOHANG, ODER_STATE_URL } from '../shared/constants/urls';
+import { XACNHAN_A_ORDER, ORDER_GET_ALL_BY_ID_ORDER_URL, ORDER_GET_ALL_BY_ID_STORE_URL, ORDER_GET_UNCONFIRM_URL, ODER_GIOHANG, ODER_STATE_URL, CANCEL_A_ORDER, ORDER_BY_ID_BUYER } from '../shared/constants/urls';
 import { IStateOrder } from '../shared/interfaces/IStoreLogin';
 import { ToastrService } from 'ngx-toastr';
 
@@ -42,7 +42,6 @@ import { ToastrService } from 'ngx-toastr';
           `Cập nhật đơn hàng thành công`,
           'Add Successful'
         );
-
         
       }),
       catchError((error: any) => {
@@ -54,6 +53,18 @@ import { ToastrService } from 'ngx-toastr';
   }
 
 
+  getAllOrdersByUser(buyerId: string): Observable<any[]>{
+    const url = `${ORDER_BY_ID_BUYER}/${buyerId}`;
+    return this.http.get<any[]>(url);
+   }
+  cancelOrder(orderId: string): Observable<any>{
+    const url = `${CANCEL_A_ORDER}/${orderId}`;
+    return this.http.patch(url, {});
+  }
 
+  xacNhanOrder(orderId: string): Observable<any>{
+    const url = `${XACNHAN_A_ORDER}/${orderId}`;
+    return this.http.patch(url, {});
+  }
  
   }

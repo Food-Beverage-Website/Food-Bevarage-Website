@@ -1,0 +1,103 @@
+<div class="w-full h-[150px]  z-0 flex relative ">
+
+    <video class="h-full w-full object-cover absolute z-0" autoplay muted loop id="myVideo">
+        <source [src]="'assets/Images/' +banner" type="video/mp4">
+      </video>
+      <div class="z-10 h-full bg-black opacity-25 w-full items-center flex justify-center absolute ">
+       
+       
+      </div>
+
+      <div class="z-20 h-full  w-full items-center flex justify-center ">
+        <div class="border-2 border-white px-[200px]" > 
+            <p  class="text-white text-[40px] font-bold  ">  {{ type?.TenTieuMuc }}</p>
+        </div>
+       
+      </div>
+      
+
+     
+</div>
+
+<div class=" text-white bg-pink-900 flex px-3 ">
+    <div class="flex justify-center items-center">
+        <p class="text-[25px] font-bold">Phân loại sản phẩm </p>
+    <ul class="flex ml-[20px]">
+        <li (click)="getTieuMuc(item.TenTieuMuc)" class="w-[80px] text-center hover:font-bold" *ngFor="let item of types">{{item.TenTieuMuc}}</li>
+    </ul>
+
+    </div>
+    
+</div>
+<div class="h-[50px] bg-white flex px-3 bg-pink-200">
+    <div class="flex items-center gap-x-5 ">
+        
+            <select (change)="sort($event)" class="border-2 px-3 py-2">
+                <option disabled selected>Xếp sếp sản phẩm:</option>
+                <option  value="PriceDecrease">Từ cao đến thấp</option>
+                <option  value="PriceAscending">Từ thấp đến cap</option>
+            </select>
+
+            <div (click)="near_me()" class="flex border-2 px-3 py-2 bg-white"><mat-icon>near_me</mat-icon>Cửa hàng gần nhất</div>
+
+            
+
+            <div class="flex ml-[400px]">
+                <input class="border" type="text">
+                <div class="bg-blue-100 px-3 ">Tìm kiếm</div>
+            </div>
+    </div>
+
+
+</div>
+
+
+<div class="h-[2000px] relative ">
+
+    <div class="absolute z-10 w-full h-full bg-center bg-cover opacity-10" style="background-image: url('assets/Images/{{ type?.Background }}')">
+
+    </div>
+
+    <div class="z-10 absolute">
+
+        <div class="list-product mt-2">
+            <ng-container *ngFor="let item of product">
+            <a *ngIf="item.TinhTrang!=='Ẩn'" [href]="'/detailproduct/' + item._id">
+                <div class="item-product" >
+                    <img [src]="'assets/Images/' + item.Hinh"  >
+                    <div class="infor-product">
+                        <div class="flex">
+                            <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:18 }} ...  </p>
+                            <p class="product-address ml-auto"> <mat-icon class="text-orange-600 font-bold "></mat-icon> ~{{calMap(item.MaCH.ToaDo) }}km</p>
+                        </div>
+                   
+                    <p  class="product-store">{{ item.MaCH.TenCuaHang | slice:0:27 }} </p>
+                
+                        <p class="product-name ">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
+                        <div class="" *ngIf="checkvoucherProduct(item._id)!==1"> 
+                                <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                        </div>
+                        <div class="flex" *ngIf="checkvoucherProduct(item._id)===1">
+                            <p  class="">{{ voucherProduct(item._id,getMinPrice(item.DonGia).toString()) | currency:'VND':'symbol':'1.0-0' }}</p>
+                            <p  class="line-through text-[10px] text-red-500 ml-[5px] ">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                        </div>
+        
+        
+                    <div (click)="goToShop(item.MaCH._id)" class="product-button">
+                        <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+                        
+                        <p>Go shop</p>
+                    </div>
+                    </div>
+                </div>
+            </a>
+        </ng-container>
+        </div>
+
+
+
+
+    </div>
+
+    
+</div>

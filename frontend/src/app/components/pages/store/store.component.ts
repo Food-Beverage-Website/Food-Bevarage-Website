@@ -145,7 +145,13 @@ export class StoreComponent implements OnInit {
     return hasVoucher;
   }
   
+  buy(id:string){
+    this.router.navigateByUrl('/detailproduct/'+id);
+  }
   
+  soldout(){
+    alert("Sản phẩm đã bán hết")
+  }
 
   voucherProduct(idSP: string, price: string): number {
     let percent: number = 0;

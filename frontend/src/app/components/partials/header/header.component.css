@@ -112,3 +112,18 @@ header .div-header,  .header-icon{
     background-color: #ff9800;
     color: white;
   }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px); /* Optional: Di chuyển lên trên một chút */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  [app-notifications-store] {
+    animation: fadeIn 0.5s ease-out; /* Thời gian và chế độ easing có thể điều chỉnh theo nhu cầu */
+  }

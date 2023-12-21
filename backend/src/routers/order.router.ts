@@ -70,8 +70,6 @@ router.post("/orderGioHang", asynceHandler(async (req, res) => {
     let dem = 0;
     let demtrung = 0;
     let idCuoi = "";
-    let tongtien = 0;
-
     for (let i = 0; i < productGioHangJson.ChitietDonHang.length; i++) {
         const chiTietDonHang = productGioHangJson.ChitietDonHang[i];
         const buyerId = productGioHangJson.ChitietDonHang[i].KhachHang;
@@ -94,14 +92,6 @@ router.post("/orderGioHang", asynceHandler(async (req, res) => {
                 { $push: { ChiTietDonHang: updatedChiTietDonHang } }
             );
 
-            tongtien += chiTietDonHang.TongTien;
-
-            await DonHangModel.findOneAndUpdate(
-                { _id: idCuoi },
-                { $set: { "TongTien": tongtien } },
-                { new: true } // Trả về giá trị mới sau khi cập nhật
-              );
-
 
             // Bổ sung lệnh cập nhật cơ sở dữ liệu BuyerModel
             await BuyerModel.findByIdAndUpdate(buyerId, {
@@ -117,11 +107,10 @@ router.post("/orderGioHang", asynceHandler(async (req, res) => {
             demtrung++;
         } else {
 
-            tongtien = chiTietDonHang.TongTien;
-
             const newDonHang = new DonHangModel({
                 KhachHang: chiTietDonHang.KhachHang,
                 TongTien: chiTietDonHang.TongTien,
+                paymentId :productGioHangJson.paymentId,
                 NgayDat: productGioHangJson.NgayDat,
                 PhuongThucThanhToan: productGioHangJson.PhuongThucThanhToan,
                 TinhTrangDonHang: productGioHangJson.TinhTrangDonHang,
@@ -191,6 +180,52 @@ router.patch("/updateOrder", asynceHandler(async (req, res) => {
     }
   }));
 
+  //Code Duy Hung
+
+
+  router.get("/getAllOrderByBuyer/:buyerId",asynceHandler(
+    async (req,res)=>{
+        const buyerId = req.params.buyerId;
+        const ordersInfo = await DonHangModel.find({KhachHang: buyerId}).populate('KhachHang');
+        if(!ordersInfo)
+        {
+            throw { status: 404, message: 'Không có đơn hàng nào' };
+        }
+        res.send(ordersInfo);
+    }
+))
+
+router.patch("/cancelOrder/:orderId", asynceHandler(
+    async (req, res) => {
+      const orderId = req.params.orderId;
+
+      const order = await DonHangModel.findById(orderId);
+      if (!order) {
+        throw { status: 404, message: 'Không tìm thấy đơn hàng' };
+      }
+      order.TinhTrangDonHang = "Đã hủy";
+      await order.save();
+
+      res.send({ message: 'Đã hủy đơn hàng thành công' });
+    }
+  ))
+
+  router.patch("/xacNhanOrder/:orderId", asynceHandler(
+    async (req, res) => {
+      const orderId = req.params.orderId;
+
+      const order = await DonHangModel.findById(orderId);
+      if (!order) {
+        throw { status: 404, message: 'Không tìm thấy đơn hàng' };
+      }
+      order.TinhTrangDonHang = "Đã giao";
+      await order.save();
+
+      res.send({ message: 'Xác nhận đơn hàng đã giao thành công' });
+    }
+  ))
+
+  
 
 
 export default router;

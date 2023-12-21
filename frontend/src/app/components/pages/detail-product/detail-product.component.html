@@ -107,9 +107,15 @@
                         
                         <div class="row justify-content-md-center">
                             <div class="col-md-auto">
-                                <a (click)="truyenDetailProductJson()" class="btn btn-primary d-flex align-items-center">
+                                <a *ngIf="state===true" (click)="truyenDetailProductJson()" class="btn btn-primary d-flex align-items-center">
                                     <mat-icon class="mr-2">add_shopping_cart</mat-icon> Thêm vào giỏ
                                 </a>
+
+                                <a *ngIf="state===false" style="background-color: darkgray;"  class="btn btn-primary d-flex align-items-center">
+                                    <mat-icon class="mr-2">add_shopping_cart</mat-icon> Đã đóng cửa
+                                </a>
+
+
                             </div>
                         </div>
                     </div>

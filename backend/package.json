@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "cd src && nodemon server.ts",
+    "build": "npm install && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.10.5",
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

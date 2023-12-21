@@ -5,7 +5,18 @@
     </div>
 </div>
 
-<div class="flex justify-end mt-[5px]">
-    <div (click)="updateDistance()" class="px-3 bg-green-500 text-white mr-[67px]">Cập nhật địa chỉ</div>
+<div class="mt-[5px] px-[100px]">
+    <div class="flex text-[12px]">
+        Số nhà (Cơ quan/nhà riêng):
+        <input [(ngModel)]="newad" class="border-2 ml-2 w-[200px]" type="text">
+        
+        
+    
+    </div>
+    <p class="text-[12px]">{{newAddress}}</p>
+   
 </div>
 <br>
+<div class="flex mt-[5px] justify-end">
+<div (click)="updateDistance()" class="px-3 bg-green-500 text-white mr-[67px]">Cập nhật địa chỉ</div>
+</div>

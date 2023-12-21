@@ -99,13 +99,13 @@
                         </div>
                        
                     
-                    <div *ngIf="item.TinhTrang!=='Hết hàng'" class="product-button">
+                    <div (click)="buy(item._id)" *ngIf="item.TinhTrang!=='Hết hàng'" class="product-button">
                         <div class="icon"><mat-icon>monetization_on</mat-icon></div>
                         
                         <p>Mua ngay</p>
                     </div>
 
-                    <div *ngIf="item.TinhTrang==='Hết hàng'" class=" product-sold-button">
+                    <div (click)="soldout()" *ngIf="item.TinhTrang==='Hết hàng'" class=" product-sold-button">
                         <div class="icon"><mat-icon>monetization_on</mat-icon></div>
                         
                         <p>SOLD OUT</p>

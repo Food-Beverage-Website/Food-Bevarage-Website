@@ -14,6 +14,8 @@ import { Type } from 'src/app/shared/models/type';
 export class StoreProductAdditionalComponent implements OnInit {
 
  tieumucs:Type[]=[]
+
+ storeJWT!:Store
  store!:Store
 
  inputType!:string;
@@ -24,6 +26,8 @@ export class StoreProductAdditionalComponent implements OnInit {
  inputImg!:string;
  inputPrice: { Size: string, Gia: string }[] = [{ Size: '', Gia: '' }];
 
+ addNewCategory=false
+
   urllink:string="assets/Images/default.png"
   constructor(
     private sharedDataService: SharedDataService,
@@ -33,12 +37,22 @@ export class StoreProductAdditionalComponent implements OnInit {
     
     ) {
       storeService.storeObservable.subscribe((newStore)=>{
-        this.store=newStore;
+        this.storeJWT=newStore;
+        this.loadStore()
         this.loadTieuMucs();
       })
   
 
   }
+
+  loadStore(){
+    this.storeService.getStorebyID(this.storeJWT._id).subscribe((item)=>{
+      this.store=item
+    })
+  }
+
+
+
 
   loadTieuMucs(){
     this.typeService.getAll().subscribe((type)=>{
@@ -50,10 +64,32 @@ export class StoreProductAdditionalComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
-
+  
   
   }
+
+
+  
+  addNewCategoryy(){
+  
+   
+    this.storeService.addCategory({
+      IdStore:this.store._id,
+      TenDanhMuc:this.inputCategory
+    }).subscribe((item)=>{
+      this.closeAddCategory()
+      this.loadStore()
+      
+    })
+ 
+
+  }
+
+
+  closeAddCategory(){
+    this.addNewCategory=false
+  }
+  
 
 
   handleFileInput(event: any) {
@@ -114,12 +150,15 @@ submitProduct(){
     const currentDate = new Date();
     const ngayDangValue: string | undefined = currentDate.toLocaleDateString()?.toString();
    
+    const [ thang, ngay, nam] = ngayDangValue.split('/');
+    const ngayDangFormatted = `${ngay}/${thang}/${nam}`;
+
     this.productService.postNewProduct({
       TenSP:this.inputProductName,
       MieuTa:this.inputDescribed,
       DonGia:this.inputPrice,
       Hinh:this.inputImg,
-      NgayDang:ngayDangValue,
+      NgayDang:ngayDangFormatted,
       MaCH:this.store._id,
       MaThucDon:this.inputCategory,
       MaTieuMuc:this.inputType,

@@ -3,7 +3,7 @@
 }
 
 .banner-address button{
-    @apply ml-auto bg-sky-100 mr-[10px] px-[10px] text-[15px] rounded-[20px] my-[10px]
+    @apply ml-auto bg-pink-600 mr-[10px] px-[10px] text-[15px] rounded-[20px] my-[10px] text-white
 }
 
 .title-infor{

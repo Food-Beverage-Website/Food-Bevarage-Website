@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, Input } from '@angular/core';
 import * as L from 'leaflet';
+import { DistanceService } from 'src/app/services/distance.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -15,9 +16,13 @@ export class StoreModifyMapComponent implements AfterViewInit {
   private currentMarker: L.Marker | null = null;
   inputLat!:number;
   inputLon!:number;
+  newAddress!:string;
+  newad!:string
 
-
-  constructor(private storeService:StoreService){
+  constructor(
+    private storeService:StoreService,
+    private distanceService:DistanceService
+    ){
 
   }
 
@@ -46,39 +51,55 @@ private initializeMap(): void {
         popupAnchor: [0, -32]
       });
 
-      // Remove the current marker if it exists
       if (this.currentMarker) {
         this.map.removeLayer(this.currentMarker);
       }
 
-      // Create a new marker and add it to the map
       const marker = L.marker([clickedLatLng.lat, clickedLatLng.lng], { icon: customIcon }).addTo(this.map)
         .bindPopup('Đây là vị trí được chọn.')
         .openPopup();
 
-      // Update the current marker
+      
       this.currentMarker = marker;
 
       this.inputLat=clickedLatLng.lat
       this.inputLon=clickedLatLng.lng
+      this.loadAdress(clickedLatLng.lat,clickedLatLng.lng)
+
 
     });
   }
 }
 
+loadAdress(Lat:number, Lon:number)
+{
+  this.distanceService.getAddress(Lat.toString(),Lon.toString()).subscribe((item)=>{
+    this.newAddress=item.display_name
+   
+  })
+}
+
 
 updateDistance()
 {
+  if(!this.newad || !this.newAddress)
+  {
+    alert("Hãy chọn marker và số nhà nhé ")
+  }
+  else{
   if(this.inputLat || this.inputLon ){
     this.storeService.patchDistanceStore({
       _id:this.idStore,
-      ToaDo:this.inputLat+","+this.inputLon
+      ToaDo:this.inputLat+","+this.inputLon,
+      DiaChi:this.newad+","+this.newAddress
+
     }).subscribe((item)=>{
 
     })
   }else{
     alert("Bạn chưa chọn vị trí")
   }
+}
   
 }
 

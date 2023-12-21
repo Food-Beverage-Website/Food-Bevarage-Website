@@ -292,6 +292,11 @@ closeAlert() {
 }
 
 
+showTopping(id:string){
+  this.router.navigateByUrl('/storee/product/topping/'+id);
+  
+}
+
 
 issProduct(){
   this.isProduct=true;

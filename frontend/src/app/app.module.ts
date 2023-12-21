@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/partials/header/header.component';
@@ -44,8 +44,18 @@ import { StoreModifyMapComponent } from './components/partials/store-modify-map/
 import { StoreOrderDetailComponent } from './components/partials/store-order-detail/store-order-detail.component';
 import { CarouselModule } from 'primeng/carousel';
 import { DathangDialogComponent } from './components/pages/dathang-dialog/dathang-dialog.component';
+import { ListStoresComponent } from './components/pages/list-stores/list-stores.component';
+import { NewdishesComponent } from './components/pages/newdishes/newdishes.component';
+import { TopProductsComponent } from './components/pages/top-products/top-products.component';
+import { TopStoresComponent } from './components/pages/top-stores/top-stores.component';
+import { StoreProductToppingComponent } from './components/partials/store-product-topping/store-product-topping.component';
+import { ProductCategoryComponent } from './components/pages/product-category/product-category.component';
+import { PaypalComponent } from './components/partials/paypal/paypal.component';
 import { StoreThongkeComponent } from './components/partials/store-thongke/store-thongke.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+import { UserNearMeComponent } from './components/partials/user-near-me/user-near-me.component';
+
+
 
 
 @NgModule({
@@ -80,7 +90,15 @@ import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
     StoreModifyMapComponent,
     StoreOrderDetailComponent,
     DathangDialogComponent,
-    StoreThongkeComponent
+    ListStoresComponent,
+    NewdishesComponent,
+    TopProductsComponent,
+    TopStoresComponent,
+    StoreProductToppingComponent,
+    ProductCategoryComponent,
+    PaypalComponent,
+    StoreThongkeComponent,
+    UserNearMeComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +119,9 @@ import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
       newestOnTop:false
     }),
     CarouselModule,
-    NgChartsModule
+    NgChartsModule,
+  
+
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptorTsInterceptor,multi:true

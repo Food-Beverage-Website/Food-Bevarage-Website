@@ -11,6 +11,7 @@ export interface Product {
   MaCH: ObjectId;
   MaThucDon: ObjectId;
   MaTieuMuc: ObjectId;
+  Topping:ObjectId[];
   DanhGia: [{
     MaDonHang: string;
     Rate: number;
@@ -29,6 +30,7 @@ export interface Product {
       Hinh:{ type: String, required: true },
       NgayDang :{ type: String, required: true },
       TinhTrang :{ type: String, required: true },
+      Topping:[{ type: Schema.Types.ObjectId, ref: 'topping'}],
       MaCH: { type: Schema.Types.ObjectId, ref: 'cuahang' },
       MaThucDon: { type: Schema.Types.ObjectId},
       MaTieuMuc: { type:Schema.Types.ObjectId },

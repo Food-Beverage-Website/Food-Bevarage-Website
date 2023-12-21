@@ -21,7 +21,7 @@
         <hr>
         
         <div class="flex gap-x-[30px] mt-[5px]">
-            <div class="number_product"><mat-icon class="text-red-500">inventory_2</mat-icon> Thức uống:{{countProducts()}}</div>
+            <!-- <div class="number_product"><mat-icon class="text-red-500">inventory_2</mat-icon>Thức uống: {{ countProducts() }}</div> -->
             <div class="number_cate"><mat-icon class="text-red-500">category</mat-icon> Danh mục: {{countMenus(store.ThucDons)}}</div>
             <div class="number_product "><mat-icon class="text-red-500">timer</mat-icon> Open: {{store.GioMoCua}}| Close:  {{store.GioDongCua}} </div>
         </div>
@@ -41,22 +41,30 @@
 <p class="px-[150px] text-[15px] font-bold">Rearch for product:</p>
 
 <div class="list-product">
-    <div class="item-product" *ngFor="let item of products">
+    <ng-container *ngFor="let item of products" >
+    <div *ngIf="item.TinhTrang!=='Ẩn'"  class="item-product" >
+        
+        <a [href]="'/detailproduct/' + item._id">
         <img [src]="'assets/Images/' + item.Hinh"  >
+        </a>
         <div class="infor-product">
+            <a [href]="'/detailproduct/' + item._id">
         <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:27 }} ...</p>
+   
         <div class="flex"> 
-            <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
+            <p class="product-name">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:10) + '...' : item.TenSP }}</p>
             <p *ngIf="item.TinhTrang!=='Hết hàng'" class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
             <p *ngIf="item.TinhTrang==='Hết hàng'" class="product-price">Hết Hàng</p>
         </div>
-        <div class="product-button">
+    </a>
+        <div (click)="goToShop(item.MaCH._id)" class="product-button">
             <div class="icon"><mat-icon>monetization_on</mat-icon></div>
             
             <p>Go shop</p>
         </div>
         </div>
     </div>
+</ng-container>
 </div>
 
 

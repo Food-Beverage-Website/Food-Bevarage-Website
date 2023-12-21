@@ -1,0 +1,46 @@
+
+<h1 class="text-[25px] font-bold text-white bg-pink-900 flex px-3">
+    <p>Cửa hàng nước uống</p>
+</h1>
+<div class="h-[50px] bg-pink-50 flex px-3">
+    <div class="flex items-center gap-x-5">
+        
+           
+            <div  class="flex border-2 px-3 py-2"><mat-icon>near_me</mat-icon>Cửa hàng gần nhất</div>
+
+            
+
+            <div class="flex ml-[600px]">
+                <input class="border" type="text">
+                <div class="bg-blue-100 px-3 ">Tìm kiếm</div>
+            </div>
+    </div>
+
+
+</div>
+
+<div class="container mt-4 mr-auto ml-auto" >
+    <div class="row">
+        <div class="grid grid-cols-3 gap-x-5 md-4">
+            <ng-container *ngFor="let store of stores">
+            <div (click)="goToShop(store._id)" class="card transition duration-700 ease-in-out">
+                <img  class="h-[150px] w-full" [src]="'assets/Images/' + store.Hinh"  >
+                <div class="card-body px-2">
+                    <div  class="name-Store">
+                        {{store.TenCuaHang}}
+                    </div>
+                    <div class="address-Store">
+                        {{ store.DiaChi}}
+                    </div>
+                    <div class="pnumber-Store">
+                        Số sản phẩm: {{getNumberProducts(store._id)}}
+                    </div>
+                    <div class="time-Store flex justify-end">
+                        <div class="open">O: {{store.GioMoCua}}</div>&nbsp;<div class="close"> C: {{store.GioDongCua}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        </div>
+    </div>
+</div> 

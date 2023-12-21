@@ -52,6 +52,16 @@ router.get("/getProduct", asynceHandler(async (req, res) => {
 }));
 
 
+router.get("/getProductAll_KVH", asynceHandler(async (req, res) => {
+ 
+  const productsWithStoreInfo = await ProductModel.find().populate('MaCH');
+
+
+  res.send(productsWithStoreInfo);
+
+}));
+
+
 router.get("/getProductByIdStore/:idStore", asynceHandler(async (req, res) => {
     const idStore = req.params.idStore;
     const products = await ProductModel.find({ MaCH:idStore});
@@ -260,6 +270,72 @@ router.delete("/deleteProduct/:idProduct", asynceHandler(async (req, res) => {
 }));
 
   
+router.get("/getNewProducts", async (req, res) => {
+    try {
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() - 7);
+  
+      const newProducts = await ProductModel.find({
+        NgayDang: {
+          $gte: formatDate(endDate),
+          $lte: formatDate(new Date()),
+        },
+      });
+  
+      console.log(newProducts);
+      res.send(newProducts);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: 'Internal Server Error' });
+    }
+  });
+  
+ 
+  function formatDate(date:any) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Months are zero-based
+    const year = date.getFullYear();
+  
+    // Ensure leading zeros
+    const formattedDate = `${day < 10 ? '0' : ''}${day}/${
+      month < 10 ? '0' : ''
+    }${month}/${year}`;
+  
+    return formattedDate;
+  }
+
+
+
+interface AggregatedProduct {
+    _id: string;
+    totalSold: number;
+  }
+
+  
+  router.get('/top25_products', async (req, res) => {
+      try {
+        const topSellingProducts = await DonHangModel.aggregate([
+          { $unwind: '$ChiTietDonHang' },
+          {
+            $group: {
+              _id: '$ChiTietDonHang.SanPham',
+              SoLuongBan: { $sum: '$ChiTietDonHang.SL' },
+            },
+          },
+          { $sort: { SoLuongBan: -1 } },
+          { $limit: 25 },
+        ]);
+  
+        const topSellingProductsDetails = await ProductModel.populate(topSellingProducts, { path: '_id' });
+  
+        // Respond with the top-selling products within orders
+        res.send(topSellingProductsDetails);
+      } catch (error) {
+        // Handle errors
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    });
 
 
 export default router;

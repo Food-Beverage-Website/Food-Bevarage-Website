@@ -43,7 +43,7 @@ export class ProductlistComponent {
     this.productService.getAllProductbyidStore(this.idStore).subscribe((products) => {
       if (products) {
         this.productInfor = products;
-        
+        this.countProducts
       } else {
         console.error("Cửa hàng hiện tại không phục vụ");
       }
@@ -74,7 +74,7 @@ export class ProductlistComponent {
   {
     this.storeService.getStorebyNameSearch(this.result).subscribe((store) => {
       this.idStore=store[0]._id;
-      alert(this.idStore)
+  
             this.store = store[0];
     });
   
@@ -96,7 +96,7 @@ export class ProductlistComponent {
 
   goToShop(idShop:string)
   {
-    alert(idShop);
+ 
     this.router.navigateByUrl('/store/'+idShop);
   }
   

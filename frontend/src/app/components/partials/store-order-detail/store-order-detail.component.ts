@@ -75,6 +75,8 @@ export class StoreOrderDetailComponent implements OnInit {
   }
 
   loadTopping(idTB: string): string {
+    console.log(idTB); // Use console.log instead of console
+    console.log(JSON.stringify(this.topping.Topping)); // Fix
     const foundTopping = this.topping.Topping.find(item => item._id === idTB);
   
     return foundTopping ? foundTopping.tentopping : 'N/A';

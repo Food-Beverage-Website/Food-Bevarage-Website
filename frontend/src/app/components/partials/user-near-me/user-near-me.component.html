@@ -1,0 +1,109 @@
+<div class="h-[50px] bg-pink-900 flex px-3 bg-pink-200">
+    <div class="flex items-center gap-x-5 ">
+        
+            <select (change)="sort($event)" class="border-2 px-3 py-2">
+                <option disabled selected>Xếp sếp sản phẩm:</option>
+                <option  value="PriceDecrease">Từ cao đến thấp</option>
+                <option  value="PriceAscending">Từ thấp đến cap</option>
+            </select>
+
+            <div (click)="near_me()" class="cursor-pointer flex border-2 px-3 py-2 bg-white"><mat-icon>near_me</mat-icon>Cửa hàng gần nhất</div>
+
+            
+
+            <div class="flex ml-[400px]">
+                <input [(ngModel)]="search" class="border px-2" type="text">
+                <div (click)="searchProduct()" class="bg-blue-100 px-3 ">Tìm kiếm</div>
+            </div>
+    </div>
+</div>
+
+<br>
+
+
+<div class="flex px-3 ">
+
+    <div class="w-[250px] bg-gray-100">
+        <div class="flex px-3">
+            <span class="material-symbols-outlined" style="font-size: 20px;"> filter_alt</span>
+            <p class="text-[15px]">Bộ lọc tìm kiếm</p>
+        </div>
+        <hr>
+    
+        <div class="px-3 mt-[12px]">
+            <div class="flex">
+                <p class="text-[14px] ">Nơi bán</p>
+                <p class="text-[10px] ml-auto mt-auto text-red-500 font-bold">Bán kính 3km</p>
+            </div>
+           
+           <label>
+            <ng-container *ngFor="let itemm of getUniqueProvinces(provinces)">
+                <input type="checkbox" name="myCheckbox" (change)="onCheckboxChange(itemm)">
+                &nbsp; {{itemm}}<br>
+              </ng-container>
+            </label>
+        </div>
+
+        <hr>
+        <div class="px-3 mt-[15px]">
+            <p class="text-[13px] ">Khoảng giá</p>
+            <div class="flex justify-center gap-x-5">
+                <input [(ngModel)]="priceMin" type="number" class="border w-[100px] px-2"> <span>-</span> <input  [(ngModel)]="priceMax" type="number" class=" px-2 border w-[100px]">
+            </div>
+
+            <div class=" flex justify-center px-3 mt-[10px]">
+               <div (click)="filterPrice()"  class="cursor-pointer px-2 bg-pink-900 w-full px-2"><p class="text-white font-bold text-[15px] text-center">Áp dụng</p></div>
+            </div>
+        </div>
+
+    </div>
+
+<div class="list-product h-[1000px]  overflow-y-scroll">
+    <ng-container *ngFor="let item of product">
+    <a *ngIf="item.TinhTrang!=='Ẩn'" [href]="'/detailproduct/' + item._id">
+        <div class="item-product" >
+            <div class="  relative h-[245px]" [style.backgroundImage]="'url(assets/Images/' + item.Hinh + ')'" style="background-size: cover; background-position: center;">
+                <div  class=" hih  duration-700 ease-in-out  transition-all   opacity-25 bg-black w-full h-[0px] absolute  flex justify-center items-center">
+                    <span class="material-symbols-outlined icon-cart " style="color: aliceblue;">
+                        add_shopping_cart
+                    </span>
+                </div>
+                
+              </div>
+            <!-- <div class="relative"  >
+              
+               
+            </div> -->
+            
+            <!-- <img [src]="'assets/Images/' + item.Hinh"  > -->
+            <div class="infor-product">
+                <div class="flex">
+                    <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:14 }} ...  </p>
+                    <p class="product-address ml-auto"> <mat-icon class="text-orange-600 font-bold "></mat-icon> ~{{calMap(item.MaCH.ToaDo) }}km</p>
+                </div>
+           
+            <p  class="product-store">{{ item.MaCH.TenCuaHang | slice:0:20 }} </p>
+        
+                <p class="product-name ">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...' : item.TenSP }}</p>
+                <div class="" *ngIf="checkvoucherProduct(item._id)!==1"> 
+                        <p class="product-price">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                </div>
+                <div class="flex" *ngIf="checkvoucherProduct(item._id)===1">
+                    <p  class="">{{ voucherProduct(item._id,getMinPrice(item.DonGia).toString()) | currency:'VND':'symbol':'1.0-0' }}</p>
+                    <p  class="line-through text-[10px] text-red-500 ml-[5px] ">{{ getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                </div>
+
+
+            <div (click)="goToShop(item.MaCH._id)" class="product-button">
+                <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+                
+                <p>Go shop</p>
+            </div>
+            </div>
+        </div>
+    </a>
+</ng-container>
+</div>
+
+
+</div>

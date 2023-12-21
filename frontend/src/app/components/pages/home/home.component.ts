@@ -61,6 +61,10 @@ export class HomeComponent implements OnInit {
 
   }
 
+  nearme(){
+    this.router.navigateByUrl('/nearme');
+  }
+
   loadvoucher(){
   
     
@@ -96,6 +100,10 @@ export class HomeComponent implements OnInit {
     return hasVoucher;
   }
   
+
+  getTieuMuc(id:string){
+    this.router.navigateByUrl('/category/'+id);
+  }
   
 
   voucherProduct(idSP: string, price: string): number {
@@ -151,7 +159,15 @@ export class HomeComponent implements OnInit {
   }
   
 
-  
+  newDishes(){
+    this.router.navigateByUrl('/newDishes');
+  }
+  toTopProducts(){
+    this.router.navigateByUrl('/top-25-products');
+  }
+  toTopStores(){
+    this.router.navigateByUrl('/top-3-stores');
+  }
 
 
   ngOnInit(): void {

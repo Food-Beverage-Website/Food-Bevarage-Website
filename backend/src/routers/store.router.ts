@@ -5,7 +5,7 @@ import { DonHangModel } from "../models/order.model";
 import { ProductModel } from "../models/product.model";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-const moment = require('moment');
+import moment from "moment";
 
 const router = Router();
 const nodemailer = require("nodemailer");
@@ -257,14 +257,15 @@ router.patch("/updateStore", asynceHandler(async (req, res) => {
 
 
 router.patch("/updateToaDo", asynceHandler(async (req, res) => {
-  const { _id, ToaDo } = req.body;
+  const { _id, ToaDo,DiaChi } = req.body;
 
   try {
     const updatedStore = await StoreModel.findOneAndUpdate(
       { _id: _id },
       {
         $set: {
-          ToaDo: ToaDo
+          ToaDo: ToaDo,
+          DiaChi:DiaChi
         }
       },
       { new: true }
@@ -283,6 +284,16 @@ router.patch("/updateToaDo", asynceHandler(async (req, res) => {
   }
 }));
 
+router.get("/get_Store_All",asynceHandler(
+  async (req,res)=>{ 
+    try {
+      const stores = await StoreModel.find();
+      res.send(stores);
+    } catch (error) {
+      console.error('Error fetching stores:', error);
+      res.status(500).send({ message: 'Internal server error' });
+    }
+  }));
 
 
 
@@ -357,6 +368,7 @@ const generateTokenResponse = (store: any)=> {
 };
 
 
+
 router.post("/thongke_Thang_SoDon_store", async (req, res) => {
   try {
     const idStore = req.body.MaCH.MaCH;
@@ -390,8 +402,8 @@ router.post("/thongke_Thang_SoDon_store", async (req, res) => {
           don_huy3thang[monthDiff] += 1;
           tongSoDon3thang[monthDiff] += 1;
         }
-        let tent = monthName - 2;
-
+        
+        let tent = parseInt(monthName, 10) - 2;
         for(let i = 0; i < monthDiff; i++)
         {
           let tt = `Tháng ${tent}`;
@@ -449,7 +461,7 @@ router.post("/thongke_Thang_DoanhThu_store", async (req, res) => {
         if (donHang.TinhTrangDonHang === "Đã giao") {
           don_doanhthu3thang[monthDiff] += donHang.TongTien;
         } 
-        let tent = monthName - 2;
+        let tent = parseInt(monthName, 10) - 2;
 
         for(let i = 0; i < monthDiff; i++)
         {
@@ -513,7 +525,7 @@ router.post("/thongke_7ngay_SoDon_store", async (req, res) => {
           don_huy7ngay[dayDiff] += 1;
           tongSoDon7ngay[dayDiff] += 1;
         }
-        
+
         for(let i = 0; i < dayDiff; i++)
         {
           let tt = moment(startOfSevenDaysAgo).add(i, 'days').format("DD/MM");
@@ -701,9 +713,6 @@ router.post("/thongke_Top5_SP_BanE_store", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
-
-
 
 
 export default router;

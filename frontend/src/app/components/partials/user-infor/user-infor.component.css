@@ -11,5 +11,5 @@
 }
 
 .btn-option{
-    @apply px-[5px] py-1 bg-sky-100 text-[15px] w-[300px]
+    @apply px-[5px] py-1 bg-pink-500 text-[15px] w-[300px] text-white font-bold
 }

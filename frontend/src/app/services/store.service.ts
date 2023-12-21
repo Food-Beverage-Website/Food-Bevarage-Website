@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { Store } from '../shared/models/store';
-import {STORE_THONGKE_TOP5_SP_BANE, STORE_THONGKE_TOP5_SP_BANCHAY, STORE_THONGKE_7NGAY_DOANHTHU, STORE_THONGKE_7NGAY_SODON, STORE_THONGKE_THANG_DOANHTHU, STORE_THONGKE_THANG_SODON, STORE_BEST_SELLING_GET_URL, STORE_CATEGORY_ADD_URL, STORE_GET_BY_ID_URL, STORE_LOGIN_URL, STORE_NEW_URL, STORE_SEARCH_BY_NAME_URL, STORE_UPDATE_DISTANCE_URL, STORE_UPDATE_URL } from '../shared/constants/urls';
+import {  GET_ALL_STORE, STORE_BEST_SELLING_GET_URL, STORE_CATEGORY_ADD_URL, STORE_GET_BY_ID_URL, STORE_LOGIN_URL, STORE_NEW_URL, STORE_SEARCH_BY_NAME_URL, STORE_THONGKE_7NGAY_DOANHTHU, STORE_THONGKE_7NGAY_SODON, STORE_THONGKE_THANG_DOANHTHU, STORE_THONGKE_THANG_SODON, STORE_THONGKE_TOP5_SP_BANCHAY, STORE_THONGKE_TOP5_SP_BANE, STORE_UPDATE_DISTANCE_URL, STORE_UPDATE_URL } from '../shared/constants/urls';
 import { IStoreCategory, IStoreDistanceUpdate, IStoreLogin, IStoreNew, IStoreUpDate } from '../shared/interfaces/IStoreLogin';
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
@@ -169,6 +169,10 @@ export class StoreService {
     });
   }
   
+  getAllStore():Observable<Store[]>{
+    return this.http.get<Store[]>(GET_ALL_STORE);
+  }
+
   get_ThongKe_Thang_SoDon_Store(MaCH: any): Observable<any> {
     const url = `${STORE_THONGKE_THANG_SODON}`;
     return this.http.post<any>(url, { MaCH });
@@ -198,5 +202,4 @@ export class StoreService {
     const url = `${STORE_THONGKE_TOP5_SP_BANE}`;
     return this.http.post<any>(url, { MaCH });
   }
-  
 }

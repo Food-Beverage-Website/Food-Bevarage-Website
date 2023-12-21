@@ -92,6 +92,7 @@
             <th class="w-[120px]">Ngày Tạo</th>
             <th class="w-[100px]">Hình</th>
             <th class="w-[100px]">Trạng thái</th>
+          
           </tr>
         </thead>
         <tbody>
@@ -108,6 +109,7 @@
                 <mat-icon *ngIf="item.TinhTrang=='Ẩn'" class="text-red-500">adjust</mat-icon>
                 <mat-icon *ngIf="item.TinhTrang=='Hết hàng'" class="text-yellow-500">adjust</mat-icon>
               </td>
+             
             </tr>
             <!-- Dòng chi tiết hàng -->
             <tr [style.display]="isRowVisible[j] ? 'table-row' : 'none'">

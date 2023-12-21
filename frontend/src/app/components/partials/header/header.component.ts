@@ -11,6 +11,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { DistanceService } from 'src/app/services/distance.service';
 import { DistanceBuyerService } from 'src/app/services/session/distance_buyer';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
 
   diachi!:string;
 
+
   isSubMenuVisible = false;
   constructor(private orderService:OrderService,
     private router:Router,
@@ -37,8 +39,11 @@ export class HeaderComponent implements OnInit {
       private storeService:StoreService,
       private loadingService:LoadingService,
       private distanceService:DistanceService,
-      private distanceBuyer:DistanceBuyerService
+      private distanceBuyer:DistanceBuyerService,
+ 
       ){
+
+
   
     userService.userObservable.subscribe((newUser)=>{
       this.user= newUser;
@@ -53,8 +58,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+ 
     this.loadMap()
   }
+
+ 
+
 
   cartUser():void{
 
@@ -80,6 +89,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
+ 
 
 
   search(term:string):void{
@@ -109,11 +119,19 @@ export class HeaderComponent implements OnInit {
         this.distanceBuyer.currentLongitude = position.coords.longitude;
         this.lat = position.coords.latitude;
         this.lon = position.coords.longitude;
+
+        alert(this.lat +'/'+  this.lon )
   
         this.distanceService.getAddress(this.lat, this.lon).subscribe((item) => {
-     
+        
           this.diachi =  item.address.village || item.address.road ||item.address.quarter||item.address.suburb|| item.address.country  ;
-  
+          if(item.address.amenity)
+          {
+            this.diachi =item.address.amenity
+          }else if(item.address.house_number && item.address.road  )
+          {
+            this.diachi =item.address.house_number +','+item.address.road 
+          }
         });
       },
       (error) => {
@@ -127,8 +145,18 @@ export class HeaderComponent implements OnInit {
    
    
   }
+  tolistStores():void{
+    this.router.navigateByUrl('/list-stores');
+  }
 
   home(){
     this.router.navigateByUrl('/');
   }
+
+
+  nearme(){
+    this.router.navigateByUrl('/nearme');
+  }
 }
+
+

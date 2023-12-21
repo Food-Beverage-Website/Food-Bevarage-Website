@@ -1,1 +1,431 @@
-<p>user-order works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="font-bold text-black text-[20px]">
+            Quản lý đơn hàng
+        </h2>
+    </div>
+
+    <hr class="border-2">
+</div>
+<div class="bg-white">
+    <ul class="nav nav-tabs h-[30px]  flex">
+        <li class="nav-item w-[150px] flex justify-center border-r-[1px]" *ngFor="let tab of tabs; let sr = index"
+            (click)="setTab(sr)">
+            <a type="button" class="nav-link w-full text-center"
+                [ngClass]="activatedTab == sr ? 'active' :''">{{tab}}</a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content  h-[450px] mt-[5px]">
+    <div class="tab-pane fade show active" *ngIf="activatedTab == 0">
+        <h4 class="ml-[5px]  text-[15px]">Tất cả đơn hàng</h4>
+        <div class="h-[430px]  overflow-y-scroll">
+            <table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Ngày đặt</th>
+                        <th>Tình trạng</th>
+                        <th>Cửa hàng</th>
+                        <th>Hoạt động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of orders; let i = index">
+
+                        <tr class="border-t-[2px] ">
+                            <td>{{item._id}}</td>
+                            <td>{{item.TongTien | currency:'VND':'symbol':'1.0-0'}}</td>
+                            <td class="text-center">{{item.NgayDat | date}}</td>
+                            <td>{{item.TinhTrangDonHang}}</td>
+                            <td>{{getStoreName(item.MaCH)}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-primary btn-sm btn-collapse-details" data-toggle="collapse"
+                                    (click)="toggleCollapse(i)">Xem chi tiết</button>
+                                <button class="btn btn-danger btn-sm ml-2"
+                                    *ngIf="item.TinhTrangDonHang == 'Chờ xác nhận'"
+                                    (click)="cancelOrder(item._id)">Hủy</button>
+                            </td>
+                        </tr>
+                        <tr class="border-r-[1px]" [ngClass]="{'collapse': !item.showDetails, 'show': item.showDetails}"
+                            id="{{'orderDetails' + i}}">
+                            <td colspan="6">
+                                <table class=" w-[800px]">
+                                    <thead class=" ">
+                                        <tr>
+                                            <th class="w-[200px] border-r-[1px]">Tên sản phẩm</th>
+                                            <th class="w-[50px] border-r-[1px]">SL</th>
+                                            <th class="w-[100px] border-r-[1px]">Size</th>
+                                            <th class="w-[200px] border-r-[1px]">Topping</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let sanpham of item.ChiTietDonHang">
+                                        <tr>
+                                            <td>{{getProductName(sanpham.SanPham)}}</td>
+                                            <td class="text-center w-[50px]">{{sanpham.SL}}</td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                {{sanpham.DonGia.Size}} | {{sanpham.DonGia.Dongia |
+                                                currency:'VND':'symbol':'1.0-0'}}
+                                            </td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                <p> {{sanpham.DonGia.Size}} | {{sanpham.DonGiaKhuyenMai |
+                                                currency:'VND':'symbol':'1.0-0'}}
+                                                    
+                                                </p>
+                                                <p class="flex" style="justify-content: center">
+                                                    <del>{{sanpham.DonGia.Dongia | currency:'VND':'symbol':'1.0-0'}}</del>
+                                                    <span style="font-size: 15px;"
+                                                        class="text-red-500">(-{{sanpham.KhuyenMai}})</span>
+                                                </p>
+                                            </td>
+                                            <td class="toppings" style="display: block ; padding-left: 10px;"
+                                                *ngFor="let topping  of sanpham.Topping">
+                                                <ul class="flex">
+                                                    <li class="w-[150px]">{{getToppingName(item.MaCH,
+                                                        topping.MaTopping)}} </li>
+                                                    <li class="w-[50px] text-center"> {{topping.SL}}</li>
+                                                    <li class="w-[100px] ">{{topping.DonGia |
+                                                        currency:'VND':'symbol':'1.0-0'}}</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade show active" *ngIf="activatedTab ==1">
+        <h4 class="ml-[5px]  text-[15px]">Chờ xác nhận</h4>
+        <div class="h-[430px]  overflow-y-scroll">
+            <table class="table w-full">
+                <thead>
+
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Ngày đặt</th>
+                        <th>Tình trạng</th>
+                        <th>Cửa hàng</th>
+                        <th>Hoạt động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of orders; let i = index">
+                        <tr *ngIf="item.TinhTrangDonHang == 'Chờ xác nhận'">
+                            <td>{{item._id}}</td>
+                            <td>{{item.TongTien | currency:'VND':'symbol':'1.0-0'}}</td>
+                            <td>{{item.NgayDat | date}}</td>
+                            <td>{{item.TinhTrangDonHang}}</td>
+                            <td>{{getStoreName(item.MaCH)}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn-collapse-details" data-toggle="collapse"
+                                    (click)="toggleCollapse(i)">Xem chi tiết</button>
+                                <button class="btn btn-danger btn-sm ml-2"
+                                    *ngIf="item.TinhTrangDonHang == 'Chờ xác nhận'"
+                                    (click)="cancelOrder(item._id)">Hủy</button>
+                            </td>
+                        </tr>
+                        <tr [ngClass]="{'collapse': !item.showDetails, 'show': item.showDetails}"
+                            id="{{'orderDetails' + i}}">
+                            <td colspan="6">
+                                <table class="table table-light small" style="width: 80%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="w-[200px] border-r-[1px]">Tên sản phẩm</th>
+                                            <th class="w-[50px] border-r-[1px]">SL</th>
+                                            <th class="w-[100px] border-r-[1px]">Size</th>
+                                            <th class="w-[200px] border-r-[1px]">Topping</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let sanpham of item.ChiTietDonHang">
+                                        <tr>
+                                            <td>{{getProductName(sanpham.SanPham)}}</td>
+                                            <td>{{sanpham.SL}}</td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                {{sanpham.DonGia.Size}} | {{sanpham.DonGia.Dongia |
+                                                currency:'VND':'symbol':'1.0-0'}}
+                                            </td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                <p> {{sanpham.DonGia.Size}} | {{sanpham.DonGiaKhuyenMai |
+                                                currency:'VND':'symbol':'1.0-0'}}
+                                                </p>
+                                                <p class="flex" style="justify-content: center">
+                                                    <del>{{sanpham.DonGia.Dongia | currency:'VND':'symbol':'1.0-0'}}</del>
+                                                    <span style="font-size: 15px;"
+                                                        class="text-red-500">(-{{sanpham.KhuyenMai}})</span>
+                                                </p>
+                                            </td>
+                                            <td class="toppings" style="display: block ; padding-left: 10px;"
+                                                *ngFor="let topping  of sanpham.Topping">
+                                                <ul class="flex">
+                                                    <li class="w-[150px]">{{getToppingName(item.MaCH,
+                                                        topping.MaTopping)}} </li>
+                                                    <li class="w-[50px] text-center"> {{topping.SL}}</li>
+                                                    <li class="w-[100px] ">{{topping.DonGia |
+                                                        currency:'VND':'symbol':'1.0-0'}}</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade show active" *ngIf="activatedTab == 2">
+        <h4 class="ml-[5px]  text-[15px]">Đang giao hàng</h4>
+        <table class="table w-full">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày đặt</th>
+                    <th>Tình trạng</th>
+                    <th>Cửa hàng</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let item of orders; let i = index">
+                    <tr *ngIf="item.TinhTrangDonHang == 'Đang giao hàng'">
+                        <td>{{item._id}}</td>
+                        <td>{{item.TongTien | currency:'VND':'symbol':'1.0-0'}}</td>
+                        <td>{{item.NgayDat | date}}</td>
+                        <td>{{item.TinhTrangDonHang}}</td>
+                        <td>{{getStoreName(item.MaCH)}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm btn-collapse-details" data-toggle="collapse"
+                                (click)="toggleCollapse(i)">Xem chi tiết |</button>
+                            <button class="btn btn-danger btn-sm ml-2"
+                                *ngIf="item.TinhTrangDonHang == 'Đang giao hàng'" (click)="xacThucOrder(item._id)">Xác nhận đã giao</button>
+                        </td>
+                    </tr>
+                    <tr [ngClass]="{'collapse': !item.showDetails, 'show': item.showDetails}"
+                        id="{{'orderDetails' + i}}">
+                        <td colspan="6">
+                            <table class="table table-light small " style="width: 80%;">
+                                <thead>
+                                    <tr>
+                                        <th class="w-[200px] border-r-[1px]">Tên sản phẩm</th>
+                                        <th class="w-[50px] border-r-[1px]">SL</th>
+                                        <th class="w-[100px] border-r-[1px]">Size</th>
+                                        <th class="w-[200px] border-r-[1px]">Topping</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let sanpham of item.ChiTietDonHang">
+                                    <tr>
+                                        <td>{{getProductName(sanpham.SanPham)}}</td>
+                                        <td>{{sanpham.SL}}</td>
+                                        <td class="text-center"
+                                            *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                            {{sanpham.DonGia.Size}} | {{sanpham.DonGia.Dongia |
+                                            currency:'VND':'symbol':'1.0-0'}}
+                                        </td>
+                                        <td class="text-center"
+                                            *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                            <p> {{sanpham.DonGia.Size}} | {{sanpham.DonGiaKhuyenMai |
+                                                currency:'VND':'symbol':'1.0-0'}}
+                                            </p>
+                                            <p class="flex" style="justify-content: center">
+                                                <del>{{sanpham.DonGia.Dongia | currency:'VND':'symbol':'1.0-0'}}</del>
+                                                <span style="font-size: 15px;"
+                                                    class="text-red-500">(-{{sanpham.KhuyenMai}})</span>
+                                            </p>
+                                        </td>
+                                        <td class="toppings" style="display: block ; padding-left: 10px;"
+                                            *ngFor="let topping  of sanpham.Topping">
+                                            <ul class="flex">
+                                                <li class="w-[150px]">{{getToppingName(item.MaCH, topping.MaTopping)}}
+                                                </li>
+                                                <li class="w-[50px] text-center"> {{topping.SL}}</li>
+                                                <li class="w-[100px] ">{{topping.DonGia |
+                                                    currency:'VND':'symbol':'1.0-0'}}</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade show active" *ngIf="activatedTab == 3">
+        <h4 class="ml-[5px]  text-[15px]">Đã nhận</h4>
+        <div class="h-[430px]  overflow-y-scroll">
+            <table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Ngày đặt</th>
+                        <th>Tình trạng</th>
+                        <th>Cửa hàng</th>
+                        <th>Hoạt động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of orders; let i = index">
+                        <tr *ngIf="item.TinhTrangDonHang == 'Đã giao'">
+                            <td>{{item._id}}</td>
+                            <td>{{item.TongTien | currency:'VND':'symbol':'1.0-0'}}</td>
+                            <td>{{item.NgayDat | date}}</td>
+                            <td>{{item.TinhTrangDonHang}}</td>
+                            <td>{{getStoreName(item.MaCH)}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn-collapse-details" data-toggle="collapse"
+                                    (click)="toggleCollapse(i)">Xem chi tiết</button>
+                                <button class="btn btn-danger btn-sm ml-2"
+                                    *ngIf="item.TinhTrangDonHang == 'Chờ xác nhận'">Update</button>
+                            </td>
+                        </tr>
+                        <tr [ngClass]="{'collapse': !item.showDetails, 'show': item.showDetails}"
+                            id="{{'orderDetails' + i}}">
+                            <td colspan="6">
+                                <table class="table table-light small" style="width: 80%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="w-[200px] border-r-[1px]">Tên sản phẩm</th>
+                                            <th class="w-[50px] border-r-[1px]">SL</th>
+                                            <th class="w-[100px] border-r-[1px]">Size</th>
+                                            <th class="w-[200px] border-r-[1px]">Topping</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let sanpham of item.ChiTietDonHang">
+                                        <tr>
+                                            <td>{{getProductName(sanpham.SanPham)}}</td>
+                                            <td>{{sanpham.SL}}</td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                {{sanpham.DonGia.Size}} | {{sanpham.DonGia.Dongia |
+                                                currency:'VND':'symbol':'1.0-0'}}
+                                            </td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                <p> {{sanpham.DonGia.Size}} | {{sanpham.DonGiaKhuyenMai |
+                                                    currency:'VND':'symbol':'1.0-0'}}
+                                                </p>
+                                                <p class="flex" style="justify-content: center">
+                                                    <del>{{sanpham.DonGia.Dongia | currency:'VND':'symbol':'1.0-0'}}</del>
+                                                    <span style="font-size: 15px;"
+                                                        class="text-red-500">(-{{sanpham.KhuyenMai}})</span>
+                                                </p>
+                                            </td>
+                                            <td class="toppings" style="display: block ; padding-left: 10px;"
+                                                *ngFor="let topping  of sanpham.Topping">
+                                                <ul class="flex">
+                                                    <li class="w-[150px]">{{getToppingName(item.MaCH,
+                                                        topping.MaTopping)}} </li>
+                                                    <li class="w-[50px] text-center"> {{topping.SL}}</li>
+                                                    <li class="w-[100px] ">{{topping.DonGia |
+                                                        currency:'VND':'symbol':'1.0-0'}}</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade show active" *ngIf="activatedTab == 4">
+        <h4 class="ml-[5px]  text-[15px]">Đã hủy</h4>
+        <div class="h-[430px]  overflow-y-scroll">
+            <table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Ngày đặt</th>
+                        <th>Tình trạng</th>
+                        <th>Cửa hàng</th>
+                        <th>Hoạt động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of orders; let i = index">
+                        <tr *ngIf="item.TinhTrangDonHang == 'Đã hủy'">
+                            <td>{{item._id}}</td>
+                            <td>{{item.TongTien | currency:'VND':'symbol':'1.0-0'}}</td>
+                            <td>{{item.NgayDat | date}}</td>
+                            <td>{{item.TinhTrangDonHang}}</td>
+                            <td>{{getStoreName(item.MaCH)}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn-collapse-details" data-toggle="collapse"
+                                    (click)="toggleCollapse(i)">Xem chi tiết</button>
+                                <button class="btn btn-danger btn-sm ml-2"
+                                    *ngIf="item.TinhTrangDonHang == 'Chờ xác nhận'"
+                                    (click)="cancelOrder('item._id')">Hủy</button>
+                            </td>
+                        </tr>
+                        <tr [ngClass]="{'collapse': !item.showDetails, 'show': item.showDetails}"
+                            id="{{'orderDetails' + i}}">
+                            <td colspan="6">
+                                <table class="table table-light small" style="width: 80%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="w-[200px] border-r-[1px]">Tên sản phẩm</th>
+                                            <th class="w-[50px] border-r-[1px]">SL</th>
+                                            <th class="w-[100px] border-r-[1px]">Size</th>
+                                            <th class="w-[200px] border-r-[1px]">Topping</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let sanpham of item.ChiTietDonHang">
+                                        <tr>
+                                            <td>{{getProductName(sanpham.SanPham)}}</td>
+                                            <td>{{sanpham.SL}}</td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                {{sanpham.DonGia.Size}} | {{sanpham.DonGia.Dongia |
+                                                currency:'VND':'symbol':'1.0-0'}}
+                                            </td>
+                                            <td class="text-center"
+                                                *ngIf="sanpham.DonGiaKhuyenMai != 0 && sanpham.DonGiaKhuyenMai != undefined">
+                                                <p> {{sanpham.DonGia.Size}} | {{sanpham.DonGiaKhuyenMai |
+                                                    currency:'VND':'symbol':'1.0-0'}}
+                                                </p>
+                                                <p class="flex" style="justify-content: center">
+                                                    <del>{{sanpham.DonGia.Dongia | currency:'VND':'symbol':'1.0-0'}}</del>
+                                                    <span style="font-size: 15px;"
+                                                        class="text-red-500">(-{{sanpham.KhuyenMai}})</span>
+                                                </p>
+                                            </td>
+                                            <td class="toppings" style="display: block ; padding-left: 10px;"
+                                                *ngFor="let topping  of sanpham.Topping">
+                                                <ul class="flex">
+                                                    <li class="w-[150px]">{{getToppingName(item.MaCH,
+                                                        topping.MaTopping)}} </li>
+                                                    <li class="w-[50px] text-center"> {{topping.SL}}</li>
+                                                    <li class="w-[100px] ">{{topping.DonGia |
+                                                        currency:'VND':'symbol':'1.0-0'}}</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

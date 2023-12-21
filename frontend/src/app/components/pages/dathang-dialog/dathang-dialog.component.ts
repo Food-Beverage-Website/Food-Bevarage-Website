@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { ToastrService } from 'ngx-toastr';
@@ -6,14 +6,26 @@ import { retry } from 'rxjs';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrderService } from 'src/app/services/order.service';
 
+declare var paypal:any;
 @Component({
   selector: 'app-dathang-dialog',
   templateUrl: './dathang-dialog.component.html',
   styleUrls: ['./dathang-dialog.component.css'],
 })
-export class DathangDialogComponent {
+export class DathangDialogComponent implements OnInit, DoCheck{
+  cartJson: any;
 
-  constructor(private oderService: OrderService, private toastr: ToastrService) { }
+  constructor(private oderService: OrderService, private toastr: ToastrService)  { 
+    
+  }
+  ngDoCheck(): void {
+    
+  }
+  ngOnInit(): void {
+  
+   
+  }
+
   modifyVoucher=true
   activeModal = inject(NgbActiveModal);
 
@@ -26,6 +38,12 @@ export class DathangDialogComponent {
   selectedDiaChi: string = "";
   selectedThanhToan: string = "";
   selectedGhiChu: string = "";
+
+  dataPayment!:any;
+  
+
+ 
+  
 
   setGhiChu(gc: string)
   {
@@ -41,14 +59,16 @@ export class DathangDialogComponent {
   }
 
   taoJsonThanhToan() {
+
     if (this.danhsachSPdathang.length === undefined) {
       return 0;
     } else {
-
+     
       const currentDateTime = new Date(); // Lấy thời gian hiện tại
 
-      const cartJson = {
+      this.cartJson = {
         NgayDat: currentDateTime.toISOString(),
+        paymentId:'null',
         PhuongThucThanhToan: this.selectedThanhToan,
         TinhTrangDonHang: 'Chờ xác nhận',
         ChitietDonHang: this.danhsachSPdathang[0].GioHang.map((tt: any) => {
@@ -77,41 +97,32 @@ export class DathangDialogComponent {
         GhiChu: this.selectedGhiChu,
       };
 
-      console.log(cartJson);
-      return cartJson;
+      
+      this.dataPayment=this.cartJson
+      return this.cartJson;
     }
+
+
   }
 
 
   truyenJsonDatHang() {
-    if (this.selectedDiaChi == "" && this.selectedThanhToan == "") {
+    if (this.selectedDiaChi == "" || this.selectedThanhToan == "") {
       this.toastr.error("Hãy chọn địa chỉ nhận hàng và phương thức thanh toán")
-      return;
+   
     }
     else if (this.selectedDiaChi == "") {
       this.toastr.error("Hãy chọn địa chỉ nhận hàng", "Thông báo lõi")
-      return;
+     
     }
     else if (this.selectedThanhToan == "") {
       this.toastr.error("Hãy chọn phương thức thanh toán");
-      return;
+
     }
     else {
-      this.oderService.oder_GioHang(this.taoJsonThanhToan()).subscribe(
-        (response) => {
-          console.log('Đặt hàng thành công:', response);
-          // Xử lý dữ liệu nhận được từ server ở đây
-          this.toastr.success('Đãt hàng thành công!', 'Thông báo!');
-
-        },
-        (error) => {
-          console.error('Lỗi đặt hàng:', error);
-          this.toastr.error('Lỗi đặt hàng!', 'Thông báo lỗi!');
-
-          // Xử lý lỗi ở đây
-        }
-      );
-
+      alert("Mãi chua")
+      this.taoJsonThanhToan()
+     
     }
 
 

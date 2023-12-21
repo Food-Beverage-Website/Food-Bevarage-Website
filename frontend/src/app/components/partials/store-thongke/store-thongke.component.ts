@@ -4,6 +4,7 @@ import { Store } from 'src/app/shared/models/store';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
+import { Router } from '@angular/router';
 
 
 
@@ -14,7 +15,7 @@ import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 })
 export class StoreThongkeComponent {
   store!: Store;
-
+  active = 1;
   danhsachThongKe_Thang_SoDon: any = {};
   danhsachThongKe_7Ngay_SoDon: any = {};
   danhsachThongKe_Thang_DoanhThu: any = {};
@@ -24,7 +25,12 @@ export class StoreThongkeComponent {
 
   tenThangSoDon: string[] = [];
 
-  constructor(private storeService: StoreService) {
+  constructor(
+    private storeService: StoreService,
+    private router:Router
+
+    
+    ) {
     storeService.storeObservable.subscribe((newStore) => {
       this.store = newStore;
       console.log(this.store);
@@ -39,7 +45,8 @@ export class StoreThongkeComponent {
     this.randomizeDoanhThu3Thang();
     this.randomizeSoDon7Ngay();
     this.randomizeDoanhThu7Ngay();
-
+    this.changeLegendPosition_ChartTop5_BanChayNhat();
+    this.changeLegendPosition_ChartTop5_BanENhat();
 
 
 
@@ -78,6 +85,7 @@ export class StoreThongkeComponent {
 
     });
 
+   
 
     this.storeService.get_ThongKe_Top5_SP_BanENhat_Store(idch).subscribe((item) => {
       this.danhsachTop5_SP_BanENhat = item;
@@ -86,6 +94,13 @@ export class StoreThongkeComponent {
 
 
   }
+
+  voucher()
+  {
+    this.router.navigateByUrl('/storee/voucher');
+
+  }
+
 
   themData_Thang_SoDon3Thang(item: any) {
     this.barChartSoDon3ThangData.labels = item.monthNames;
@@ -493,4 +508,3 @@ export class StoreThongkeComponent {
 
 
 }
-

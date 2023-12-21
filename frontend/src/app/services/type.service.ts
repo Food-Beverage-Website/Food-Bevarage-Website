@@ -12,6 +12,7 @@ export class TypeService {
   constructor(private http:HttpClient) { }
 
   getAll():Observable<Type[]>{
+  
     return this.http.get<Type[]>(TYPE_GET_URL);
   }
 }

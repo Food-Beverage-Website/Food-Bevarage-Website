@@ -4,6 +4,7 @@ import { BuyerModel } from "../models/buyer.model";
 import jwt from "jsonwebtoken";
 import { ToppingModel } from "../models/topping.model";
 import { ProductModel } from "../models/product.model";
+import mongoose from "mongoose";
 
 
 const router = Router();
@@ -136,6 +137,7 @@ router.post("/register", asynceHandler(async (req, res) => {
     const { user, password, TenKhachHang, DiaChi, SDT, Gmail } = req.body;
 
     const defaultCustomer = new BuyerModel({
+      _id: new mongoose.Types.ObjectId(),
       TenKhachHang: TenKhachHang,
       SDT: SDT,
       DiaChi: DiaChi,

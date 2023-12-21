@@ -20,7 +20,14 @@ import { DetailProductComponent } from './components/pages/detail-product/detail
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { StoreOrderDetailComponent } from './components/partials/store-order-detail/store-order-detail.component';
 import { DathangDialogComponent } from './components/pages/dathang-dialog/dathang-dialog.component';
+import { ListStoresComponent } from './components/pages/list-stores/list-stores.component';
+import { NewdishesComponent } from './components/pages/newdishes/newdishes.component';
+import { TopProductsComponent } from './components/pages/top-products/top-products.component';
+import { TopStoresComponent } from './components/pages/top-stores/top-stores.component';
+import { StoreProductToppingComponent } from './components/partials/store-product-topping/store-product-topping.component';
+import { ProductCategoryComponent } from './components/pages/product-category/product-category.component';
 import { StoreThongkeComponent } from './components/partials/store-thongke/store-thongke.component';
+import { UserNearMeComponent } from './components/partials/user-near-me/user-near-me.component';
 
 
 
@@ -30,8 +37,14 @@ const routes: Routes = [
 {path:'login',component:LoginPageComponent},
 {path:'user',component:UserComponent},
 {path:'store/:idStore',component:StoreComponent},
+{path:'store/:idStore',component:StoreComponent},
 {path:'login/register',component:RegisterComponent},
-
+{path:'list-stores',component:ListStoresComponent},
+{path:'newDishes',component:NewdishesComponent},
+{path:'top-25-products',component:TopProductsComponent},
+{path:'top-3-stores',component:TopStoresComponent},
+{path:'category/:name',component:ProductCategoryComponent},
+{path:'nearme', component:UserNearMeComponent},
 { 
  path: 'user/infor',
  component: UserComponent,
@@ -49,6 +62,15 @@ const routes: Routes = [
      component:UserOrderComponent
   }]
  },
+ { 
+   path: 'storee/product/topping/:name',
+   component: StoreManagementComponent,
+   children:[{
+      path:'',
+      component:StoreProductToppingComponent
+   }]
+  }
+ ,
  
  { 
    path: 'storee/category/modify/:name',
@@ -126,6 +148,7 @@ const routes: Routes = [
   },
 //================================================
 //Duy Minh
+
 
 { 
    path: 'storee/thongke',

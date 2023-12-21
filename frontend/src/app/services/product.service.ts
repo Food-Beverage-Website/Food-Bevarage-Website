@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { PRODUCT_ALL_BY_NAME_GET_URL, PRODUCT_ALL_GET_URL, PRODUCT_BEST_SELLER_BY_ID_STORE_URL, PRODUCT_DELETE_BY_ID_URL, PRODUCT_GET_BY_ID_MENU_URL, PRODUCT_GET_BY_ID_STORE_URL, PRODUCT_GET_BY_ID_URL, PRODUCT_NEW_ADD_URL, PRODUCT_UPDATE_BY_ID_URL, PRODUCT_BY_ID_CHITIET, PRODUCT_BY_JSON_PRODUCT_DETAIL, EXCEL_EXPORT_URL} from '../shared/constants/urls';
+import { PRODUCT_ALL_BY_NAME_GET_URL, PRODUCT_ALL_GET_URL, PRODUCT_BEST_SELLER_BY_ID_STORE_URL, PRODUCT_DELETE_BY_ID_URL, PRODUCT_GET_BY_ID_MENU_URL, PRODUCT_GET_BY_ID_STORE_URL, PRODUCT_GET_BY_ID_URL, PRODUCT_NEW_ADD_URL, PRODUCT_UPDATE_BY_ID_URL, PRODUCT_BY_ID_CHITIET, PRODUCT_BY_JSON_PRODUCT_DETAIL, EXCEL_EXPORT_URL, PRODUCT_TOP_25, PRODUCT_LIST_NEW, PRODUCT_ALL_PRODUCT_URL} from '../shared/constants/urls';
 import { Product } from '../shared/models/product';
 import { Injectable } from '@angular/core';
 import { IProducUpdate, IProductAdd } from '../shared/interfaces/IProduct';
@@ -20,6 +20,11 @@ export class ProductService {
 
   getAllProduct():Observable<any[]>{
     return this.http.get<any[]>(PRODUCT_ALL_GET_URL);
+  } // lấy tất cả nhưng có sự random. hình như chỉ lấy 9 sản phẩm thôi nhé 
+
+
+  getALLProduct_2():Observable<any[]>{
+    return this.http.get<any[]>(PRODUCT_ALL_PRODUCT_URL)
   }
 
   getAllProductbyName(name: string): Observable<any[]> {
@@ -142,8 +147,15 @@ export class ProductService {
       );
   }
   
+  getTopProducts():Observable<any[]>{
+    const url = `${PRODUCT_TOP_25}`;
+    return this.http.get<any[]>(url);
+  }
 
-
+  getRecentProduct(): Observable<Product[]>{
+    const url = `${PRODUCT_LIST_NEW}`;
+    return this.http.get<Product[]>(url);
+  }
 
 
 }

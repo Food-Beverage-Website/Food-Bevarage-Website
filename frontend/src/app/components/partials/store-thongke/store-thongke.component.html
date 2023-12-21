@@ -1,87 +1,180 @@
-<div class="px-[100px] mt-[20px] ">
-    <div class="ml-3 w-[400px] h-[400px]" style="float: left;">
-        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+
+<div class="flex px-3">
+    <p class=" text-[20px] text-blue-900 font-bold">Thống kê cửa hàng</p> 
+    
+ </div>
+ <hr>
+
+
+ <div class="flex px-3 justify-center mt-[15px]">
+    <ul class="flex gap-x-[20px] ">
+        <li (click)="active = 1" >
+            <div class="bg-blue-500 rounded-[15px] w-[260px] h-[150px]">
+                <div class="text-white font-bold text-[25px]  px-4 flex ">Đơn hàng</div> 
+                <div class="flex px-4">
+                    <span style="font-size: 100px;" class="material-symbols-outlined ml-auto  text-white">
+                    package_2
+                    </span>
+                </div>
+
+            </div>
+        </li>
+
+        <li (click)="active = 2" >
+            <div class="bg-green-500 rounded-[15px] w-[260px] h-[150px]">
+                <div class="text-white font-bold text-[25px]  px-4 flex ">Doanh thu</div> 
+                <div class="flex px-4">
+                    <span style="font-size: 100px;" class="material-symbols-outlined ml-auto  text-white">
+                        savings
+                    </span>
+                </div>
+
+            </div>
+        </li>
+
+
+        <li (click)="active = 3">
+            <div class="bg-yellow-500 rounded-[15px] w-[260px] h-[150px]">
+                <div class="text-white font-bold text-[25px]  px-4 flex ">Sản phẩm</div> 
+                <div class="flex px-4">
+                    <span style="font-size: 100px;" class="material-symbols-outlined ml-auto  text-white">
+                        donut_small
+                    </span>
+                </div>
+
+            </div>
+        </li>
+    </ul>    
+
+ </div>
+  
+ <div class="flex mt-[25px] px-3">
+    <div>
+        <p class="font-bold text-blue-500 text-[15px]">Sơ đồ biểu thị</p>
+    </div>
+
+ </div>
+ <br>
+  
+  
+ <div *ngIf="active===1"  class="flex gap-x-2">
+
+
+  <div class="ml-[20px] w-[400px] h-[300px]" style="float: left;">
+      
         <canvas class="chart" baseChart [data]="barChartSoDon3ThangData" [options]="barChartSoDon3ThangOptions"
             [type]="barChartSoDon3ThangType" (chartHover)="chartSoDon3ThangHovered($event)"
             (chartClick)="chartSoDon3ThangClicked($event)" style="display: block; box-sizing: border-box;">
         </canvas>
-        <p style="text-align: center;">Số đơn hàng 3 tháng gần nhất</p>
-        <div (click)="randomizeSoDon3Thang()"
-            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
-            <p style="color: white;" class="font-bold">Load data</p>
+        <div class="flex">
+            <div class="flex">
+                <mat-icon (click)="randomizeSoDon3Thang()">change_circle</mat-icon>
+            </div>
+           
+            <p style="text-align: center; margin-left: 70px;">Số đơn hàng 3 tháng gần nhất</p>
         </div>
+       
+      
     </div>
 
-    <div class="ml-3 w-[400px] h-[400px]" style="float: right">
-        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+    <div class="ml-2 w-[400px] h-[300px]" style="float: right">
+      
         <canvas class="chart" baseChart [data]="barChartSoDon7NgayData" [options]="barChartSoDon7NgayOptions"
             [type]="barChartSoDon7NgayType" (chartHover)="chartSoDon7NgayHovered($event)"
             (chartClick)="chartSoDon7NgayClicked($event)" style="display: block; box-sizing: border-box;">
         </canvas>
-        <p style="text-align: center;">Số đơn hàng 7 ngày gần nhất</p>
-        <div (click)="randomizeSoDon7Ngay()"
-            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
-            <p style="color: white;" class="font-bold">Load data</p>
+
+
+        <div class="flex">
+            <div class="flex">
+                <mat-icon (click)="randomizeSoDon7Ngay()" >change_circle</mat-icon>
+            </div>
+           
+            <p style="text-align: center; margin-left: 70px;">Số đơn hàng 7 ngày gần nhất</p>
         </div>
+
     </div>
 
-    <div class="ml-3 w-[400px] h-[400px]"style="float: left;">
-        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+</div>
+
+
+
+<div *ngIf="active===2"  class="flex gap-x-2">
+ <div class="ml-3 w-[400px] h-[300px]"style="float: left;">
+      
         <canvas class="chart" baseChart [data]="barChartDoanhThu3ThangData" [options]="barChartDoanhThu3ThangOptions"
             [type]="barChartDoanhThu3ThangType" (chartHover)="chartDoanhThu3ThangHovered($event)"
             (chartClick)="chartDoanhThu3ThangClicked($event)" style="display: block; box-sizing: border-box;">
         </canvas>
-        <p style="text-align: center;">Doanh thu 3 tháng gần nhất (đ)</p>
-        <div (click)="randomizeDoanhThu3Thang()"
-            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
-            <p style="color: white;" class="font-bold">Load data</p>
+
+        <div class="flex">
+            <div class="flex">
+                <mat-icon (click)="randomizeDoanhThu3Thang()">change_circle</mat-icon>
+            </div>
+           
+            <p style="text-align: center; margin-left: 70px;">Doanh thu 3 tháng gần nhất (đ)</p>
         </div>
+
     </div>
 
-    <div class="ml-3 w-[400px] h-[400px]" style="float: right">
-        <!-- Thay đổi thứ tự canvas và dữ liệu -->
+    <div class="ml-3 w-[400px] h-[300px]" style="float: right">
+      
         <canvas class="chart" baseChart [data]="barChartDoanhThu7NgayData" [options]="barChartDoanhThu7NgayOptions"
             [type]="barChartDoanhThu7NgayType" (chartHover)="chartDoanhThu7NgayHovered($event)"
             (chartClick)="chartDoanhThu7NgayClicked($event)" style="display: block; box-sizing: border-box;">
         </canvas>
-        <p style="text-align: center;">Doanh thu 7 ngày gần nhất (đ)</p>
-        <div (click)="randomizeDoanhThu7Ngay()"
-            class="w-[200px] flex justify-center bg-green-900 px-[10px] py-1 rounded-[20px]">
-            <p style="color: white;" class="font-bold">Load data</p>
+
+        <div class="flex">
+            <div class="flex">
+                <mat-icon (click)="randomizeDoanhThu7Ngay()">change_circle</mat-icon>
+            </div>
+           
+            <p style="text-align: center; margin-left: 70px;">Doanh thu 7 ngày gần nhất (đ)</p>
         </div>
     </div>
+</div>
 
 
-    <div style="width: 500px; float: left;" *ngIf="danhsachTop5_SP_BanChayNhat.soLuongArray.length != 0">
-        <canvas baseChart class="chart"
+
+<div *ngIf="active===3"   class="flex gap-x-2 grid-cols-2">
+
+    
+     <div class="w-[450px] h-[290px] bg-white" *ngIf="danhsachTop5_SP_BanChayNhat.soLuongArray.length != 0">
+        <canvas baseChart 
             [data]="pieChartTop5_BanChayNhatData(danhsachTop5_SP_BanChayNhat.tenSPArray, danhsachTop5_SP_BanChayNhat.soLuongArray)"
             [type]="pieChartTop5_BanChayNhatType" [options]="pieChartTop5_BanChayNhatOptions"
             [plugins]="pieChartTop5_BanChayNhatPlugins">
         </canvas>
 
-
         <div class="button-row">
-            <p>Top 5 sản phẩm bán chạy nhất</p>
-            <button (click)="changeLegendPosition_ChartTop5_BanChayNhat()">
-                Thu gọn
-            </button>
+           
+            <p style="text-align: center; margin-left: 70px;">Top 5 sản phẩm bán chạy nhất</p>
         </div>
     </div>
 
+    
 
-    <div style="width: 500px; float: right;" *ngIf="danhsachTop5_SP_BanENhat.soLuongArray.length != 0">
-        <canvas baseChart class="chart"
+
+     <div  class="w-[450px] h-[290px] bg-white"  *ngIf="danhsachTop5_SP_BanENhat.soLuongArray.length != 0">
+        <canvas baseChart 
             [data]="pieChartTop5_BanENhatData(danhsachTop5_SP_BanENhat.tenSPArray, danhsachTop5_SP_BanENhat.soLuongArray)"
             [type]="pieChartTop5_BanENhatType" [options]="pieChartTop5_BanENhatOptions"
             [plugins]="pieChartTop5_BanENhatPlugins">
         </canvas>
 
 
-        <div class="button-row">
-            <p>Top 5 sản phẩm bán ế nhất</p>
-            <button (click)="changeLegendPosition_ChartTop5_BanENhat()">
-                Thu gọn
-            </button>
+        <div class="button-row flex">
+           
+            <p style="text-align: center; margin-left: 70px;">Top 5 sản phẩm bán ế</p>
+            <div (click)="voucher()" class=" ml-2 bg-red-500 px-2 flex justify-center items-center">
+                
+                <p class="text-[9px] text-center text-white ">
+                    Áp dụng khuyến mãi
+                </p>
+                
+            </div>
         </div>
-    </div>
+   
+</div>  
+
 </div>

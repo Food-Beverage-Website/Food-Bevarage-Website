@@ -1,0 +1,28 @@
+<h1 class="text-[25px] font-bold text-white bg-pink-900 flex px-3">
+    <p>Top 3 cửa hàng</p>
+</h1>
+<div class="container mt-4 mr-auto ml-auto" >
+    <div class="row">
+        <div class="grid grid-cols-3 gap-x-5 md-4">
+            <ng-container *ngFor="let store of stores">
+            <div (click)="goToShop(store._id)" style="transition: border-radius 0.3s ease-in-out;" class="card ">
+                <img class="img-store" src="assets/Images/fe4267c424a0a382326a4e7a16cac9fd.jpg" >
+                <div class="card-body">
+                    <div  class="name-Store">
+                        {{store.TenCuaHang}}
+                    </div>
+                    <div class="address-Store">
+                        {{ store.DiaChi}}
+                    </div>
+                    <div class="pnumber-Store">
+                        Số sản phẩm: {{getNumberProducts(store._id)}}
+                    </div>
+                    <div class="time-Store flex justify-end">
+                        <div class="open">O: {{store.GioMoCua}}</div>&nbsp;<div class="close"> C: {{store.GioDongCua}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        </div>
+    </div>
+</div> 

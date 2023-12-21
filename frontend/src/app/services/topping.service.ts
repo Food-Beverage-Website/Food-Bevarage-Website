@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Topping } from '../shared/models/topping';
-import { TOPPING_DELETE_TOPPING_BY_ID_URL, TOPPING_GET_ALL_BY_ID_STORE_URL, TOPPING_GET_TOPPING_BY_ID_URL, TOPPING_POST_ADD_TOPPING_URL, TOPPING_UPDATE_TOPPING_BY_ID_URL } from '../shared/constants/urls';
+import { GET_ALL_TOPPING, TOPPING_DELETE_TOPPING_BY_ID_URL, TOPPING_GET_ALL_BY_ID_STORE_URL, TOPPING_GET_TOPPING_BY_ID_URL, TOPPING_POST_ADD_TOPPING_URL, TOPPING_UPDATE_TOPPING_BY_ID_URL } from '../shared/constants/urls';
 import { IAddTopping, IDeleteTopping, IUpdateTopping } from '../shared/interfaces/ITopping';
 import { ToastrService } from 'ngx-toastr';
 
@@ -84,7 +84,9 @@ export class ToppingService {
    
   }
 
-
+  getAllTopping():Observable<Topping[]>{
+    return this.http.get<Topping[]>(GET_ALL_TOPPING);
+  }
 
   
 }

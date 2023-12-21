@@ -1,21 +1,25 @@
 <div>
     <img class="banner-img" src="assets/Images/banner-contact.png">
     <div class="type-list">
-        <div *ngFor="let type of types" class="type" >
-            <img  [src]="'assets/Images/' + type.Poster">
-            <p >{{ type.TenTieuMuc }}</p>
+        <div  *ngFor="let type of types" class="type" >
+            <div class="cursor-pointer" (click)="getTieuMuc(type.TenTieuMuc)">
+
+                <img  [src]="'assets/Images/' + type.Poster">
+                <p >{{ type.TenTieuMuc }}</p>
+            </div>
+           
         </div>
     </div>
 </div>
 
 <div class="banner-rank">
-    <div class="rank-25dish "  style="background-image: url(assets/Images/b181818cf48822d67b99.jpg); background-size: cover;" >
+    <div class="rank-25dish "  (click)="toTopProducts()" style="background-image: url(assets/Images/b181818cf48822d67b99.jpg); background-size: cover;" >
         <div>Top 25 side dishes</div>
     </div>
     <div class="rank flex gird grid-col-2">
         
-        <div class="rank-3shop" style="background-image: url(assets/Images/pexels-photo-1438445.jpeg) ; background-size: cover;"><p>Top 3 shop</p></div>
-        <div class="rank-new" style="background-image: url(assets/Images/pexels-photo-941864.jpeg) ; background-size: cover;"><p>New dishes</p></div>
+        <div class="rank-3shop" (click)="toTopStores()" style="background-image: url(assets/Images/pexels-photo-1438445.jpeg) ; background-size: cover;"><p>Top 3 shop</p></div>
+        <div class="rank-new" (click)="newDishes()" style="background-image: url(assets/Images/pexels-photo-941864.jpeg) ; background-size: cover;"><p>New dishes</p></div>
     </div>
 </div>
 <br>
@@ -40,7 +44,20 @@
     <ng-container *ngFor="let item of products">
     <a *ngIf="item.TinhTrang!=='Ẩn'" [href]="'/detailproduct/' + item._id">
         <div class="item-product" >
-            <img [src]="'assets/Images/' + item.Hinh"  >
+            <div class="  relative h-[245px]" [style.backgroundImage]="'url(assets/Images/' + item.Hinh + ')'" style="background-size: cover; background-position: center;">
+                <div  class=" hih  duration-700 ease-in-out  transition-all   opacity-25 bg-black w-full h-[0px] absolute  flex justify-center items-center">
+                    <span class="material-symbols-outlined icon-cart " style="color: aliceblue;">
+                        add_shopping_cart
+                    </span>
+                </div>
+                
+              </div>
+            <!-- <div class="relative"  >
+              
+               
+            </div> -->
+            
+            <!-- <img [src]="'assets/Images/' + item.Hinh"  > -->
             <div class="infor-product">
                 <div class="flex">
                     <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{ item.MaCH.DiaChi | slice:0:18 }} ...  </p>
@@ -69,6 +86,7 @@
     </a>
 </ng-container>
 </div>
+<div class="flex justify-center mt-[10px]"> <p (click)="nearme()" class=" cursor-pointer w-[350px] bg-gray-100 text-[20px] text-center">Xem thêm</p></div>
 <br>
 
 <div class="bg-fixed h-[250px] w-full bg-cover bg-center  " style="background-image: url(assets/Images/027d1c3c513b8765de2a.jpg)"></div>
@@ -80,7 +98,7 @@
         <img class="img-store" [src]="'assets/Images/' + item.Hinh"  >
         <div class="infor-store">
             <div class="address-Store">
-                {{ (item.DiaChi) ? (item.DiaChi | slice:0:31) + '...' : item.DiaChi }}
+                {{ (item.DiaChi) ? (item.DiaChi | slice:0:25) + '...' : item.DiaChi }}
             </div>
             
             <div  class="name-Store">

@@ -9,9 +9,8 @@ export class Product {
     Hinh!: string; 
     NgayDang!:string;
     TinhTrang!:string;
-    MaCH!: {
-      $oid: string;
-    };
+    MaCH!:string;
+    Topping!:string;
     MaThucDon!: string;
     MaTieuMuc!:string
     DanhGia!: {

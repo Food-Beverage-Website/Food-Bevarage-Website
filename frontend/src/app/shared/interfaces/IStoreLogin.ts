@@ -47,7 +47,8 @@ export interface IStoreUpDate{
 
 export interface IStoreDistanceUpdate{
     _id:string,
-    ToaDo:string
+    ToaDo:string,
+    DiaChi:string
 }
 
 export interface IStoreCategory{

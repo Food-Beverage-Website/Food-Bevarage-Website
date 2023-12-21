@@ -6,6 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { VoucherService } from 'src/app/services/voucher.service';
+import { Store } from 'src/app/shared/models/store';
+import { StoreService } from 'src/app/services/store.service';
 
 
 @Component({
@@ -13,12 +15,21 @@ import { VoucherService } from 'src/app/services/voucher.service';
   templateUrl: './detail-product.component.html',
   styleUrls: ['./detail-product.component.css']
 })
+
 export class DetailProductComponent implements OnInit {
   products: any;
   user!: User;
   danhsachKhuyenMai: any;
+ 
+  
 
-  constructor(private voucherService: VoucherService, private toastr: ToastrService, private productService: ProductService, private activatedRoute: ActivatedRoute, private userService: UserService) 
+  constructor(
+    private voucherService: VoucherService,
+    private toastr: ToastrService, 
+    private productService: ProductService, 
+    private activatedRoute: ActivatedRoute, 
+    private storeService:StoreService,
+    private userService: UserService) 
   {
     this.activatedRoute.params.subscribe((params) => {
       if (params.productId) {
@@ -27,6 +38,7 @@ export class DetailProductComponent implements OnInit {
           voucherService.getPhanTramKhuyenMaiTheoCH_SP(this.taoJsonPostGiaKhuyenMai(products)).subscribe((danhsachKhuyenMai) => {
             this.danhsachKhuyenMai = danhsachKhuyenMai;
           });
+          this.loadAllStore()
           this.getPhanTramKhuyenMai_SanPham();
         });
       }
@@ -40,7 +52,34 @@ export class DetailProductComponent implements OnInit {
     });    
   }
 
+  state: boolean = false;
 
+  loadAllStore() {
+    this.storeService.getAllStore().subscribe((items) => {
+      const foundStore = items.find((item) => item._id === this.products.productInfo.MaCH._id);
+     
+      if (foundStore) {
+        const currentHour = new Date().getHours(); // Get the current hour
+  
+        const openingHour = parseInt(foundStore.GioMoCua.split(":")[0], 10);
+        const closingHour = parseInt(foundStore.GioDongCua.split(":")[0], 10);
+        
+        if (
+          !isNaN(openingHour) &&
+          !isNaN(closingHour) &&
+          currentHour >= openingHour &&
+          currentHour < closingHour
+        ) {
+          this.state = true;
+        } else {
+          this.state = false;
+        }
+      } else {
+        console.error('Store not found.');
+      }
+    });
+  }
+  
 
   nhanThongTinKhuyenMai(item: any): any
   {

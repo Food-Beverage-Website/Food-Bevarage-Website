@@ -57,8 +57,24 @@ p{
 }
 
 .item-product{
-    @apply h-[365px] w-full bg-orange-50
+    @apply h-[365px] w-full bg-orange-50 transition duration-700 ease-in-out
 }
+
+/* .item-product:hover{
+    @apply scale-105 border-2 border-orange-900  
+} */
+
+.item-product:hover .hih {
+    @apply opacity-25 bg-black w-full h-full absolute flex justify-center items-center;
+}
+
+.item-product:hover .icon-cart {
+   font-size: 50px;
+}
+
+
+
+
 
 .infor-product{
     @apply px-3
@@ -113,7 +129,7 @@ p{
     @apply  gap-[15px] mt-[15px]
 }
 .rank-25dish, .rank-3shop, .rank-new{
-    @apply w-full h-[80px] relative object-cover
+    @apply w-full h-[80px] relative object-cover  transition duration-700 ease-in-out
 }
 
 .rank-25dish div, .rank-3shop p, .rank-new p{
@@ -159,3 +175,14 @@ p{
 .time-Store .close{
     @apply px-2 py-1 bg-red-600 text-white rounded-[20px] 
 }
+
+
+.rank-25dish:hover{
+    @apply scale-105 
+}
+.rank-3shop:hover{
+    @apply scale-105 
+}
+.rank-new:hover{
+    @apply scale-105 
+}  

@@ -1,0 +1,19 @@
+.name-Store{
+    @apply text-[lg]  font-semibold
+}
+.card{
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+}
+.card:hover {
+    @apply scale-105 
+}
+
+.time-Store .open{ 
+    @apply px-2 py-1 bg-green-600 text-white rounded-[20px] mb-2
+}
+
+.time-Store .close{
+    @apply px-2 py-1 bg-red-600 text-white rounded-[20px] mb-2
+}

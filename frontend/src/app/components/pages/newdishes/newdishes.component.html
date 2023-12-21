@@ -1,0 +1,87 @@
+<div class="relative">
+
+    <video class="absolute bg-cove h-[100%] opacity-20 object-cover  z-[-5]" autoplay muted loop
+        id="myVideo">
+        <source src="assets/Images/pexels-free-creative-stuff-5649204 (2160p).mp4" type="video/mp4">
+    </video>
+
+
+    <div class="flex px-3 gap-x-[15px] z-50">
+
+
+    
+        <div>
+            <h1 class="text-[25px] font-bold text-white bg-pink-900 flex px-3">
+                <p>Sản phẩm mới</p>
+            </h1>
+            <div class="h-[50px] bg-white flex px-3">
+                <div class="flex items-center gap-x-5">
+                    
+                        <select  (change)="sort($event)" class="border-2 px-3 py-2">
+                            <option disabled selected>Xếp sếp sản phẩm:</option>
+                            <option  value="PriceDecrease">Từ cao đến thấp</option>
+                            <option  value="PriceAscending">Từ thấp đến cap</option>
+                        </select>
+
+                        <div (click)="near_me()" class="flex border-2 px-3 py-2"><mat-icon>near_me</mat-icon>Cửa hàng gần nhất</div>
+
+                        
+
+                        <div class="flex ml-[400px]">
+                            <input class="border" type="text">
+                            <div class="bg-blue-100 px-3 ">Tìm kiếm</div>
+                        </div>
+                </div>
+
+
+            </div>
+            <div class="list-product mt-3">
+                <ng-container *ngFor="let item of products">
+                    <a *ngIf="item.TinhTrang!=='Ẩn'" [href]="'/detailproduct/' + item._id">
+                        <div style="transition: border-radius 0.3s ease-in-out;" class="item-product">
+                            <img  style="transition: border-radius 0.3s ease-in-out;"  [src]="'assets/Images/' + item.Hinh">
+                            <div class="infor-product">
+                                <div class="flex">
+                                    <p class="product-address"> <mat-icon class="text-orange-600 ">storefront</mat-icon> {{
+                                        loadStore(item.MaCH)?.DiaChi ?? 'Default Text' | slice:0:20 }} ... </p>
+                                          <p class="product-address ml-auto"> <mat-icon class="text-orange-600 font-bold "></mat-icon> ~{{calMap( loadStore(item.MaCH)?.ToaDo ?? 'Default Text') }}km</p>
+
+                                </div>
+                                
+                               <p class="product-store">{{ loadStore(item.MaCH)?.TenCuaHang ?? 'Default Text' }}</p>
+
+
+                                <p class="product-name ">{{ (item.TenSP.length > 18) ? (item.TenSP | slice:0:18) + '...'
+                                    : item.TenSP }}</p>
+                                <div class="" *ngIf="checkvoucherProduct(item._id)!==1">
+                                    <p class="product-price">{{ getMinPrice(item.DonGia) |
+                                        currency:'VND':'symbol':'1.0-0' }}</p>
+                                </div>
+                                <div class="flex" *ngIf="checkvoucherProduct(item._id)===1">
+                                    <p class="">{{ voucherProduct(item._id,getMinPrice(item.DonGia).toString()) |
+                                        currency:'VND':'symbol':'1.0-0' }}</p>
+                                    <p class="line-through text-[10px] text-red-500 ml-[5px] ">{{
+                                        getMinPrice(item.DonGia) | currency:'VND':'symbol':'1.0-0' }}</p>
+                                </div>
+
+
+                                <div (click)="goToShop(item.MaCH)" class="product-button">
+                                    <div class="icon"><mat-icon>monetization_on</mat-icon></div>
+
+                                    <p>Go shop</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="flex">
+        <div class="px-3"><p class="font-bold text-[15px]  ">Sản phẩm có thể quan tâm</p></div>
+    </div>
+
+</div>
+

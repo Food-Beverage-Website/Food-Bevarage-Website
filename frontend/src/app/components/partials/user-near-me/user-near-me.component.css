@@ -1,0 +1,67 @@
+
+.list-product{
+    @apply grid grid-cols-4 px-[10px] gap-[30px]
+}
+
+.item-product{
+    @apply h-[365px] w-full bg-pink-50 transition duration-700 ease-in-out
+}
+
+/* .item-product:hover{
+    @apply scale-105 border-2 border-pink-900  
+} */
+
+.item-product:hover .hih {
+    @apply opacity-25 bg-black w-full h-full absolute flex justify-center items-center;
+}
+
+.item-product:hover .icon-cart {
+   font-size: 50px;
+}
+
+
+
+
+
+.infor-product{
+    @apply px-3
+}
+.item-product img{
+    @apply h-[248px] w-full
+}
+
+.product-address{
+    @apply text-[11px] font-light text-pink-600 flex mt-[2px] h-[13px] 
+}
+
+
+.product-address mat-icon {
+    @apply text-[14px] font-light text-pink-600 
+}
+.product-name {
+    @apply text-[15px] font-medium mt-[3px]
+}
+
+
+.product-store{
+    @apply text-[14px]  text-pink-800 ml-[24px] 
+}
+.product-price{
+    @apply text-[15px]  ml-auto mt-[3px]
+}
+
+.product-button{
+    @apply flex 
+}
+
+.product-button .icon{
+    @apply bg-sky-950 text-white items-center h-[25px] w-[25px] 
+}
+
+.product-button .icon mat-icon{
+    @apply  text-white text-[20px] mt-[3px] ml-[2px] 
+}
+
+.product-button p{
+    @apply  bg-pink-600 text-white text-[15px] font-medium h-[25px] w-[100px] text-center
+}
