@@ -34,8 +34,8 @@ Khách hàng:
 <i>Tìm Kiếm, Lọc, Sắp Xếp:</i> Cung cấp chức năng tìm kiếm nâng cao để khách hàng có thể dễ dàng tìm kiếm sản phẩm theo tên, loại, giá, và các tiêu chí khác.
 <br>
 <p align="center">
-  <img width="375" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/9db0da28-b2d0-4b8c-a01d-29d4500891c3" >
-  <img width="375" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/d42d27fe-c61c-4c0d-af4f-8b64d85ee0bf" >
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/9db0da28-b2d0-4b8c-a01d-29d4500891c3" >
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/d42d27fe-c61c-4c0d-af4f-8b64d85ee0bf" >
 </p>
 
 
