@@ -11,6 +11,12 @@
   <img width="170" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/84f5af99-c787-4ddc-b8dd-f9458182c393" style="padding-left:15px">
   <img width="170" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/124d5232-3c5b-4ed6-a02b-8812c95ec85f" style="padding-left:15px">
 </p>
+<h3><strong>Công nghệ sử dụng:</strong></h3> Xây dựng với MEAN STACK<br>
+- Frontend:<br>
+- Backend:<br>
+- Framework UI:<br>
+- Database:<br>
+<br>
 <h3><strong>Tóm tắt dự án</strong></h3>
 Foodie là một trang web chuyên về thức uống, nơi mà cả người tiêu dùng và cửa hàng có thể kết nối với nhau một cách thuận lợi. Dự án này cung cấp một nền tảng trực tuyến giúp các cửa hàng thức uống đăng ký và quảng bá sản phẩm của họ đến một đối tượng rộng lớn khách hàng trực tuyến.
 <br><br>
