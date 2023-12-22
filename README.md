@@ -124,3 +124,10 @@ Và một số nghiệp vụ quản lý khác (Quản lý danh mục, Quản lý
 <p  align="center">
 <img width="770" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/d6716605-91f3-4815-946b-788d22b74f05" style="padding-left:15px">
 </p>
+
+<br>
+------------------------------------------------------
+☆ Mọi hình thức mắc vui lòng email tới:
+1.   hoakhuu80@gmail.com (Khưu Văn Hòa)
+2.   zenonaws@gmail.com (Lương Duy Minh)
+3.   duyhung26042002@gmail.com (Phan Nguyễn Duy Hưng)
