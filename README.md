@@ -27,10 +27,10 @@
 ## 🎬 VideoDemo: [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://www.youtube.com/watch?v=21gaudM4uo8) 
 
 <h3><strong>Công nghệ sử dụng:</strong></h3> Xây dựng với MEAN STACK<br>
-- Frontend:<br>
-- Backend:<br>
-- Framework UI:<br>
-- Database:<br>
+- Frontend: Angular, Typescript, Material-UI, Leaflet,  HTML, CSS <br>
+- Backend: Node.js, Express.js, Mongoose, JWT, Nodemailer, Exceljs <br>
+- Framework UI: TailwindCSS <br>
+- Database: MongoDB <br>
 <br>
 
 <h3><strong>Tóm tắt dự án</strong></h3>
