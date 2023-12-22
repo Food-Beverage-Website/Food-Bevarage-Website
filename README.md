@@ -126,7 +126,7 @@ Và một số nghiệp vụ quản lý khác (Quản lý danh mục, Quản lý
 </p>
 
 <br>
-------------------------------------------------------
+------------------------------------------------------<br>
 ☆ Mọi hình thức mắc vui lòng email tới:
 1.   hoakhuu80@gmail.com (Khưu Văn Hòa)
 2.   zenonaws@gmail.com (Lương Duy Minh)
