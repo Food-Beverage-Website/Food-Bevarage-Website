@@ -15,6 +15,7 @@
 # 💻Tech Stack
 ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white) 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) 
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) 
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) 
@@ -23,12 +24,15 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) 
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) 
 
+## 🎬 VideoDemo: [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/c/https://www.youtube.com/watch?v=21gaudM4uo8) 
+
 <h3><strong>Công nghệ sử dụng:</strong></h3> Xây dựng với MEAN STACK<br>
 - Frontend:<br>
 - Backend:<br>
 - Framework UI:<br>
 - Database:<br>
 <br>
+
 <h3><strong>Tóm tắt dự án</strong></h3>
 Foodie là một trang web chuyên về thức uống, nơi mà cả người tiêu dùng và cửa hàng có thể kết nối với nhau một cách thuận lợi. Dự án này cung cấp một nền tảng trực tuyến giúp các cửa hàng thức uống đăng ký và quảng bá sản phẩm của họ đến một đối tượng rộng lớn khách hàng trực tuyến.
 <br><br>
