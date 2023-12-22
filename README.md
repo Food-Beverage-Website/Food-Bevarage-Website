@@ -11,6 +11,18 @@
   <img width="170" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/84f5af99-c787-4ddc-b8dd-f9458182c393" style="padding-left:15px">
   <img width="170" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/124d5232-3c5b-4ed6-a02b-8812c95ec85f" style="padding-left:15px">
 </p>
+
+# 💻Tech Stack
+![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white) 
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) 
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) 
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) 
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens) 
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) 
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) 
+
 <h3><strong>Công nghệ sử dụng:</strong></h3> Xây dựng với MEAN STACK<br>
 - Frontend:<br>
 - Backend:<br>
