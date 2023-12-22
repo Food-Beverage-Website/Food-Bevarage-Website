@@ -33,9 +33,15 @@ Khách hàng:
 </p>
 <i>Tìm Kiếm, Lọc, Sắp Xếp:</i> Cung cấp chức năng tìm kiếm nâng cao để khách hàng có thể dễ dàng tìm kiếm sản phẩm theo tên, loại, giá, và các tiêu chí khác.
 <br>
-<p  align="center">
-<img width="470" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/9db0da28-b2d0-4b8c-a01d-29d4500891c3" style="padding-left:15px">
+<p align="center">
+  <img width="385" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/9db0da28-b2d0-4b8c-a01d-29d4500891c3" style="padding-left:15px">
+  <img width=385" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/d42d27fe-c61c-4c0d-af4f-8b64d85ee0bf" style="padding-left:15px">
+ 
 </p>
+
+
+
+
 <i>Xác Định Vị Trí và Tính Toán Khoảng Cách:</i> <br>
 - Sử dụng dịch vụ định vị để xác định vị trí của người dùng <br>
 - Tính toán khoảng các từ vị trí người dùng đến cửa hàng theo Kilometre<br>
