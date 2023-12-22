@@ -24,9 +24,11 @@ Foodie là một trang web chuyên về thức uống, nơi mà cả người ti
 <img width="470" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/cdc81905-414f-485c-b571-1a65e52e02ca" style="padding-left:15px">
 </p>
 
-Khách hàng:
-
+<b>Khách hàng:</b>
 <i>Đăng nhập/Đăng xuất:</i> Khách hàng có thể đăng nhập vào tài khoản của họ bằng cách sử dụng tên đăng nhập và mật khẩu, và đăng xuất khi kết thúc phiên làm việc.
+<p  align="center">
+<img width="470" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/81430ec9-c4ca-4977-abc6-1a505b745e21" style="padding-left:15px">
+</p>
 <i>Quản lý Tài Khoản:</i> Khách hàng có thể quản lý thông tin cá nhân, thay đổi mật khẩu và theo dõi lịch sử đơn hàng của mình.
 <p  align="center">
 <img width="470" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/fb20c2b7-dc38-4e9a-b97e-3358389553ac" style="padding-left:15px">
@@ -50,11 +52,45 @@ Khách hàng:
 <img width="770" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/4d293ad6-08b7-4432-b6c2-9ef8379e3ad6" style="padding-left:15px">
 </p>
 <p align="center">
-  <img width="385" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/df4a562a-592d-4e7b-adf0-daae485802b3" style="padding-left:15px">
-  <img width=385" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/1a04c790-a507-4571-806a-dfe8fc4f2752" style="padding-left:15px">
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/df4a562a-592d-4e7b-adf0-daae485802b3" style="padding-left:15px">
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/1a04c790-a507-4571-806a-dfe8fc4f2752" style="padding-left:15px">
  
 </p>
 
 <i>Quản Lý Giỏ Hàng:</i> Khách hàng có thể thêm sản phẩm vào giỏ hàng, chỉnh sửa số lượng và xóa sản phẩm. Giỏ hàng sẽ được lưu trữ giữa các phiên đăng nhập.
+<p  align="center">
+<img width="470" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/428205c1-760e-4a2f-afea-2aa378b14c3f" style="padding-left:15px">
+</p>
+
 <i>Thanh Toán Online (Paypal):</i> Cung cấp tùy chọn thanh toán trực tuyến thông qua Paypal để tiện lợi và an toàn.
+<p  align="center">
+<img width="470" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/a07f5c67-8a94-4c93-8ad2-a12b9232b39f" style="padding-left:15px">
+</p>
+<b>Cửa hàng</b>
+<i>Xác Định Vị Trí Trên Bản Đồ:</i>
+Cửa hàng có khả năng xác định vị trí của mình trên bản đồ. Điều này giúp khách hàng dễ dàng xác định vị trí cửa hàng và quyết định liệu họ muốn đặt hàng từ cửa hàng gần họ hay không.
+<p align="center">
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/19dd7087-9a76-4725-9e69-42c44a34170a" style="padding-left:15px">
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/1a04c790-a507-4571-806a-dfe8fc4f2752" style="padding-left:15px">
+</p>
+<i>Quản Lý Sản Phẩm và Xuất tệp Excel:</i><br>
+- Cửa hàng có khả năng thêm mới, chỉnh sửa, và xóa sản phẩm từ danh sách sản phẩm của mình. Mỗi sản phẩm được mô tả bằng thông tin chi tiết, bao gồm tên, giá, mô tả, và ảnh minh họa.<br>
+-Cửa hàng có khả năng xuất danh sách sản phẩm của mình dưới dạng tệp Excel. Điều này giúp cửa hàng quản lý dữ liệu sản phẩm một cách thuận tiện và chia sẻ thông tin với các bên liên quan.
+
+<p  align="center">
+<img width="770" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/abbedf40-6fc0-4d4b-8bb8-86ac9fc7385c" style="padding-left:15px">
+</p>
+<p align="center">
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/b9d5f432-6429-4cdc-acbf-c79b0ccef2f6" style="padding-left:15px">
+  <img width="370" height="250" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/9ed89747-5a8d-4ec1-9620-70426b02b35e" style="padding-left:15px">
+ 
+</p>
+
+<i>Thống Kê:</i>
+Cung cấp các bảng thống kê về doanh số bán hàng, số lượng đơn hàng, và các chỉ số quan trọng khác để cửa hàng có thể theo dõi hiệu suất kinh doanh và đưa ra quyết định chiến lược.
+<p  align="center">
+<img width="770" height="300" src="https://github.com/Food-Beverage-Website/Food-Bevarage-Website/assets/112261849/20849dff-d95d-4656-b5b4-b5074c93cd10" style="padding-left:15px">
+</p>
+
+Và một số nghiệp vụ quản lý khác (Quản lý danh mục, Quản lý khuyến mãi, Quản lý đơn hàng)
 
