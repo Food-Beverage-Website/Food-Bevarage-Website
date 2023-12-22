@@ -2,7 +2,7 @@
 
 <h3><strong>Thành viên thực hiện</strong></h3>
 
-1. Khưu Văn Hòa
+1. Khưu Văn Hòa (Leader)
 2. Lương Duy Minh
 4. Phan Nguyễn Duy Hưng
 </br>
